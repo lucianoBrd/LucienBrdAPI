@@ -14,8 +14,25 @@ class ProjectController extends AbstractController
     public function index()
     {
         $projects = $this->getDoctrine()
-                        ->getRepository(Project::class)
-                        ->findAllArray();
+            ->getRepository(Project::class)
+            ->findAllArray();
+
+        return $this->json([
+            $projects
+        ]);
+    }
+
+    /**
+     * @Route("/project/random", name="project_random")
+     */
+    public function random()
+    {
+        $repo = $this->getDoctrine()
+            ->getRepository(Project::class);
+
+        $ids = $repo->findAllId();
+
+        $projects = $repo->findRandomArray($ids);
 
         return $this->json([
             $projects
