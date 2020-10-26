@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\Query;
 use App\Entity\Education;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Education|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,22 +20,19 @@ class EducationRepository extends ServiceEntityRepository
         parent::__construct($registry, Education::class);
     }
 
-    // /**
-    //  * @return Education[] Returns an array of Education objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Education[] Returns an array of Education objects
+     */
+    
+    public function findAllArray()
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('e.date', 'ASC')
             ->getQuery()
-            ->getResult()
+            ->getResult(Query::HYDRATE_ARRAY)
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Education
