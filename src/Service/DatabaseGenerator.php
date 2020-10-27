@@ -31,6 +31,7 @@ class DatabaseGenerator
         $this->manageProject();
         $this->manageEducation();
         $this->manageService();
+        $this->manageSocial();
     }
 
     public function manageProject()
