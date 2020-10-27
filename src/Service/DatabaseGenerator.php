@@ -2,10 +2,11 @@
 
 namespace App\Service;
 
-use App\Entity\Social;
+use App\Entity\Cv;
+use App\Entity\Education;
 use App\Entity\Project;
 use App\Entity\Service;
-use App\Entity\Education;
+use App\Entity\Social;
 use Doctrine\Persistence\ObjectManager;
 
 class DatabaseGenerator
@@ -32,6 +33,7 @@ class DatabaseGenerator
         $this->manageEducation();
         $this->manageService();
         $this->manageSocial();
+        $this->manageCv();
     }
 
     public function manageProject()
@@ -59,13 +61,13 @@ class DatabaseGenerator
             $project = new Project();
 
             $project->setImage($p[0])
-                    ->setTitle($p[1])
-                    ->setType($p[2])
-                    ->setDate($p[3])
-                    ->setUrl($p[4])
-                    ->setGit($p[5])
-                    ->setContent($p[6])
-                    ->setDocument($p[7]);
+                ->setTitle($p[1])
+                ->setType($p[2])
+                ->setDate($p[3])
+                ->setUrl($p[4])
+                ->setGit($p[5])
+                ->setContent($p[6])
+                ->setDocument($p[7]);
 
             $this->manager->persist($project);
         }
@@ -94,9 +96,9 @@ class DatabaseGenerator
             $education = new Education();
 
             $education->setImage($e[0])
-                    ->setTitle($e[1])
-                    ->setPlace($e[2])
-                    ->setDate($e[3]);
+                ->setTitle($e[1])
+                ->setPlace($e[2])
+                ->setDate($e[3]);
 
             $this->manager->persist($education);
         }
@@ -125,8 +127,8 @@ class DatabaseGenerator
             $service = new Service();
 
             $service->setImage($s[0])
-                    ->setTitle($s[1])
-                    ->setDescription($s[2]);
+                ->setTitle($s[1])
+                ->setDescription($s[2]);
 
             $this->manager->persist($service);
         }
@@ -151,10 +153,27 @@ class DatabaseGenerator
             $social = new Social();
 
             $social->setLink($s[0])
-                    ->setFa($s[1]);
+                ->setFa($s[1]);
 
             $this->manager->persist($social);
         }
+
+        $this->manager->flush();
+
+    }
+
+    public function manageCv()
+    {
+        $repository = $this->manager->getRepository(Cv::class);
+
+        /* Reset project database */
+        $this->reset($repository);
+
+        $cv = new Cv();
+
+        $cv->setDocument('CV_BURDET_LUCIEN.pdf');
+
+        $this->manager->persist($cv);
 
         $this->manager->flush();
 
