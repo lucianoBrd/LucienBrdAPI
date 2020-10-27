@@ -21,7 +21,7 @@ class DeployController extends AbstractController
             'git submodule sync',
             'git submodule update',
             'git submodule status',
-            'php /bin/console cache:clear --no-warmup --env=prod',
+            'php ../bin/console cache:clear --no-warmup --env=prod',
         );
         
         $i = 0;
@@ -32,6 +32,7 @@ class DeployController extends AbstractController
             /* Output */
             $output[$i]['command'] = $command; 
             $output[$i]['result'] = htmlentities(trim($tmp));
+            $i++;
         }
 
         return $this->json([
