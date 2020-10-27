@@ -5,7 +5,7 @@
     "description": "A minimal Symfony project recommended to create bare bones applications",
     "minimum-stability": "dev",
     "require": {
-        "php": ">=7.3.2",
+        "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "1.x-dev",
