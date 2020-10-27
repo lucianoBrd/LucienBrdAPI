@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Social;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Social|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,22 +20,18 @@ class SocialRepository extends ServiceEntityRepository
         parent::__construct($registry, Social::class);
     }
 
-    // /**
-    //  * @return Social[] Returns an array of Social objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Social[] Returns an array of Social objects
+     */
+    
+    public function findAllArray()
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('s.fa', 'ASC')
             ->getQuery()
-            ->getResult()
+            ->getResult(Query::HYDRATE_ARRAY)
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Social

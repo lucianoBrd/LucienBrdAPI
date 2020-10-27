@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Social;
 use App\Entity\Project;
 use App\Entity\Service;
 use App\Entity\Education;
@@ -127,6 +128,31 @@ class DatabaseGenerator
                     ->setDescription($s[2]);
 
             $this->manager->persist($service);
+        }
+
+        $this->manager->flush();
+
+    }
+
+    public function manageSocial()
+    {
+        $repository = $this->manager->getRepository(Social::class);
+
+        /* Reset project database */
+        $this->reset($repository);
+
+        $socials = [
+            ['https://www.linkedin.com/in/lucien-burdet-b8b76a153', 'linkedin'],
+            ['https://github.com/lucianoBrd', 'git'],
+        ];
+
+        foreach ($socials as $s) {
+            $social = new Social();
+
+            $social->setLink($s[0])
+                    ->setFa($s[1]);
+
+            $this->manager->persist($social);
         }
 
         $this->manager->flush();

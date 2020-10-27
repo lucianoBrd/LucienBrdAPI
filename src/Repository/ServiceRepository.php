@@ -21,7 +21,7 @@ class ServiceRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Project[] Returns an array of Service objects
+     * @return Service[] Returns an array of Service objects
      */
     public function findAllArray()
     {
