@@ -13,14 +13,8 @@ class DeployController extends AbstractController
     public function index()
     {
         $commands = array(
-            'echo $PWD',
-            'whoami',
-            'git reset --hard HEAD',
             'git pull',
             'git status',
-            'git submodule sync',
-            'git submodule update',
-            'git submodule status',
             'php ../bin/console cache:clear --no-warmup --env=prod',
         );
         
