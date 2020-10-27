@@ -10,7 +10,6 @@
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "1.x-dev",
         "doctrine/doctrine-bundle": "2.2.x-dev",
-        "doctrine/doctrine-fixtures-bundle": "9999999-dev",
         "doctrine/doctrine-migrations-bundle": "3.1.x-dev",
         "doctrine/orm": "2.8.x-dev",
         "sensio/framework-extra-bundle": "^5.6@dev",

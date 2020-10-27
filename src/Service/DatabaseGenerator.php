@@ -1,15 +1,44 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\Service;
 
 use App\Entity\Project;
+use App\Entity\Service;
+use App\Entity\Education;
 use Doctrine\Persistence\ObjectManager;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class ProjectFixtures extends Fixture
+class DatabaseGenerator
 {
-    public function load(ObjectManager $manager)
+    private $manager;
+
+    public function __construct(ObjectManager $manager)
     {
+        $this->manager = $manager;
+    }
+
+    private function reset($repository)
+    {
+        $entities = $repository->findAll();
+
+        foreach ($entities as $entity) {
+            $this->manager->remove($entity);
+        }
+    }
+
+    public function updateDatabase()
+    {
+        $this->manageProject();
+        $this->manageEducation();
+        $this->manageService();
+    }
+
+    public function manageProject()
+    {
+        $repository = $this->manager->getRepository(Project::class);
+
+        /* Reset project database */
+        $this->reset($repository);
+
         $projects = [
             ['emilie-nguyen.png', 'site pour une photographe', 'site vitrine - Freelance', '2017', 'https://emilie-nguyen.com/', 'https://github.com/lucianoBrd/EmilieNguyen', 'symfony 4', null],
             ['yosagaf.png', 'site pour un développeur de systèmes embarqués', 'site vitrine - Freelance', '2019', 'https://yosagaf.fr/', 'https://github.com/lucianoBrd/Sagaf', 'symfony 4', null],
@@ -36,9 +65,71 @@ class ProjectFixtures extends Fixture
                     ->setContent($p[6])
                     ->setDocument($p[7]);
 
-            $manager->persist($project);
+            $this->manager->persist($project);
         }
 
-        $manager->flush();
+        $this->manager->flush();
+
+    }
+
+    public function manageEducation()
+    {
+        $repository = $this->manager->getRepository(Education::class);
+
+        /* Reset project database */
+        $this->reset($repository);
+
+        $educations = [
+            ['tma.png', 'Baccalauréat Professionnel - Technicien Menuisier Agenceur - Arrêt de la formation en milieu d\'année', 'Institut Européen de Formation - Compagnons du Tour de France - Mouchard', '2015'],
+            ['ssi.png', 'Baccalauréat Scientifique - Sciences de l\'Ingénieur - Mention Bien', 'Lycée de la Cotière', '2015 - 2017'],
+            ['b.png', 'Permis B', 'Miribel', '2017'],
+            ['dut.png', 'DUT Informatique', 'IUT Lyon 1 - Villeurbanne', '2017 - 2019'],
+            ['a2.png', 'Permis A2', 'Saint-Alban', '2019'],
+            ['irc.png', 'Ingénieur en Informatique et Réseaux de Communication - Apprentissage EDF CNPE de Saint-Alban', 'CPE Lyon - Villeurbanne', '2019 - 2022'],
+        ];
+
+        foreach ($educations as $e) {
+            $education = new Education();
+
+            $education->setImage($e[0])
+                    ->setTitle($e[1])
+                    ->setPlace($e[2])
+                    ->setDate($e[3]);
+
+            $this->manager->persist($education);
+        }
+
+        $this->manager->flush();
+
+    }
+
+    public function manageService()
+    {
+        $repository = $this->manager->getRepository(Service::class);
+
+        /* Reset project database */
+        $this->reset($repository);
+
+        $services = [
+            ['web.png', 'Web', 'Je peux développer tous types de site : E-commerce, site vitrine, blog...'],
+            ['communication.png', 'Communication', 'Vous ne savez pas comment bien utiliser les réseaux sociaux ? Je peux gérer vos comptes afin d’accroître votre notoriété.'],
+            ['publicite.png', 'Publicité', 'Afin de d’augmenter votre présence sur internet il vous faut les meilleures publicités : image, bannière, vidéo...'],
+            ['web-design.png', 'Web design', 'Je respecte les derniers standards et normes de design afin de vous proposer un produit numérique beau et fonctionnel.'],
+            ['logo.png', 'Logo', 'Création de logo sur mesure avec une identité forte et de qualité.'],
+            ['referencement.png', 'Référencement', 'Je peux positionner les pages web de votre site internet dans les premiers résultats naturels des moteurs de recherche.'],
+        ];
+
+        foreach ($services as $s) {
+            $service = new Service();
+
+            $service->setImage($s[0])
+                    ->setTitle($s[1])
+                    ->setDescription($s[2]);
+
+            $this->manager->persist($service);
+        }
+
+        $this->manager->flush();
+
     }
 }

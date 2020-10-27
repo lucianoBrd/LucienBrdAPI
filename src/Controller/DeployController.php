@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\DatabaseGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +37,10 @@ class DeployController extends AbstractController
         /* Clear cache */
         $output[$i]['command'] = 'cache:clear';
         $output[$i]['result'] = $this->do_command($kernel, 'cache:clear');
+
+        /* Update database */
+        $dbGenerator = new DatabaseGenerator($this->getDoctrine()->getManager());
+        $dbGenerator->updateDatabase();
 
         return $this->json([
             $output
