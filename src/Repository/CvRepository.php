@@ -24,7 +24,7 @@ class CvRepository extends ServiceEntityRepository
      * @return Cv Returns a Cv objects
      */
     
-    public function findOneArray(): ?Cv
+    public function findOneArray()
     {
         return $this->createQueryBuilder('c')
             ->getQuery()
