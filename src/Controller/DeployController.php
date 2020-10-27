@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DeployController extends AbstractController
@@ -10,12 +15,11 @@ class DeployController extends AbstractController
     /**
      * @Route("/deploy", name="deploy")
      */
-    public function index()
+    public function index(KernelInterface $kernel)
     {
         $commands = array(
             'git pull',
             'git status',
-            'php ../bin/console cache:clear --no-warmup --env=prod',
         );
         
         $i = 0;
@@ -29,8 +33,32 @@ class DeployController extends AbstractController
             $i++;
         }
 
+        /* Clear cache */
+        $output[$i]['command'] = 'cache:clear';
+        $output[$i]['result'] = $this->do_command($kernel, 'cache:clear');
+
         return $this->json([
             $output
         ]);
+    }
+
+    private function do_command($kernel, $command)
+    {
+        $env = $kernel->getEnvironment();
+
+        $application = new Application($kernel);
+        $application->setAutoExit(false);
+
+        $input = new ArrayInput(array(
+            'command' => $command,
+            '--env' => $env
+        ));
+
+        $output = new BufferedOutput();
+        $application->run($input, $output);
+
+        $content = $output->fetch();
+
+        return $content;
     }
 }
