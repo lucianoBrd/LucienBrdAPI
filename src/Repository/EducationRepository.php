@@ -27,7 +27,7 @@ class EducationRepository extends ServiceEntityRepository
     public function findAllArray()
     {
         return $this->createQueryBuilder('e')
-            ->orderBy('e.date', 'ASC')
+            ->orderBy('e.date', 'DESC')
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY)
         ;

@@ -18,7 +18,8 @@ class EducationController extends AbstractController
             ->findAllArray();
 
         return $this->json([
-            $educations
+            'educations' => $educations,
+            'imagePath' => $this->getParameter('app.assets.images.educations'),
         ]);
     }
 }
