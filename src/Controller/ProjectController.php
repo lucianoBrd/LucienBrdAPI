@@ -35,7 +35,8 @@ class ProjectController extends AbstractController
         $projects = $repo->findRandomArray($ids);
 
         return $this->json([
-            $projects
+            'projects' => $projects,
+            'imagePath' => $this->getParameter('app.assets.images.projects')
         ]);
     }
 }
