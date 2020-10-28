@@ -26,7 +26,7 @@ class ProjectRepository extends ServiceEntityRepository
     public function findAllArray()
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.date', 'ASC')
+            ->orderBy('p.date', 'DESC')
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY)
         ;
