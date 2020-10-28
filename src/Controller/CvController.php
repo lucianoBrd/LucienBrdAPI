@@ -18,7 +18,8 @@ class CvController extends AbstractController
             ->findOneArray();
 
         return $this->json([
-            $cv
+            'cv' => $cv,
+            'documentPath' => $this->getParameter('app.assets.documents.cv'),
         ]);
     }
 }
