@@ -18,7 +18,7 @@ class SocialController extends AbstractController
             ->findAllArray();
 
         return $this->json([
-            $socials
+            'socials' => $socials
         ]);
     }
 }
