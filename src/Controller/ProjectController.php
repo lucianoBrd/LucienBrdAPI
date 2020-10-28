@@ -18,7 +18,9 @@ class ProjectController extends AbstractController
             ->findAllArray();
 
         return $this->json([
-            $projects
+            'projects' => $projects,
+            'imagePath' => $this->getParameter('app.assets.images.projects'),
+            'documentPath' => $this->getParameter('app.assets.documents.projects'),
         ]);
     }
 

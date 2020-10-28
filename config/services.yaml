@@ -6,6 +6,7 @@
 parameters:
     app.url: 'https://api.lucien-brd.com'
     app.assets.images.projects: '%app.url%/assets/images/projects/'
+    app.assets.documents.projects: '%app.url%/assets/documents/projects/'
     app.assets.images.services: '%app.url%/assets/images/services/'
 
 services:
