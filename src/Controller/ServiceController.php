@@ -18,7 +18,8 @@ class ServiceController extends AbstractController
             ->findAllArray();
 
         return $this->json([
-            $services
+            'services' => $services,
+            'imagePath' => $this->getParameter('app.assets.images.services')
         ]);
     }
 }
