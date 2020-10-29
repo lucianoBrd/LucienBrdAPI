@@ -171,7 +171,7 @@ class DatabaseGenerator
 
         $cv = new Cv();
 
-        $cv->setDocument('CV_BURDET_LUCIEN.jpg');
+        $cv->setDocument('CV_BURDET_LUCIEN.webp');
 
         $this->manager->persist($cv);
 
