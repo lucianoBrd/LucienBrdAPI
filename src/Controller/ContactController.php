@@ -18,7 +18,10 @@ class ContactController extends AbstractController
     {
         $error = false;
 
-        if ($name && !empty($name) && $email && !empty($email) && $message && !empty($message)) {
+        /* Remove all illegal characters from email */
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+        if ($name && !empty($name) && $email && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL) && $message && !empty($message)) {
             $html = '<h2>' . $name . '</h2>';
             $html .= '<a href="mailto:' . $email . '">' . $email . '</a>';
             $html .= '<p>' . $message . '</p>';
@@ -34,18 +37,19 @@ class ContactController extends AbstractController
 
             $html .= $signature;
 
+            $confirm = '<h1>Bonjour ' . $name . '</h1>';
+            $confirm .= '<p>Merci pour votre message, je vous répondrais dans les meilleurs délais.</p>';
+            $confirm .= '<p>---------------------------------------</p>';
+
             $email = (new Email())
                 ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
                 ->to('contact@lucien-brd.com')
                 ->subject('Message de ' . $name)
                 ->html($html);
 
-            $confirm = '<h1>Bonjour ' . $name . '</h1>';
-            $confirm .= '<p>Merci pour votre message, je vous répondrais dans les meilleurs délais.</p>';
-            $confirm .= '<p>---------------------------------------</p>';
             $emailConfirm = (new Email())
                 ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
-                ->to($email)
+                ->to(new Address($email))
                 ->subject('Confirmation de récéption')
                 ->html($confirm . $html);
             try {
