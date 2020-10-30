@@ -12,16 +12,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
     /**
-     * @Route("/contact/{name}/{mail}/{message}", name="contact")
+     * @Route("/contact/{captcha}/{name}/{mail}/{message}", name="contact")
      */
-    public function index(MailerInterface $mailer, string $name, string $mail, string $message)
+    public function index(MailerInterface $mailer, string $captcha, string $name, string $mail, string $message)
     {
         $error = false;
 
         /* Remove all illegal characters from mail */
         $mail = filter_var($mail, FILTER_SANITIZE_EMAIL);
 
-        if ($name && !empty($name) && $mail && !empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL) && $message && !empty($message)) {
+        /* Check captcha */
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $_ENV['PRIVATE_KEY'] . '&response=' . $captcha);
+        $resp = json_decode($verifyResponse);
+
+        if (!($resp != null && $resp->success)) {
+            $error = true;
+        }
+
+        if (!$error &&
+            $name && !empty($name) &&
+            $mail && !empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL) &&
+            $message && !empty($message)
+        ) {
             $html = '<h2>' . $name . '</h2>';
             $html .= '<a href="mailto:' . $mail . '">' . $mail . '</a>';
             $html .= '<p>' . $message . '</p>';
