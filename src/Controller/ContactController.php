@@ -20,12 +20,12 @@ class ContactController extends AbstractController
         $error = true;
 
         if ($request->getMethod() == 'POST') {
-            $postData = $request->request;
-            if ($postData->has('captcha') && $postData->has('name') && $postData->has('mail') && $postData->has('message')) {
-                $captcha = htmlspecialchars($postData->get('captcha'));
-                $name = htmlspecialchars($postData->get('name'));
-                $mail = htmlspecialchars($postData->get('mail'));
-                $message = htmlspecialchars($postData->get('message'));
+            $postData = json_decode($request->getContent(), true);
+            if (isset($postData['captcha']) && isset($postData['name']) && isset($postData['mail']) && isset($postData['message'])) {
+                $captcha = htmlspecialchars($postData['captcha']);
+                $name = htmlspecialchars($postData['name']);
+                $mail = htmlspecialchars($postData['mail']);
+                $message = htmlspecialchars($postData['message']);
 
                 /* Remove all illegal characters from mail */
                 $mail = filter_var($mail, FILTER_SANITIZE_EMAIL);
