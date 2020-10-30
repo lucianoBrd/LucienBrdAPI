@@ -49,7 +49,7 @@ class ContactController extends AbstractController
 
             $emailConfirm = (new Email())
                 ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
-                ->to(new Address($email))
+                ->to(new Address((string)$email))
                 ->subject('Confirmation de récéption')
                 ->html($confirm . $html);
             try {
