@@ -19,17 +19,20 @@ class ContactController extends AbstractController
         $error = false;
 
         if ($name && !empty($name) && $email && !empty($email) && $message && !empty($message)) {
-            $html = '<h1>' . $name . '</h1>';
+            $html = '<h2>' . $name . '</h2>';
             $html .= '<a href="mailto:' . $email . '">' . $email . '</a>';
             $html .= '<p>' . $message . '</p>';
 
+            /* Get signature */
+            $signature = '';
             $f = fopen('../public/assets/email/mail.html', 'r');
             while (!feof($f)) {
                 $result = fgets($f);
-                $html .= $result;
+                $signature .= $result;
             }
-
             fclose($f);
+
+            $html .= $signature;
 
             $email = (new Email())
                 ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
@@ -37,8 +40,17 @@ class ContactController extends AbstractController
                 ->subject('Message de ' . $name)
                 ->html($html);
 
+            $confirm = '<h1>Bonjour ' . $name . '</h1>';
+            $confirm .= '<p>Merci pour votre message, je vous répondrais dans les meilleurs délais.</p>';
+            $confirm .= '<p>---------------------------------------</p>';
+            $emailConfirm = (new Email())
+                ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
+                ->to($email)
+                ->subject('Confirmation de récéption')
+                ->html($confirm . $html);
             try {
                 $mailer->send($email);
+                $mailer->send($emailConfirm);
             } catch (TransportExceptionInterface $e) {
                 $error = true;
             }
