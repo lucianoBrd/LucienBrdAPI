@@ -12,18 +12,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
     /**
-     * @Route("/contact/{name}/{email}/{message}", name="contact")
+     * @Route("/contact/{name}/{mail}/{message}", name="contact")
      */
-    public function index(MailerInterface $mailer, string $name, string $email, string $message)
+    public function index(MailerInterface $mailer, string $name, string $mail, string $message)
     {
         $error = false;
 
-        /* Remove all illegal characters from email */
-        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        /* Remove all illegal characters from mail */
+        $mail = filter_var($mail, FILTER_SANITIZE_EMAIL);
 
-        if ($name && !empty($name) && $email && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL) && $message && !empty($message)) {
+        if ($name && !empty($name) && $mail && !empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL) && $message && !empty($message)) {
             $html = '<h2>' . $name . '</h2>';
-            $html .= '<a href="mailto:' . $email . '">' . $email . '</a>';
+            $html .= '<a href="mailto:' . $mail . '">' . $mail . '</a>';
             $html .= '<p>' . $message . '</p>';
 
             /* Get signature */
@@ -49,7 +49,7 @@ class ContactController extends AbstractController
 
             $emailConfirm = (new Email())
                 ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
-                ->to(new Address((string)$email))
+                ->to(new Address($mail))
                 ->subject('Confirmation de récéption')
                 ->html($confirm . $html);
             try {
