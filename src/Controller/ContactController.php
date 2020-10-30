@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
@@ -22,7 +22,14 @@ class ContactController extends AbstractController
             $html = '<h1>' . $name . '</h1>';
             $html .= '<a href="mailto:' . $email . '">' . $email . '</a>';
             $html .= '<p>' . $message . '</p>';
-            $html .= fopen('../public/assets/email/mail.html', 'r');
+
+            $f = fopen('../public/assets/email/mail.html', 'r');
+            while (!feof($f)) {
+                $result = fgets($f);
+                $html .= $result;
+            }
+
+            fclose($f);
 
             $email = (new Email())
                 ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
