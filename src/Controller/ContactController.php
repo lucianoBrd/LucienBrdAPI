@@ -43,7 +43,7 @@ class ContactController extends AbstractController
 
             $email = (new Email())
                 ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
-                ->to('contact@lucien-brd.com')
+                ->to('lucien.burdet@gmail.com')
                 ->subject('Message de ' . $name)
                 ->html($html);
 
