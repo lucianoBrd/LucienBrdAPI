@@ -1,19 +1,16 @@
- 
-# Mentions légales et politique de confidentialité
- 
 L'entreprise individuelle Lucien Burdet, soucieuse des droits des individus, notamment au regard des traitements automatisés et dans une volonté de transparence avec ses clients, a mis en place une politique reprenant l’ensemble de ces traitements, des finalités poursuivies par ces derniers ainsi que des moyens d’actions à la disposition des individus afin qu’ils puissent au mieux exercer leurs droits. 
 Pour toute information complémentaire sur la protection des données personnelles, nous vous invitons à consulter le site : https://www.cnil.fr/
  
 La poursuite de la navigation sur ce site vaut acceptation sans réserve des dispositions et conditions d'utilisation qui suivent. 
 La version actuellement en ligne de ces conditions d'utilisation est la seule opposable pendant toute la durée d'utilisation du site et jusqu'à ce qu'une nouvelle version la remplace.
 
-## Article 1 - Mentions légales
+### Article 1 - Mentions légales
 
-### 1.1 Site (ci-après « le site ») : 
+#### 1.1 Site (ci-après « le site ») : 
  
 Lucien Burdet - lucien-brd.com
  
-### 1.2 Éditeur (ci-après « l'éditeur ») : 
+#### 1.2 Éditeur (ci-après « l'éditeur ») : 
  
 L'entreprise indivuduelle Lucien Burdet
 située : Impasse des hirondelles, 01700 Miribel
@@ -21,28 +18,28 @@ immatriculée au RCS de Dijon 847828183
 n° de téléphone : 0634422757
 adresse mail : contact@lucien-brd.com
  
-### 1.3 Hébergeur (ci-après « l'hébergeur ») : 
+#### 1.3 Hébergeur (ci-après « l'hébergeur ») : 
  
 Lucien Burdet - lucien-brd.com est hébergé par Ovh, dont le siège social est situé  2 rue Kellermann 59100 Roubaix.
  
  
-## Article 2 - Accès au site
+### Article 2 - Accès au site
 
 L'accès au site et son utilisation sont réservés à un usage strictement personnel. Vous vous engagez à ne pas utiliser ce site et les informations ou données qui y figurent à des fins commerciales, politiques, publicitaires et pour toute forme de sollicitation commerciale et notamment l'envoi de courriers électroniques non sollicités.
 
-## Article 3 - Contenu du site
+### Article 3 - Contenu du site
 
 Toutes les marques, photographies, textes, commentaires, illustrations, images animées ou non, séquences vidéo, sons, ainsi que toutes les applications informatiques qui pourraient être utilisées pour faire fonctionner ce site et plus généralement tous les éléments reproduits ou utilisés sur le site sont protégés par les lois en vigueur au titre de la propriété intellectuelle.
 Ils sont la propriété pleine et entière de l'éditeur ou de ses partenaires. Toute reproduction, représentation, utilisation ou adaptation, sous quelque forme que ce soit, de tout ou partie de ces éléments, y compris les applications informatiques, sans l'accord préalable et écrit de l'éditeur, sont strictement interdites. Le fait pour l'éditeur de ne pas engager de procédure dès la prise de connaissance de ces utilisations non autorisées ne vaut pas acceptation desdites utilisations et renonciation aux poursuites.
 
-## Article 4 - Gestion du site
+### Article 4 - Gestion du site
 
 Pour la bonne gestion du site, l'éditeur pourra à tout moment :
 * suspendre, interrompre ou limiter l'accès à tout ou partie du site, réserver l'accès au site, ou à certaines parties du site, à une catégorie déterminée d'internautes ;
 * supprimer toute information pouvant en perturber le fonctionnement ou entrant en contravention avec les lois nationales ou internationales ;
 * suspendre le site afin de procéder à des mises à jour.
 
-## Article 5 - Responsabilités
+### Article 5 - Responsabilités
 
 La responsabilité de l'éditeur ne peut être engagée en cas de défaillance, panne, difficulté ou interruption de fonctionnement, empêchant l'accès au site ou à une de ses fonctionnalités.
 Le matériel de connexion au site que vous utilisez est sous votre entière responsabilité. Vous devez prendre toutes les mesures appropriées pour protéger votre matériel et vos propres données notamment d'attaques virales par Internet. Vous êtes par ailleurs seul responsable des sites et données que vous consultez.
@@ -54,12 +51,12 @@ L'éditeur ne pourra être tenu responsable en cas de poursuites judiciaires à 
 L'éditeur n'est pas responsable des dommages causés à vous-même, à des tiers et/ou à votre équipement du fait de votre connexion ou de votre utilisation du site et vous renoncez à toute action contre lui de ce fait.
 Si l'éditeur venait à faire l'objet d'une procédure amiable ou judiciaire en raison de votre utilisation du site, il pourra se retourner contre vous pour obtenir l'indemnisation de tous les préjudices, sommes, condamnations et frais qui pourraient découler de cette procédure.
 
-## Article 6 - Liens hypertextes
+### Article 6 - Liens hypertextes
  
 La mise en place par les utilisateurs de tous liens hypertextes vers tout ou partie du site est autorisée par l'éditeur. Tout lien devra être retiré sur simple demande de l'éditeur. 
 Toute information accessible via un lien vers d'autres sites n'est pas publiée par l'éditeur. L'éditeur ne dispose d'aucun droit sur le contenu présent dans ledit lien. 
 
-## Article 7 - Collecte et protection des données
+### Article 7 - Collecte et protection des données
  
 Vos données sont collectées par l'entreprise individuelle Lucien Burdet.
 Une donnée à caractère personnel désigne toute information concernant une personne physique identifiée ou identifiable (personne concernée) ; est réputée identifiable une personne qui peut être identifiée, directement ou indirectement, notamment par référence à un nom, un numéro d'identification ou à un ou plusieurs éléments spécifiques, propres à son identité physique, physiologique, génétique, psychique, économique, culturelle ou sociale.
@@ -69,7 +66,7 @@ Les données personnelles collectées sont les suivantes :
 * nom et prénom
 * adresse mail
  
-## Article 8 - Droit d’accès, de rectification et de déréférencement de vos données
+### Article 8 - Droit d’accès, de rectification et de déréférencement de vos données
  
 En application de la réglementation applicable aux données à caractère personnel, les utilisateurs disposent des droits suivants :
 * le droit d’accès : ils peuvent exercer leur droit d'accès, pour connaître les données personnelles les concernant, en écrivant à l'adresse électronique ci-dessous mentionnée. Dans ce cas, avant la mise en œuvre de ce droit, la Plateforme peut demander une preuve de l'identité de l'utilisateur afin d'en vérifier l'exactitude ;
@@ -93,7 +90,7 @@ Les utilisateurs peuvent aussi introduire une réclamation auprès de la CNIL su
  
 Nous vous recommandons de nous contacter dans un premier temps avant de déposer une réclamation auprès de la CNIL, car nous sommes à votre entière disposition pour régler votre problème. 
  
-## Article 9 - Utilisation des données
+### Article 9 - Utilisation des données
  
 Les données personnelles collectées auprès des utilisateurs ont pour objectif la mise à disposition des services de la Plateforme, leur amélioration et le maintien d'un environnement sécurisé. La base légale des traitements est  l’exécution du contrat entre l’utilisateur et la Plateforme. Plus précisément, les utilisations sont les suivantes :
  
@@ -106,12 +103,12 @@ Les données personnelles collectées auprès des utilisateurs ont pour objectif
 * gestion des éventuels litiges avec les utilisateurs ;
 * envoi d'informations commerciales et publicitaires, en fonction des préférences de l'utilisateur ;
  
-## Article 10 - Politique de conservation des données
+### Article 10 - Politique de conservation des données
  
 La Plateforme conserve vos données pour la durée nécessaire pour vous fournir ses services ou son assistance. 
 Dans la mesure raisonnablement nécessaire ou requise pour satisfaire aux obligations légales ou réglementaires, régler des litiges, empêcher les fraudes et abus ou appliquer nos modalités et conditions, nous pouvons également conserver certaines de vos informations si nécessaire, même après que vous ayez fermé votre compte ou que nous n'ayons plus besoin pour vous fournir nos services.
  
-## Article 11- Partage des données personnelles avec des tiers
+### Article 11- Partage des données personnelles avec des tiers
  
 Les données personnelles peuvent être partagées avec des sociétés tierces exclusivement dans l’Union européenne, dans les cas suivants :
 * lorsque l'utilisateur publie, dans les zones de commentaires libres de la Plateforme, des informations accessibles au public ;
@@ -119,14 +116,14 @@ Les données personnelles peuvent être partagées avec des sociétés tierces e
 * quand la Plateforme recourt aux services de prestataires pour fournir l'assistance utilisateurs, la publicité et les services de paiement. Ces prestataires disposent d'un accès limité aux données de l'utilisateur, dans le cadre de l'exécution de ces prestations, et ont l'obligation contractuelle de les utiliser en conformité avec les dispositions de la réglementation applicable en matière protection des données à caractère personnel ;
 * si la loi l'exige, la Plateforme peut effectuer la transmission de données pour donner suite aux réclamations présentées contre la Plateforme et se conformer aux procédures administratives et judiciaires.
  
-## Article 12 - Offres commerciales
+### Article 12 - Offres commerciales
  
 Vous êtes susceptible de recevoir des offres commerciales de l'éditeur. Si vous ne le souhaitez pas, veuillez cliquer sur le lien suivant : contact@lucien-brd.com.
 Vos données sont susceptibles d’être utilisées par les partenaires de l'éditeur à des fins de prospection commerciale, si vous ne le souhaitez pas, veuillez cliquer sur le lien suivant : contact@lucien-brd.com.
 Si, lors de la consultation du site, vous accédez à des données à caractère personnel, vous devez vous abstenir de toute collecte, de toute utilisation non autorisée et de tout acte pouvant constituer une atteinte à la vie privée ou à la réputation des personnes. L'éditeur décline toute responsabilité à cet égard.
 Les données sont conservées et utilisées pour une durée conforme à la législation en vigueur.
 
-## Article 13 - Cookies 
+### Article 13 - Cookies 
  
 Qu’est-ce qu’un « cookie » ?
 Un « Cookie » ou traceur est un fichier électronique déposé sur un terminal (ordinateur, tablette, smartphone,…) et lu par exemple lors de la consultation d'un site internet, de la lecture d'un courrier électronique, de l'installation ou de l'utilisation d'un logiciel ou d'une application mobile et ce, quel que soit le type de terminal utilisé (source : https://www.cnil.fr/fr/cookies-traceurs-que-dit-la-loi).
@@ -143,15 +140,15 @@ La durée de vie de ces cookies est de treize mois.
  
 Pour plus d’informations sur l’utilisation, la gestion et la suppression des « cookies », pour tout type de navigateur, nous vous invitons à consulter le lien suivant : https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser.
 
-## Article 14 - Photographies et représentation des produits
+### Article 14 - Photographies et représentation des produits
 
 Les photographies de produits, accompagnant leur description, ne sont pas contractuelles et n'engagent pas l'éditeur.
 
-## Article 15 - Loi applicable
+### Article 15 - Loi applicable
 
 Les présentes conditions d'utilisation du site sont régies par la loi française et soumises à la compétence des tribunaux du siège social de l'éditeur, sous réserve d'une attribution de compétence spécifique découlant d'un texte de loi ou réglementaire particulier.
 
-## Article 16 - Contactez-nous
+### Article 16 - Contactez-nous
 
 Pour toute question, information sur les produits présentés sur le site, ou concernant le site lui-même, vous pouvez laisser un message à l'adresse suivante : contact@lucien-brd.com.     
  
