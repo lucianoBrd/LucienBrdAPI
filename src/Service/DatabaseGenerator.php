@@ -3,10 +3,11 @@
 namespace App\Service;
 
 use App\Entity\Cv;
-use App\Entity\Education;
+use App\Entity\Social;
+use App\Entity\Politic;
 use App\Entity\Project;
 use App\Entity\Service;
-use App\Entity\Social;
+use App\Entity\Education;
 use Doctrine\Persistence\ObjectManager;
 
 class DatabaseGenerator
@@ -34,6 +35,7 @@ class DatabaseGenerator
         $this->manageService();
         $this->manageSocial();
         $this->manageCv();
+        $this->managePolitic();
     }
 
     public function manageProject()
@@ -174,6 +176,24 @@ class DatabaseGenerator
         $cv->setDocument('CV_BURDET_LUCIEN.webp');
 
         $this->manager->persist($cv);
+
+        $this->manager->flush();
+
+    }
+
+    public function managePolitic()
+    {
+        $repository = $this->manager->getRepository(Politic::class);
+
+        /* Reset project database */
+        $this->reset($repository);
+
+        $politic = new Politic();
+
+        $politic->setTitle('Politique de confidentialité')
+                ->setDocument('politique-de-confidentialite.md');
+
+        $this->manager->persist($politic);
 
         $this->manager->flush();
 
