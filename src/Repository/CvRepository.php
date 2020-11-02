@@ -21,7 +21,7 @@ class CvRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Cv Returns a Cv objects
+     * @return Cv Returns a Cv object
      */
     
     public function findOneArray()

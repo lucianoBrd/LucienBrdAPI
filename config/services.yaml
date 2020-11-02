@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.url: 'https://api.lucien-brd.com'
+    app.assets.images.blogs: '%app.url%/assets/images/blogs/'
+    app.assets.documents.blogs: '%app.url%/assets/documents/blogs/'
     app.assets.documents.cv: '%app.url%/assets/documents/cv/'
     app.assets.images.educations: '%app.url%/assets/images/educations/'
     app.assets.documents.politic: '%app.url%/assets/documents/politic/'

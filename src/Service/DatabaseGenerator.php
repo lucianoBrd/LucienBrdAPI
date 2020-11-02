@@ -2,7 +2,10 @@
 
 namespace App\Service;
 
+use DateTime;
 use App\Entity\Cv;
+use App\Entity\Tag;
+use App\Entity\Blog;
 use App\Entity\Social;
 use App\Entity\Politic;
 use App\Entity\Project;
@@ -13,10 +16,15 @@ use Doctrine\Persistence\ObjectManager;
 class DatabaseGenerator
 {
     private $manager;
+    private $tags;
 
     public function __construct(ObjectManager $manager)
     {
         $this->manager = $manager;
+        $this->tags = [
+            'security' => 'Sécurité',
+            'android' => 'Android',
+        ];
     }
 
     private function reset($repository)
@@ -36,6 +44,8 @@ class DatabaseGenerator
         $this->manageSocial();
         $this->manageCv();
         $this->managePolitic();
+        $this->manageTag();
+        $this->manageBlog();
     }
 
     public function manageProject()
@@ -191,9 +201,73 @@ class DatabaseGenerator
         $politic = new Politic();
 
         $politic->setTitle('Politique de confidentialité')
-                ->setDocument('politique-de-confidentialite.md');
+            ->setDocument('politique-de-confidentialite.md');
 
         $this->manager->persist($politic);
+
+        $this->manager->flush();
+
+    }
+
+    public function manageTag()
+    {
+        $repository = $this->manager->getRepository(Tag::class);
+
+        /* Reset project database */
+        $this->reset($repository);
+
+        foreach ($this->tags as $t) {
+            $tag = new Tag();
+
+            $tag->setTitle($t);
+
+            $this->manager->persist($tag);
+        }
+
+        $this->manager->flush();
+
+    }
+
+    public function manageBlog()
+    {
+        $repository = $this->manager->getRepository(Blog::class);
+        $repoTag = $this->manager->getRepository(Tag::class);
+
+        /* Reset project database */
+        $this->reset($repository);
+
+        $blogs = [
+            [
+                'kali-nethunter.webp',
+                'Installer Kali Linux NetHunter sur un appareil Android (Samsung Galaxy S5 - SM-G900F)',
+                'installer-kali-linux-nethunter-appareil-android-sm-g900f',
+                [
+                    $this->tags['security'], 
+                    $this->tags['android']
+                ],
+                new \DateTime('02-11-2020'),
+                'Ce tutoriel vous permettra d\'installer Kali Linux NetHunter sur un appareil Android compatible (Samsung Galaxy S5 - SM-G900F dans le tutoriel). Kali NetHunter est une plate-forme de test de pénétration mobile gratuite et open-source pour les appareils Android, basée sur Kali Linux.',
+                'kali-nethunter.md'
+            ],
+        ];
+
+        foreach ($blogs as $b) {
+            $blog = new Blog();
+
+            $blog->setImage($b[0])
+                ->setTitle($b[1])
+                ->setSlug($b[2])
+                ->setDate($b[4])
+                ->setContent($b[5])
+                ->setDocument($b[6]);
+            
+            foreach ($b[3] as $t) {
+                $tag = $repoTag->findOneBy(['title' => $t]);
+                $blog->addTag($tag);
+            }
+
+            $this->manager->persist($blog);
+        }
 
         $this->manager->flush();
 
