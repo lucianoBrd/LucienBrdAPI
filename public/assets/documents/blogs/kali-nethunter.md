@@ -1,8 +1,8 @@
-[build.py-h]: https://www.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/build.py-h.webp "build.py -h résultat"
-[install-zip]: https://www.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/install-zip.webp "installer zip"
-[twrp]: https://www.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/twrp.webp "twrp"
-[adb-list-disks]: https://www.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/adb-list-disks.webp "adb list-disks"
-[kernel]: https://www.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/kernel.webp "kernel"
+[build.py-h]: https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/build.py-h.webp "build.py -h résultat"
+[install-zip]: https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/install-zip.webp "installer zip"
+[twrp]: https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/twrp.webp "twrp"
+[adb-list-disks]: https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/adb-list-disks.webp "adb list-disks"
+[kernel]: https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/kernel.webp "kernel"
 
 Ce tutoriel vous permettra d'installer Kali Linux NetHunter sur un appareil Android compatible (Samsung Galaxy S5 - SM-G900F dans le tutoriel) :
 * *Kernel* spécifique NetHunter
@@ -42,7 +42,7 @@ Votre téléphone possède un slot pour mettre une carte micro SD qui va permett
 Si votre téléphone propose nativement dans les paramètres une option qui permet de fusionner les deux mémoires, il vous suffit de l'activer.
 Sinon, voici comment procéder pour un appareil sous Android 6 minimum (Android ne le prend pas en charge dans les versions précedente).
 
-1. [Télécharger](https://www.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/adb-setup-1.4.3.exe) et installer l’application ADB pour votre ordinateur.
+1. [Télécharger](https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/adb-setup-1.4.3.exe) et installer l’application ADB pour votre ordinateur.
 2. Activer :
    * Le mode développeur : Paramètres > A propos de l'appareil > Taper plusieurs fois sur le numéro de *build*
    * Le débogage USB : Paramètres > Options de développement > Débogage USB.
@@ -70,8 +70,8 @@ Sinon, voici comment procéder pour un appareil sous Android 6 minimum (Android 
 ##### *Root* et *Recovery Custom*
 Voici comment procéder pour un SM-G900F.
 
-1. [Télécharger](https://www.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/Samsung_USB_Driver_v1.7.31.0.zip) et installer les *driver* USB samsung. 
-2. [Télécharger](https://www.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/SM-G900F-6.0.1.zip) et extraire les fichiers pour le *root* et le *Recovery Custom*.
+1. [Télécharger](https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/Samsung_USB_Driver_v1.7.31.0.zip) et installer les *driver* USB samsung. 
+2. [Télécharger](https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/SM-G900F-6.0.1.zip) et extraire les fichiers pour le *root* et le *Recovery Custom*.
 3. Activer :
    * Le mode développeur : Paramètres > A propos de l'appareil > Taper plusieurs fois sur le numéro de *build*
    * Le débogage USB : Paramètres > Options de développement > Débogage USB.
@@ -98,7 +98,7 @@ Voici comment procéder pour un SM-G900F.
 ###### Télécharger une image déjà existante
 Si vous trouvez une image NetHunter compatible avec votre appareil (attention à la version d'Android) via ce lien https://www.offensive-security.com/kali-linux-nethunter-download, il vous suffit de télécharger celle-ci (pas besoin de siuvre les étapes suivante de cette partie).
 
-L'image pour un Samsung Galaxy S5 - SM-G900F, Android 6 - *Marshmallow*, ROM officielle *Touchwiz* est disponible [ici](https://www.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/update-nethunter-20201020_215800-klte-touchwiz-marshmallow.zip) (pas besoin de siuvre les étapes suivante de cette partie).
+L'image pour un Samsung Galaxy S5 - SM-G900F, Android 6 - *Marshmallow*, ROM officielle *Touchwiz* est disponible [ici](https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/update-nethunter-20201020_215800-klte-touchwiz-marshmallow.zip) (pas besoin de siuvre les étapes suivante de cette partie).
 
 Si vous n'avez pas trouvé d'image compatible avec votre appareil tout n'est pas perdu.
 
