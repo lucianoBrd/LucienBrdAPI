@@ -14,30 +14,29 @@ Kali NetHunter est une plate-forme de test de pénétration mobile gratuite et o
 * Kali NetHunter Store pour installer des applications et outils de sécurité
 * Kali NetHunter Desktop Experience (KeX) pour exécuter des sessions de bureau Kali Linux complètes sur un écran (via HDMI ou *screen casting*)
 
-#### Table des matières
+# Table des matières
 
-- [Table des matières](#table-des-matières)
-- [Prérequis](#prérequis)
-  - [Augmenter le stockage de l'appareil](#augmenter-le-stockage-de-lappareil)
-  - [*Root* et *Recovery Custom*](#root-et-recovery-custom)
-    - [*Rooter* le téléphone](#rooter-le-téléphone)
-    - [Installer un *Recovery Custom* TWRP](#installer-un-recovery-custom-twrp)
-  - [L'image NetHunter](#limage-nethunter)
-    - [Télécharger une image déjà existante](#télécharger-une-image-déjà-existante)
-    - [Générer sa propre image](#générer-sa-propre-image)
-- [Installation](#installation)
-- [Configuration après installation](#configuration-après-installation)
-- [En savoir plus](#en-savoir-plus)
+- [Prérequis](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#prérequis)
+  - [Augmenter le stockage de l'appareil](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#augmenter-le-stockage-de-lappareil)
+  - [*Root* et *Recovery Custom*](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#root-et-recovery-custom)
+    - [*Rooter* le téléphone](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#rooter-le-téléphone)
+    - [Installer un *Recovery Custom* TWRP](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#installer-un-recovery-custom-twrp)
+  - [L'image NetHunter](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#limage-nethunter)
+    - [Télécharger une image déjà existante](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#télécharger-une-image-déjà-existante)
+    - [Générer sa propre image](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#générer-sa-propre-image)
+- [Installation](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#installation)
+- [Configuration après installation](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#configuration-après-installation)
+- [En savoir plus](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#en-savoir-plus)
 
-#### Prérequis
-Avant toute manipulation je vous invite à vérifier que votre appareil est compatible (voir [L'image NetHunter](#limage-nethunter)).
+# Prérequis
+Avant toute manipulation je vous invite à vérifier que votre appareil est compatible (voir [L'image NetHunter](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#limage-nethunter)).
 
 * Assurez vous d'avoir une batterie chargée (75% minimum).
-* Avoir au moins 9go de stockage de disponible (voir [Augmenter le stockage de l'appareil](#augmenter-le-stockage-de-lappareil))  
-* Avoir un téléphone *rooté* avec un *Recovery Custom* (voir [*Root* et *Recovery Custom*](#root-et-recovery-custom)).
-* Avoir l'image NetHunter compatible avec son téléphone (voir [L'image NetHunter](#limage-nethunter)).
+* Avoir au moins 9go de stockage de disponible (voir [Augmenter le stockage de l'appareil](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#augmenter-le-stockage-de-lappareil))  
+* Avoir un téléphone *rooté* avec un *Recovery Custom* (voir [*Root* et *Recovery Custom*](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#root-et-recovery-custom)).
+* Avoir l'image NetHunter compatible avec son téléphone (voir [L'image NetHunter](/blog/installer-kali-linux-nethunter-appareil-android-sm-g900f/#limage-nethunter)).
 
-##### Augmenter le stockage de l'appareil
+## Augmenter le stockage de l'appareil
 Votre téléphone possède un slot pour mettre une carte micro SD qui va permettre d’augmenter cette mémoire. En revanche son utilisation est vite restrictive niveau déplacement du contenu.
 Si votre téléphone propose nativement dans les paramètres une option qui permet de fusionner les deux mémoires, il vous suffit de l'activer.
 Sinon, voici comment procéder pour un appareil sous Android 6 minimum (Android ne le prend pas en charge dans les versions précedente).
@@ -67,7 +66,7 @@ Sinon, voici comment procéder pour un appareil sous Android 6 minimum (Android 
     $ sm partition disk:179,64 private
     ```
 
-##### *Root* et *Recovery Custom*
+## *Root* et *Recovery Custom*
 Voici comment procéder pour un SM-G900F.
 
 1. [Télécharger](https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/Samsung_USB_Driver_v1.7.31.0.zip) et installer les *driver* USB samsung. 
@@ -77,7 +76,7 @@ Voici comment procéder pour un SM-G900F.
    * Le débogage USB : Paramètres > Options de développement > Débogage USB.
 4. Eteindre votre téléphone.
    
-###### *Rooter* le téléphone
+### *Rooter* le téléphone
 1. Démarrer en mode *download*. 
  Appuyez simultanément sur **volume bas + home + power**
 2. Ouvrir ```Odin3-v3.10.6.exe``` (fichier extrait lors de l'étape 2) et connecter votre téléphone à l'ordinateur.
@@ -85,7 +84,7 @@ Voici comment procéder pour un SM-G900F.
 4. Clicker sur *Start*.
 5. Une fois que le message *Pass* s'affiche, vous pouvez déconnecter votre téléphone de votre ordinateur : il est *rooté*.
 
-###### Installer un *Recovery Custom* TWRP
+### Installer un *Recovery Custom* TWRP
 1. Démarrer en mode *download*. 
  Appuyez simultanément sur **volume bas + home + power**
 2. Ouvrir ```Odin3-v3.10.6.exe``` (fichier extrait lors de l'étape 2) et connecter votre téléphone à l'ordinateur.
@@ -93,16 +92,16 @@ Voici comment procéder pour un SM-G900F.
 4. Clicker sur *Start*.
 5. Une fois que le message *Pass* s'affiche, vous pouvez déconnecter votre téléphone de votre ordinateur : TWRP est installé.
 
-##### L'image NetHunter
+## L'image NetHunter
 
-###### Télécharger une image déjà existante
+### Télécharger une image déjà existante
 Si vous trouvez une image NetHunter compatible avec votre appareil (attention à la version d'Android) via ce lien https://www.offensive-security.com/kali-linux-nethunter-download, il vous suffit de télécharger celle-ci (pas besoin de siuvre les étapes suivante de cette partie).
 
 L'image pour un Samsung Galaxy S5 - SM-G900F, Android 6 - *Marshmallow*, ROM officielle *Touchwiz* est disponible [ici](https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/update-nethunter-20201020_215800-klte-touchwiz-marshmallow.zip) (pas besoin de siuvre les étapes suivante de cette partie).
 
 Si vous n'avez pas trouvé d'image compatible avec votre appareil tout n'est pas perdu.
 
-###### Générer sa propre image
+### Générer sa propre image
 1. Premièrement il faudra que vous récupériez le projet :
     ```sh
     $ git clone https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-project
@@ -131,7 +130,7 @@ Si vous n'avez pas trouvé d'image compatible avec votre appareil tout n'est pas
     L'image sera crée dans le dossier ```nethunter-installer``` au format zip.
     C'est le fichier zip dont vous aurez besoin pour flasher votre appareil.
 
-#### Installation
+# Installation
 
 Afin d'installer l'image NetHunter, il faudra flasher celle-ci sur votre téléphone.
 
@@ -147,11 +146,11 @@ Pour le s5 appuyez simultanément sur **volume haut + home + power**.
 Si l'installation s'est bien déroulée, si vous ouvrez NetHunter App, le *Kernel Version* devrait être celui de Kali Linux NetHunter :
 ![kernel][kernel]
 
-#### Configuration après installation
+# Configuration après installation
 
 1. Ouvrez NetHunter App et allez dans *Kali Chroot Manager*. Téléchargez et installez *Kali Chroot* (faites attention de choisir la version compatible avec l'architecture de votre processeur).
 2. Ouvrez NetHunter Store (F-Droid) et installez *Hacker Keyboard*.
 
-#### En savoir plus
+# En savoir plus
 https://www.kali.org/docs/nethunter/
 https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-project
