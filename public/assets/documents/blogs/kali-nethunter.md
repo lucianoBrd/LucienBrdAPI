@@ -16,25 +16,27 @@ Kali NetHunter est une plate-forme de test de pénétration mobile gratuite et o
 
 # Table des matières
 
-1. [Prérequis](#1-prérequis)
-   1. [Augmenter le stockage de l'appareil](#11-augmenter-le-stockage-de-lappareil)
-   2. [*Root* et *Recovery Custom*](#12-root-et-recovery-custom)
-      1. [*Rooter* le téléphone](#121-rooter-le-téléphone)
-      2. [Installer un *Recovery Custom* TWRP](#122-installer-un-recovery-custom-twrp)
-   3. [L'image NetHunter](#13-limage-nethunter)
-      1. [Télécharger une image déjà existante](#131-télécharger-une-image-déjà-existante)
-      2. [Générer sa propre image](#132-générer-sa-propre-image)
-2. [Installation](#2-installation)
-3. [Configuration après installation](#3-configuration-après-installation)
-4. [En savoir plus](#4-en-savoir-plus)
+1. Prérequis
+   1. Augmenter le stockage de l'appareil
+   2. *Root* et *Recovery Custom*
+      1. *Rooter* le téléphone
+      2. Installer un *Recovery Custom* TWRP
+   3. L'image NetHunter
+      1. Télécharger une image déjà existante
+      2. Générer sa propre image
+2. Installation
+3. Configuration après installation
+4. En savoir plus
+    1. Liens de téléchargement
+    2. Documentation
 
 # 1. Prérequis
-Avant toute manipulation je vous invite à vérifier que votre appareil est compatible (voir [1.3. L'image NetHunter](#limage-nethunter)).
+Avant toute manipulation je vous invite à vérifier que votre appareil est compatible (voir 1.3. L'image NetHunter).
 
 * Assurez vous d'avoir une batterie chargée (75% minimum).
-* Avoir au moins 9go de stockage de disponible (voir [1.1. Augmenter le stockage de l'appareil](#augmenter-le-stockage-de-lappareil))  
-* Avoir un téléphone *rooté* avec un *Recovery Custom* (voir [1.2. *Root* et *Recovery Custom*](#root-et-recovery-custom)).
-* Avoir l'image NetHunter compatible avec son téléphone (voir [1.3. L'image NetHunter](#limage-nethunter)).
+* Avoir au moins 9go de stockage de disponible (voir 1.1. Augmenter le stockage de l'appareil)  
+* Avoir un téléphone *rooté* avec un *Recovery Custom* (voir 1.2. *Root* et *Recovery Custom*).
+* Avoir l'image NetHunter compatible avec son téléphone (voir 1.3. L'image NetHunter).
 
 ## 1.1. Augmenter le stockage de l'appareil
 Votre téléphone possède un slot pour mettre une carte micro SD qui va permettre d’augmenter cette mémoire. En revanche son utilisation est vite restrictive niveau déplacement du contenu.
@@ -151,5 +153,13 @@ Si l'installation s'est bien déroulée, si vous ouvrez NetHunter App, le *Kerne
 2. Ouvrez NetHunter Store (F-Droid) et installez *Hacker Keyboard*.
 
 # 4. En savoir plus
-https://www.kali.org/docs/nethunter/
-https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-project
+
+## 4.1. Liens de téléchargement
+* [adb-setup-1.4.3.exe](https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/adb-setup-1.4.3.exe)
+* [Samsung_USB_Driver_v1.7.31.0.zip](https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/Samsung_USB_Driver_v1.7.31.0.zip)
+* [SM-G900F-6.0.1.zip](https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/SM-G900F-6.0.1.zip)
+* [update-nethunter-20201020_215800-klte-touchwiz-marshmallow.zip](https://api.lucien-brd.com/assets/documents/blogs/installer-kali-linux-nethunter-appareil-android-sm-g900f/update-nethunter-20201020_215800-klte-touchwiz-marshmallow.zip)
+
+## 4.2. Documentation
+* https://www.kali.org/docs/nethunter/
+* https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-project
