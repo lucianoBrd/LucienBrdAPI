@@ -50,9 +50,9 @@ Si l'installation s'est bien déroulée, l'application SuperSU devrait être ins
 4. Clicker sur *Start*.
 5. Une fois que le message *Pass* s'affiche, vous pouvez déconnecter votre téléphone de votre ordinateur : TWRP est installé.
 
-Si l'installation s'est bien déroulée, si vous démarer votre téléphone en mode *recovery*, appuyez simultanément sur **volume haut + home + power**, l'écran suivant devrait s'afficher.
+Si l'installation s'est bien déroulée, si vous démarer votre téléphone en mode *recovery*, appuyez simultanément sur **volume haut + home + power**, l'écran suivant devrait s'afficher :
 
-![twrp][twrp]
+* ![twrp][twrp]
 
 # 4. Liens de téléchargement
 * [Samsung_USB_Driver_v1.7.31.0.zip](https://api.lucien-brd.com/assets/documents/blogs/root-twrp-sm-g900f/Samsung_USB_Driver_v1.7.31.0.zip)

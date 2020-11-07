@@ -86,7 +86,7 @@ Pour le s5 appuyez simultanément sur **volume haut + home + power**.
 
 Si l'installation s'est bien déroulée, si vous ouvrez NetHunter App, le *Kernel Version* devrait être celui de Kali Linux NetHunter :
 
-![kernel][kernel]
+* ![kernel][kernel]
 
 # 4. Configuration après installation
 
