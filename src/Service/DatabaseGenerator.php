@@ -245,9 +245,31 @@ class DatabaseGenerator
                     $this->tags['security'], 
                     $this->tags['android']
                 ],
-                new \DateTime('02-11-2020'),
+                new \DateTime('03-11-2020'),
                 'Ce tutoriel vous permettra d\'installer Kali Linux NetHunter sur un appareil Android compatible (Samsung Galaxy S5 - SM-G900F dans le tutoriel). Kali NetHunter est une plate-forme de test de pénétration mobile gratuite et open-source pour les appareils Android, basée sur Kali Linux.',
                 'kali-nethunter.md'
+            ],
+            [
+                'root-twrp-sm-g900f.webp',
+                'Rooter et installer un Recovery Custom TWRP pour Samsung Galaxy S5 - SM-G900F',
+                'rooter-installer-recovery-custom-twrp-sm-g900f',
+                [
+                    $this->tags['android']
+                ],
+                new \DateTime('01-11-2020'),
+                'Équivalent du jailbreak sur iPhone, l\'idée de rooter son téléphone c\'est d\'accéder à un contrôle complet de l\'appareil. Les principaux usages qui peuvent venir en tête sont la suppression d\'applications installées par le fabricant / l\'opérateur, l\'accélération de la machine, installer une ROM spécifique ou encore pirater des jeux.',
+                'root-twrp-sm-g900f.md'
+            ],
+            [
+                'sd-card.webp',
+                'Augmenter le stockage d\'un appareil Android - Fusionner les mémoires',
+                'augmenter-stockage-appareil-android-fusionner-mémoires',
+                [
+                    $this->tags['android']
+                ],
+                new \DateTime('02-11-2020'),
+                'Votre téléphone possède un slot pour mettre une carte micro SD qui va permettre d’augmenter cette mémoire. En revanche son utilisation est vite restrictive niveau déplacement du contenu. Si votre téléphone propose nativement dans les paramètres une option qui permet de fusionner les deux mémoires, il vous suffit de l\'activer.',
+                'sd-card.md'
             ],
         ];
 
