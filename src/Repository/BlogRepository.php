@@ -39,14 +39,18 @@ class BlogRepository extends ServiceEntityRepository
      */
     public function findLatestArray()
     {
-        return $this->createQueryBuilder('b')
+        $blogs = $this->createQueryBuilder('b')
             ->leftJoin('b.tags', 'tag')
             ->addSelect('tag')
             ->orderBy('b.date', 'DESC')
-            ->setMaxResults(3)
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY)
         ;
+
+        if (count($blogs) > 3) {
+            return array_slice($blogs, 0, 3);
+        }
+        return $blogs;
     }
 
     /**
