@@ -1,4 +1,4 @@
-[twrp]: https://api.lucien-brd.com/assets/documents/images/root-twrp-sm-g900f/twrp.webp "twrp"
+[twrp]: https://api.lucien-brd.com/assets/images/blogs/root-twrp-sm-g900f/twrp.webp "twrp"
 
 Équivalent du *jailbreak* sur iPhone, l'idée de rooter son téléphone c'est d'accéder à **un contrôle complet de l'appareil**. Les principaux usages qui peuvent venir en tête sont la suppression d'applications installées par le fabricant / l'opérateur, l'accélération de la machine, installer une ROM spécifique ou encore pirater des jeux.
 

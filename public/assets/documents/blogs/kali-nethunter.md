@@ -1,7 +1,7 @@
-[build.py-h]: https://api.lucien-brd.com/assets/documents/images/kali-nethunter/build.py-h.webp "build.py -h résultat"
-[install-zip]: https://api.lucien-brd.com/assets/documents/images/kali-nethunter/install-zip.webp "installer zip"
-[twrp]: https://api.lucien-brd.com/assets/documents/images/kali-nethunter/twrp.webp "twrp"
-[kernel]: https://api.lucien-brd.com/assets/documents/images/kali-nethunter/kernel.webp "kernel"
+[build.py-h]: https://api.lucien-brd.com/assets/images/blogs/kali-nethunter/build.py-h.webp "build.py -h résultat"
+[install-zip]: https://api.lucien-brd.com/assets/images/blogs/kali-nethunter/install-zip.webp "installer zip"
+[twrp]: https://api.lucien-brd.com/assets/images/blogs/kali-nethunter/twrp.webp "twrp"
+[kernel]: https://api.lucien-brd.com/assets/images/blogs/kali-nethunter/kernel.webp "kernel"
 
 Ce tutoriel vous permettra d'installer Kali Linux NetHunter sur un appareil Android compatible (Samsung Galaxy S5 - SM-G900F dans le tutoriel) :
 * *Kernel* spécifique NetHunter

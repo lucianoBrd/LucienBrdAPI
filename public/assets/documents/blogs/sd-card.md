@@ -1,6 +1,4 @@
-[adb-list-disks]: https://api.lucien-brd.com/assets/documents/images/sd-card/adb-list-disks.webp "adb list-disks"
-
-## 1.1. Augmenter le stockage de l'appareil
+[adb-list-disks]: https://api.lucien-brd.com/assets/images/blogs/sd-card/adb-list-disks.webp "adb list-disks"
 
 Votre téléphone possède un slot pour mettre une carte micro SD qui va permettre d’augmenter cette mémoire. En revanche son utilisation est vite restrictive niveau déplacement du contenu.
 Si votre téléphone propose nativement dans les paramètres une option qui permet de fusionner les deux mémoires, il vous suffit de l'activer.
