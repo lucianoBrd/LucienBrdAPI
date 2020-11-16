@@ -24,6 +24,7 @@ class DatabaseGenerator
         $this->tags = [
             'security' => 'Sécurité',
             'android' => 'Android',
+            'wifi' => 'Wifi',
         ];
     }
 
@@ -237,6 +238,18 @@ class DatabaseGenerator
         $this->reset($repository);
 
         $blogs = [
+            [
+                'evil-twin.webp',
+                'L\'attaque Evil Twin - Récupérer clé WPA - WifiPhisher',
+                'attaque-evil-twin-recuperer-cle-wpa-wifiphisher',
+                [
+                    $this->tags['security'], 
+                    $this->tags['wifi']
+                ],
+                new \DateTime('16-11-2020'),
+                'L\'attaque Evil Twin est une technique permettant de capturer la clé WPA d\'un point d\'accès Wifi. Dans un premier temps en rendant insdiponible celui-ci. Puis, en redirigeant les clients connectés vers un faux point d\'accès contrôlé par le pirate ressemblant de toute pièce au vrai point d\'accès, de tel sorte à ce que les clients saississent la clé WPA du point d\'accès légitime sans se méfier.',
+                'evil-twin.md'
+            ],
             [
                 'kali-nethunter.webp',
                 'Installer Kali Linux NetHunter sur un appareil Android (Samsung Galaxy S5 - SM-G900F)',

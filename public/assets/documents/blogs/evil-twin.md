@@ -1,0 +1,171 @@
+[eviltwin]: https://api.lucien-brd.com/assets/documents/images/evil-twin/eviltwin.webp "eviltwin"
+[AWUS036NH]: https://api.lucien-brd.com/assets/documents/images/evil-twin/AWUS036NH.webp "AWUS036NH"
+[bouygues]: https://api.lucien-brd.com/assets/documents/images/evil-twin/bouygues.webp "bouygues"
+[phishing-pages]: https://api.lucien-brd.com/assets/documents/images/evil-twin/phishing-pages.webp "phishing-pages"
+[wifiphisher-start]: https://api.lucien-brd.com/assets/documents/images/evil-twin/wifiphisher-start.webp "wifiphisher-start"
+[wifiphisher-wifi]: https://api.lucien-brd.com/assets/documents/images/evil-twin/wifiphisher-wifi.webp "wifiphisher-wifi"
+[wifiphisher-phising]: https://api.lucien-brd.com/assets/documents/images/evil-twin/wifiphisher-phising.webp "wifiphisher-phising"
+[wifiphisher-starting]: https://api.lucien-brd.com/assets/documents/images/evil-twin/wifiphisher-starting.webp "wifiphisher-starting"
+[wifiphisher-ddos]: https://api.lucien-brd.com/assets/documents/images/evil-twin/wifiphisher-ddos.webp "wifiphisher-ddos"
+[wifiphisher-connect]: https://api.lucien-brd.com/assets/documents/images/evil-twin/wifiphisher-connect.webp "wifiphisher-connect"
+[wifiphisher-wpa]: https://api.lucien-brd.com/assets/documents/images/evil-twin/wifiphisher-wpa.webp "wifiphisher-wpa"
+[wifiphisher-resume]: https://api.lucien-brd.com/assets/documents/images/evil-twin/wifiphisher-resume.gif "wifiphisher-resume"
+[victim]: https://api.lucien-brd.com/assets/documents/images/evil-twin/victim.gif "victim"
+
+L'attaque Evil Twin est une technique permettant de capturer la clé WPA d'un point d'accès Wifi.
+Dans un premier temps en rendant insdiponible celui-ci.
+Puis, en redirigeant les clients connectés vers un faux point d'accès contrôlé par le pirate ressemblant de toute pièce au vrai point d'accès, de tel sorte à ce que les clients saississent la clé WPA du point d'accès légitime sans se méfier.
+
+Pour réaliser l'attaque, nous aurons besoin de deux cartes réseaux wifi, dont une supportant l'injection de paquet.
+Plus précisément, une première interface wifi sera défini comme point d'accès et la seconde comme interface d'attaque pour rendre indisponible le point d'accès et copier son identité.
+Ensuite, les clients seront déconnectés de force du point d'accès et comme un faux point d'accès identique ne disposant pas d'authentification aura été créé, ils se reconnecteront automatiquement sans se rendre compte de rien.
+Ensuite, le DHCP les redirigera vers une fausse page, leur demandant de saisir la clé WPA.
+
+Pour automatiser l'attaque, nous allons utiliser WifiPhisher.
+
+> Les systèmes, programmes et méthodologies de ce tutoriel sont utilisés à but éducatif et préventif uniquement. 
+> Vous restez les responsables de vos actions et aucune responsabilité ne sera engagée quant à la mauvaise utilisation du contenu enseigné. 
+
+# Table des matières
+
+1. Prérequis
+2. Présentation général
+    1. Présentation de l'attaque Evil Twin
+    2. L'utilitaire WifiPhisher
+3. Préparation des outils
+    1. Télécharger WifiPhisher
+    2. Associer des pages personnalisée à WifiPhisher
+    3. Installer WifiPhisher
+4. L'attaque Evil Twin
+    1. L'attaquant
+    2. La victime
+5. En savoir plus
+    1. Liens de téléchargement
+    2. Documentation
+
+# 1. Prérequis
+
+* Disposer de **Kali Linux**, vous pouvez utiliser une machine virtuelle sous **VirtualBox** par exemple.
+* Disposer de **deux cartes réseaux wifi**, dont une supportant **l'injection de paquet**. Dans ce tutoriel, j'utilise deux cartes [Alfa Network AWUS036NH](https://www.amazon.fr/ALFA-Network-AWUS036NH-150Mbit-adaptateur/dp/B00358XUC4).
+
+    ![AWUS036NH][AWUS036NH]
+
+    Sinon voir la liste des [cartes Wifi compatibles Kali Linux](https://www.kali-linux.fr/cartes-wifi-compatibles).
+
+# 2. Présentation général
+
+## 2.1. Présentation de l'attaque Evil Twin
+
+Scénario d'attaque EvilTwin :
+
+![eviltwin][eviltwin]
+
+1. Le pirate créé d'abord un faux point d'accès sans fil, autrement dit un AP et se fait passer pour un point d'accès wifi légitime.
+2. Il déclenche ensuite une attaque par dénis de service DDOS entre le point d'accès wifi légitime ou créé des interférences autour de ce dernier qui déconnecte alors les utilisateurs sans fil.
+3. Ces derniers sont ensuite invité à inspecter les réseaux disponible et c'est la que le piège se referme car un fois déconnecté du point d'accès wifi légitime, le pirate va forcer les ordinateurs et périphériques hors ligne pour qu'ils se reconnectent automatiquement au jumeau maléfique permettant au pirate d'intercépter tout le trafic via ce dispositif.
+
+La technique est également connu comme :
+* AP Phishing
+* Wi-Fi Phishing
+* Hotspotter
+* Rogue AP
+* Honeypot AP
+
+Ce genres d'attaques font usage de faux points d'accès avec des pages de connection trucés pour capturer les informations d'identification wifi des utilisateurs, numéro de cartes de crédit ou encore lancer des attaques *Man in the Middle* connu sous le nom de MITM et infecter les hôtes du réseau sans fil.
+
+## 2.2. L'utilitaire WifiPhisher
+
+Un chercheur en sécurité Grec nommé George Chatzisofroniou a développé un outils d'ingiéneurie social wifi qui est conçu pour voler les informations d'identification des utilisateurs via des réseaux wifi sécurisés.
+
+L'outils est baptisé WifiPhisher et a été publié sur [Github](https://github.com/wifiphisher/wifiphisher). Cependant, il existe de nombreux autre outils de hacking sur Internet dédiés au piratage d'un réseau sécurisé wifi. Mais WifiPhisher automatise de multiple technique de piratage wifi qui fait qu'il se démarque des autres.
+
+WifiPhisher implémente l'attaque EvilTwin de manière automatique en fournissant un serveur WEB, un DHCP et des pages de phishing toute prête pour le hacker.
+
+# 3. Préparation des outils
+
+## 3.1. Télécharger WifiPhisher
+
+Pour télécharger WifiPhisher, tapez la commande suivante :
+```sh
+$ git clone https://github.com/wifiphisher/wifiphisher.git
+```
+
+Vous trouverez dans ```wifiphisher/wifiphisher/data/phishing-pages``` les différentes pages *trucés* selon le scénario (mise à jours, pages de connection...). 
+
+En revanche, ces pages sont en anglais donc pas forcément compréhensible par un utilisateur francais et le design de ces pages laisse à désirer.
+
+Il faut considérer ces pages comme des exemples. Il vaut mieux éviter de les utiliser tel quelle car elles ne sont pas adaptés à la plupars des situations rencontrés. 
+
+Il est préférable de les modifiés de tel sorte à ce qu'elles paraissent légitime aux yeux de la victime. Pour cela, il faut prendre en considération le FAI et le modèle de la boxe à laquelle nous essayons d'usurper l'identité ainsi que la langue utilisée par défault dans le pays ou vous vous trouvez. 
+
+## 3.2. Associer des pages personnalisée à WifiPhisher
+
+J'ai confectionné pour vous des pages toute prête pour trois principaux FAI francais : SFR, Bouygues et Orange. Pour récupérer les récupérés; tapez la commande suivante :
+```sh
+$ git clone https://github.com/lucianoBrd/PhishingPages.git
+```
+
+Voici un exemple de la page Bouygues. Le SSID et le Canal du point d'accès seront automatiquement mis à jours en fonction du point d'accès que vous aurez choisit :
+* ![bouygues][bouygues]
+
+Vous pouvez modifier les informations présentes dans les pages afin qu'elles concordent avec celles de la vitime (addresse IP, addresse MAC...).
+
+Copiez les dossiers présents dans ```PhishingPages``` dans ```wifiphisher/wifiphisher/data/phishing-pages``` :
+* ```PhishingPages/bouygues```
+* ```PhishingPages/orange```
+* ```PhishingPages/sfr```
+
+Votre dossier ```wifiphisher/wifiphisher/data/phishing-pages``` devrait ressembler à cela :
+
+![phishing-pages][phishing-pages]
+
+Il faudra réinstaller WifiPhisher à chaque fois que vous modifiez les pages de *phising* (voir 3.3. Installer WifiPhisher).
+
+## 3.3. Installer WifiPhisher
+
+Pour installer WifiPhisher, rendez vous dans le dossier téléchargé précedement (étape 3.1. Télécharger WifiPhisher) et tapez la commande suivante :
+```sh
+$ sudo python3 setup.py install
+```
+
+# 4. L'attaque Evil Twin
+
+## 4.1. L'attaquant
+
+1. Branchez les deux cartes réseaux wifi à votre ordianateur. Connectez celle-ci à votre machine virtuelle si vous en utilisez une.
+2. Lancez WifiPhisher avec la commande suivante en étant dans le dossier téléchargé précedement (étape 3.1. Télécharger WifiPhisher) :
+    ```sh
+    $ python3 bin/wifiphisher
+    ```
+    ![wifiphisher-start][wifiphisher-start]
+3. Une fois que l'outil s'est lancé, séléctionner le le point d'accès Wifi de la victime :
+    ![wifiphisher-wifi][wifiphisher-wifi]
+4. Séléctionner la page de *phising* en fonction de la victime :
+    ![wifiphisher-phising][wifiphisher-phising]
+5. Puis, WifiPhisher va lancer le faux point d'accès et le serveur WEB :
+    ![wifiphisher-starting][wifiphisher-starting]
+6. Ensuite, l'outil va déconnecter tous les utilisateurs connecté au point d'accès légitime et rendre indisponible celui-ci :
+    ![wifiphisher-ddos][wifiphisher-ddos]
+7. Les utilisateurs précédement connecté vont se reconnecter automatiquement / manuellement au jumeau maléfique :
+    ![wifiphisher-connect][wifiphisher-connect]
+8. Le DHCP de WifiPhisher va alors rediriger les requêtes vers la page de *phising* précédement choisie. Une fois que la victime aura envoyé la clé WPA, vous la recevrez directement sur la console  :
+    ![wifiphisher-wpa][wifiphisher-wpa]
+9. Voici un résumé de l'attaque :
+    ![wifiphisher-resume][wifiphisher-resume]
+
+## 4.2. La victime
+
+Voici ce qui se passe du côté de la vitime lors de l'attaque : 
+* ![victim][victim]
+
+# 5. En savoir plus
+
+## 5.1. Liens de téléchargement
+
+* [wifiphisher](https://github.com/wifiphisher/wifiphisher.git)
+* [PhishingPages](https://github.com/lucianoBrd/PhishingPages.git)
+
+## 5.2. Documentation
+
+* https://wifiphisher.org/
+* https://github.com/wifiphisher/wifiphisher/blob/master/README.md
