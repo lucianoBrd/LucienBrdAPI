@@ -12,6 +12,9 @@
 [wifiphisher-resume]: https://api.lucien-brd.com/assets/images/blogs/evil-twin/wifiphisher-resume.gif "wifiphisher-resume"
 [victim]: https://api.lucien-brd.com/assets/images/blogs/evil-twin/victim.gif "victim"
 
+> Les systèmes, programmes et méthodologies de ce tutoriel sont utilisés à but éducatif et préventif uniquement. 
+> Vous restez les responsables de vos actions et aucune responsabilité ne sera engagée quant à la mauvaise utilisation du contenu enseigné.
+
 L'attaque Evil Twin est une technique permettant de capturer la clé WPA d'un point d'accès Wifi.
 Dans un premier temps en rendant insdiponible celui-ci.
 Puis, en redirigeant les clients connectés vers un faux point d'accès contrôlé par le pirate ressemblant de toute pièce au vrai point d'accès, de tel sorte à ce que les clients saississent la clé WPA du point d'accès légitime sans se méfier.
@@ -21,10 +24,7 @@ Plus précisément, une première interface wifi sera défini comme point d'acc�
 Ensuite, les clients seront déconnectés de force du point d'accès et comme un faux point d'accès identique ne disposant pas d'authentification aura été créé, ils se reconnecteront automatiquement sans se rendre compte de rien.
 Ensuite, le DHCP les redirigera vers une fausse page, leur demandant de saisir la clé WPA.
 
-Pour automatiser l'attaque, nous allons utiliser WifiPhisher.
-
-> Les systèmes, programmes et méthodologies de ce tutoriel sont utilisés à but éducatif et préventif uniquement. 
-> Vous restez les responsables de vos actions et aucune responsabilité ne sera engagée quant à la mauvaise utilisation du contenu enseigné. 
+Pour automatiser l'attaque, nous allons utiliser WifiPhisher. 
 
 # Table des matières
 
@@ -39,7 +39,8 @@ Pour automatiser l'attaque, nous allons utiliser WifiPhisher.
 4. L'attaque Evil Twin
     1. L'attaquant
     2. La victime
-5. En savoir plus
+5. Comment éviter les attaques Evil Twin
+6. En savoir plus
     1. Liens de téléchargement
     2. Documentation
 
@@ -58,7 +59,7 @@ Pour automatiser l'attaque, nous allons utiliser WifiPhisher.
 
 Scénario d'attaque EvilTwin :
 
-![eviltwin][eviltwin]
+* ![eviltwin][eviltwin]
 
 1. Le pirate créé d'abord un faux point d'accès sans fil, autrement dit un AP et se fait passer pour un point d'accès wifi légitime.
 2. Il déclenche ensuite une attaque par dénis de service DDOS entre le point d'accès wifi légitime ou créé des interférences autour de ce dernier qui déconnecte alors les utilisateurs sans fil.
@@ -117,7 +118,7 @@ Copiez les dossiers présents dans ```PhishingPages``` dans ```wifiphisher/wifip
 
 Votre dossier ```wifiphisher/wifiphisher/data/phishing-pages``` devrait ressembler à cela :
 
-![phishing-pages][phishing-pages]
+* ![phishing-pages][phishing-pages]
 
 Il faudra réinstaller WifiPhisher à chaque fois que vous modifiez les pages de *phising* (voir 3.3. Installer WifiPhisher).
 
@@ -158,14 +159,25 @@ $ sudo python3 setup.py install
 Voici ce qui se passe du côté de la vitime lors de l'attaque : 
 * ![victim][victim]
 
-# 5. En savoir plus
+# 5. Comment éviter les attaques Evil Twin
 
-## 5.1. Liens de téléchargement
+Les entreprises qui offrent la connexion Wifi à leurs employés ou à leurs clients peuvent utiliser des systèmes de prévention des intrusions sans fil (WIPS) afin de détecter la présence d’une attaque Evil Twin et empêcher les employés et les clients des entreprises de s’y connecter.
+
+* Demandez toujours à l’établissement quel est le nom du hotspot officiel. Cela vous évitera de faire des suppositions incorrectes et de choisir un hotspot malveillant.
+* Évitez de vous connecter à des points d’accès Wifi qui portent la mention « Unsecure » (ou « non sécurisé »), même s’ils leurs SSID vous semblent familier.
+* Ne visitez que les sites web HTTPS, surtout lorsqu’ils se trouvent sur des réseaux ouverts. Les sites web HTTPS offrent un chiffrement de bout en bout. Ceci rend difficile – voire impossible – pour les pirates de voir ce que vous faites lorsque vous naviguez.
+* Si le hotspot officiel auquel vous voulez vous connecter a une clé, essayez de taper intentionnellement la mauvaise clé. Si la connexion accepte la clé manifestement erronée, il s’agit très probablement d’un jumeau maléfique.
+* Désactivez les fonctions « auto connect » ou « auto join » pour les hotspots enregistrés pour tous vos appareils sans fil.
+* Utilisez un VPN chaque fois que vous vous connectez à un Wifi public. Ceci vous permet de vous assurer que les pirates ne puissent pas voir vos habitudes de navigation.
+
+# 6. En savoir plus
+
+## 6.1. Liens de téléchargement
 
 * [wifiphisher](https://github.com/wifiphisher/wifiphisher.git)
 * [PhishingPages](https://github.com/lucianoBrd/PhishingPages.git)
 
-## 5.2. Documentation
+## 6.2. Documentation
 
 * https://wifiphisher.org/
 * https://github.com/wifiphisher/wifiphisher/blob/master/README.md
