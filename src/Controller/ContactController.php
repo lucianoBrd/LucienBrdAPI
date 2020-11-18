@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
-use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +17,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(ObjectManager $manager, MailerInterface $mailer, Request $request)
+    public function index(EntityManagerInterface $manager, MailerInterface $mailer, Request $request)
     {
         $repository = $this->manager->getRepository(User::class);
 
