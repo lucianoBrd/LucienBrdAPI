@@ -22,9 +22,9 @@ class DatabaseGenerator
     {
         $this->manager = $manager;
         $this->tags = [
-            'security' => 'Sécurité',
-            'android' => 'Android',
-            'wifi' => 'Wifi',
+            'security' => ['Sécurité', 'security'],
+            'android' => ['Android', 'android'],
+            'wifi' => ['Wifi', 'wifi'],
         ];
     }
 
@@ -220,7 +220,8 @@ class DatabaseGenerator
         foreach ($this->tags as $t) {
             $tag = new Tag();
 
-            $tag->setTitle($t);
+            $tag->setTitle($t[0])
+                ->setSlug($t[1]);
 
             $this->manager->persist($tag);
         }
@@ -241,10 +242,10 @@ class DatabaseGenerator
             [
                 'evil-twin.webp',
                 'L\'attaque Evil Twin - Récupérer clé WPA - WifiPhisher',
-                'attaque-evil-twin-recuperer-cle-wpa-wifiphisher',
+                'attack-evil-twin-recover-wpa-key-wifiphisher',
                 [
-                    $this->tags['security'], 
-                    $this->tags['wifi']
+                    $this->tags['security'][1], 
+                    $this->tags['wifi'][1]
                 ],
                 new \DateTime('16-11-2020'),
                 'L\'attaque Evil Twin est une technique permettant de capturer la clé WPA d\'un point d\'accès Wifi. Dans un premier temps, en rendant insdiponible celui-ci. Puis, en redirigeant les clients connectés vers un faux point d\'accès contrôlé par le pirate et ressemblant de toute pièce au vrai point d\'accès, pour que les clients saississent la clé WPA du point d\'accès légitime sans se méfier.',
@@ -253,10 +254,10 @@ class DatabaseGenerator
             [
                 'kali-nethunter.webp',
                 'Installer Kali Linux NetHunter sur un appareil Android (Samsung Galaxy S5 - SM-G900F)',
-                'installer-kali-linux-nethunter-appareil-android-sm-g900f',
+                'install-kali-linux-nethunter-android-sm-g900f-device',
                 [
-                    $this->tags['security'], 
-                    $this->tags['android']
+                    $this->tags['security'][1], 
+                    $this->tags['android'][1]
                 ],
                 new \DateTime('03-11-2020'),
                 'Ce tutoriel vous permettra d\'installer Kali Linux NetHunter sur un appareil Android compatible (Samsung Galaxy S5 - SM-G900F dans le tutoriel). Kali NetHunter est une plate-forme de test de pénétration mobile gratuite et open-source pour les appareils Android, basée sur Kali Linux.',
@@ -265,9 +266,9 @@ class DatabaseGenerator
             [
                 'root-twrp-sm-g900f.webp',
                 'Rooter et installer un Recovery Custom TWRP pour Samsung Galaxy S5 - SM-G900F',
-                'rooter-installer-recovery-custom-twrp-sm-g900f',
+                'root-install-recovery-custom-twrp-sm-g900f',
                 [
-                    $this->tags['android']
+                    $this->tags['android'][1]
                 ],
                 new \DateTime('01-11-2020'),
                 'Équivalent du jailbreak sur iPhone, l\'idée de rooter son téléphone c\'est d\'accéder à un contrôle complet de l\'appareil. Les principaux usages qui peuvent venir en tête sont la suppression d\'applications installées par le fabricant / l\'opérateur, l\'accélération de la machine, installer une ROM spécifique ou encore pirater des jeux.',
@@ -276,9 +277,9 @@ class DatabaseGenerator
             [
                 'sd-card.webp',
                 'Augmenter le stockage d\'un appareil Android - Fusionner les mémoires',
-                'augmenter-stockage-appareil-android-fusionner-mémoires',
+                'increase-storage-android-device-merge-memory',
                 [
-                    $this->tags['android']
+                    $this->tags['android'][1]
                 ],
                 new \DateTime('02-11-2020'),
                 'Votre téléphone possède un slot pour mettre une carte micro SD qui va permettre d’augmenter cette mémoire. En revanche son utilisation est vite restrictive au niveau déplacement du contenu. Si votre téléphone propose nativement dans les paramètres une option qui permet de fusionner les deux mémoires, il vous suffit de l\'activer. Sinon, voici comment procéder pour un appareil sous Android 6 minimum.',
@@ -297,7 +298,7 @@ class DatabaseGenerator
                 ->setDocument($b[6]);
             
             foreach ($b[3] as $t) {
-                $tag = $repoTag->findOneBy(['title' => $t]);
+                $tag = $repoTag->findOneBy(['slug' => $t]);
                 $blog->addTag($tag);
             }
 

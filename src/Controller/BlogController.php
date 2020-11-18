@@ -42,13 +42,13 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/blog/tag/{tag}", name="blog_tag")
+     * @Route("/blog/tag/{slug}", name="blog_tag")
      */
-    public function getByTag($tag)
+    public function getByTag($slug)
     {
         $blogs = $this->getDoctrine()
             ->getRepository(Blog::class)
-            ->findByTagArray($tag);
+            ->findByTagArray($slug);
 
         return $this->json([
             'blogs' => $blogs,
