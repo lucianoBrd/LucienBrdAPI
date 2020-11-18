@@ -23,9 +23,11 @@ class ProjectRepository extends ServiceEntityRepository
     /**
      * @return Project[] Returns an array of Project objects
      */
-    public function findAllArray()
+    public function findAllArray($local)
     {
         return $this->createQueryBuilder('p')
+            ->andWhere('p.local = :local')
+            ->setParameter('local', $local)
             ->orderBy('p.date', 'DESC')
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY)
@@ -68,10 +70,12 @@ class ProjectRepository extends ServiceEntityRepository
     /**
      * @return Integer[] Returns an array of id Integer
      */
-    public function findAllId()
+    public function findAllId($local)
     {
         $arrayIds = $this->createQueryBuilder('p')
             ->select('p.id')
+            ->andWhere('p.local = :local')
+            ->setParameter('local', $local)
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY);
 

@@ -24,9 +24,11 @@ class PoliticRepository extends ServiceEntityRepository
      * @return Politic Returns a Politic objects
      */
     
-    public function findOneArray()
+    public function findOneArray($local)
     {
         return $this->createQueryBuilder('p')
+            ->andWhere('p.local = :local')
+            ->setParameter('local', $local)
             ->getQuery()
             ->getOneOrNullResult(Query::HYDRATE_ARRAY)
         ;

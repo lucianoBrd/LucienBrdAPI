@@ -24,9 +24,11 @@ class EducationRepository extends ServiceEntityRepository
      * @return Education[] Returns an array of Education objects
      */
     
-    public function findAllArray()
+    public function findAllArray($local)
     {
         return $this->createQueryBuilder('e')
+            ->andWhere('e.local = :local')
+            ->setParameter('local', $local)
             ->orderBy('e.date', 'DESC')
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY)

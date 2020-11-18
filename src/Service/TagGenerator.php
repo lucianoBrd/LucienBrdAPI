@@ -31,26 +31,25 @@ class TagGenerator
 
     public function generateTag()
     {
+
         foreach ($this->locals as $l) {
 
-            foreach ($this->locals as $l) {
+            foreach ($this->tags[$l] as $t) {
+                $tag = new Tag();
 
-                foreach ($this->tags[$l] as $t) {
-                    $tag = new Tag();
-    
-                    $tag->setTitle($t[0])
-                        ->setSlug($t[1])
-                        ->setLocal($l);
-    
-                    $this->manager->persist($tag);
-                }
+                $tag->setTitle($t[0])
+                    ->setSlug($t[1])
+                    ->setLocal($l);
+
+                $this->manager->persist($tag);
             }
         }
 
         $this->manager->flush();
     }
 
-    public function getTags() {
+    public function getTags()
+    {
         return $this->tags;
     }
 

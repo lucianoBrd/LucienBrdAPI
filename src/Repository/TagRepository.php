@@ -24,9 +24,11 @@ class TagRepository extends ServiceEntityRepository
      * @return Tag[] Returns an array of Tag objects
      */
     
-    public function findAllArray()
+    public function findAllArray($local)
     {
         return $this->createQueryBuilder('t')
+            ->andWhere('t.local = :local')
+            ->setParameter('local', $local)
             ->orderBy('t.title', 'ASC')
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY)

@@ -24,9 +24,11 @@ class CvRepository extends ServiceEntityRepository
      * @return Cv Returns a Cv object
      */
     
-    public function findOneArray()
+    public function findOneArray($local)
     {
         return $this->createQueryBuilder('c')
+            ->andWhere('c.local = :local')
+            ->setParameter('local', $local)
             ->getQuery()
             ->getOneOrNullResult(Query::HYDRATE_ARRAY)
         ;

@@ -3,19 +3,31 @@
 namespace App\Controller;
 
 use App\Entity\Politic;
+use App\Service\LocalGenerator;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PoliticController extends AbstractController
 {
-    /**
-     * @Route("/politic", name="politic")
-     */
-    public function index()
+    private $localGenerator;
+
+    public function __construct(LocalGenerator $localGenerator)
     {
+        $this->localGenerator = $localGenerator;
+    }
+    
+    /**
+     * @Route("/politic/{local}", name="politic")
+     */
+    public function index($local)
+    {
+        if ($this->localGenerator->checkLocal($local)) {
+            return $this->json([]);
+        }
+
         $politic = $this->getDoctrine()
             ->getRepository(Politic::class)
-            ->findOneArray();
+            ->findOneArray($local);
 
         return $this->json([
             'politic' => $politic,

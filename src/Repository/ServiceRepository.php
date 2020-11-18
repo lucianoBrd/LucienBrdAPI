@@ -23,9 +23,11 @@ class ServiceRepository extends ServiceEntityRepository
     /**
      * @return Service[] Returns an array of Service objects
      */
-    public function findAllArray()
+    public function findAllArray($local)
     {
         return $this->createQueryBuilder('s')
+            ->andWhere('s.local = :local')
+            ->setParameter('local', $local)
             ->orderBy('s.title', 'ASC')
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY)
