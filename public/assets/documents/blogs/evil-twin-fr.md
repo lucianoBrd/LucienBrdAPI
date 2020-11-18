@@ -16,8 +16,8 @@
 > Vous restez les responsables de vos actions et aucune responsabilité ne sera engagée quant à la mauvaise utilisation du contenu enseigné.
 
 L'attaque Evil Twin est une technique permettant de capturer la clé WPA d'un point d'accès Wifi.
-Dans un premier temps, en rendant insdiponible celui-ci.
-Puis, en redirigeant les clients connectés vers un faux point d'accès contrôlé par le pirate et ressemblant de toute pièce au vrai point d'accès, pour que les clients saississent la clé WPA du point d'accès légitime sans se méfier.
+Dans un premier temps, en rendant indisponible celui-ci.
+Puis, en redirigeant les clients connectés vers un faux point d'accès contrôlé par le pirate et ressemblant de toute pièce au vrai point d'accès, pour que les clients saisissent la clé WPA du point d'accès légitime sans se méfier.
 
 Pour réaliser l'attaque, nous aurons besoin de deux cartes réseaux wifi, dont une supportant l'injection de paquet.
 Plus précisément, une première interface wifi sera définie comme point d'accès et la seconde comme interface d'attaque pour rendre indisponible le point d'accès et copier son identité.
@@ -101,20 +101,17 @@ Il est préférable de les modifier, afin qu'elles paraissent légitimes aux yeu
 
 ## 3.2. Associer des pages personnalisées à WifiPhisher
 
-J'ai confectionné pour vous des pages toutes prêtes pour trois principaux FAI francais : SFR, Bouygues et Orange. Pour les récupérer, taper la commande suivante :
-```sh
-$ git clone https://github.com/lucianoBrd/PhishingPages.git
-```
+J'ai confectionné pour vous des pages toutes prêtes pour trois principaux FAI francais : SFR, Bouygues et Orange. Pour les récupérer, vous pouvez les [télécharger ici](https://api.lucien-brd.com/assets/documents/blogs/root-twrp-sm-g900f/PhishingPages-main.zip) et extraire l'archive.
 
 Voici un exemple de la page Bouygues. Le SSID et le Canal du point d'accès seront automatiquement mis à jour en fonction du point d'accès que vous aurez choisi :
 * ![bouygues][bouygues]
 
 Vous pouvez modifier les informations présentes dans les pages, afin qu'elles concordent avec celles de la victime (adresse IP, adresse MAC...).
 
-Copier les dossiers présents dans ```PhishingPages``` dans ```wifiphisher/wifiphisher/data/phishing-pages``` :
-* ```PhishingPages/bouygues```
-* ```PhishingPages/orange```
-* ```PhishingPages/sfr```
+Copier les dossiers présents dans ```PhishingPages-main``` dans ```wifiphisher/wifiphisher/data/phishing-pages``` :
+* ```PhishingPages-main/bouygues```
+* ```PhishingPages-main/orange```
+* ```PhishingPages-main/sfr```
 
 Votre dossier ```wifiphisher/wifiphisher/data/phishing-pages``` devrait ressembler à cela :
 
@@ -175,7 +172,7 @@ Les entreprises qui offrent la connexion Wifi à leurs employés ou à leurs cli
 ## 6.1. Liens de téléchargement
 
 * [wifiphisher](https://github.com/wifiphisher/wifiphisher.git)
-* [PhishingPages](https://github.com/lucianoBrd/PhishingPages.git)
+* [PhishingPages-main.zi](https://api.lucien-brd.com/assets/documents/blogs/root-twrp-sm-g900f/PhishingPages-main.zip)
 
 ## 6.2. Documentation
 

@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use DateTime;
 use App\Entity\Cv;
 use App\Entity\Tag;
 use App\Entity\Blog;
@@ -11,21 +10,29 @@ use App\Entity\Politic;
 use App\Entity\Project;
 use App\Entity\Service;
 use App\Entity\Education;
+use App\Service\CvGenerator;
+use App\Service\TagGenerator;
+use App\Service\BlogGenerator;
+use App\Service\LocalGenerator;
+use App\Service\PoliticGenerator;
+use App\Service\ProjectGenerator;
+use App\Service\ServiceGenerator;
+use App\Service\EducationGenerator;
 use Doctrine\Persistence\ObjectManager;
 
 class DatabaseGenerator
 {
     private $manager;
     private $tags;
+    private $locals;
 
     public function __construct(ObjectManager $manager)
     {
         $this->manager = $manager;
-        $this->tags = [
-            'security' => ['Sécurité', 'security'],
-            'android' => ['Android', 'android'],
-            'wifi' => ['Wifi', 'wifi'],
-        ];
+
+        $localGenerator = new LocalGenerator();
+        $this->locals = $localGenerator->getLocals();
+
     }
 
     private function reset($repository)
@@ -56,36 +63,9 @@ class DatabaseGenerator
         /* Reset project database */
         $this->reset($repository);
 
-        $projects = [
-            ['emilie-nguyen.webp', '@ngyemilie', 'Site vitrine - Freelance', '2017', 'https://emilie-nguyen.com/', 'https://github.com/lucianoBrd/EmilieNguyen', 'Site pour une photographe PHP, MySQL, HTML/CSS, JavaScript.', null],
-            ['yosagaf.webp', 'sagaf youssouf', 'Site vitrine - Freelance', '2019', 'https://yosagaf.fr/', 'https://github.com/lucianoBrd/Sagaf', 'Site pour un développeur de systèmes embarqués en Symfony 4.', null],
-            ['smart-ev.webp', 'Smart-EV', 'Projet - CPE', '2020', 'https://smart-ev.lucien-brd.com/', 'https://github.com/lucianoBrd/SmartEV', 'Cette application permet de localiser des stations de recharge compatibles avec son véhicule électrique et d’obtenir des itinéraires “intelligents”. JavaScript, Leaflet, OpenChargeMap.', null],
-            ['graphjs.webp', 'GraphJS', 'Projet - CPE', '2020', null, 'https://github.com/lucianoBrd/graphJS', 'GraphJS affiche des données JSON dans un graphique SVG avec des animations et un design époustouflant en JavaScript.', null],
-            ['snakejs.webp', 'Crazy Snake', 'Projet - IUT', '2018', null, 'https://github.com/lucianoBrd/SnakeJs', 'Crazy Snake pour des parties de folie. Jeu du snake fait en JavaScript, HTML et CSS', null],
-            ['morpion.webp', 'Jeu de morpion', 'Projet - IUT', '2017', null, 'https://github.com/lucianoBrd/Morpion', 'Java.', 'RapportIHM_MorpionMALDONADO_BURDET_ISSOUFI_DLTEYSSONNIERE.pdf'],
-            ['beeleat.webp', 'BeelEAT', 'Projet tutoré - IUT', '2018 - 2019', 'https://youtu.be/i4Llz617ovY', 'https://github.com/lucianoBrd/BeelEAT', 'BeelEAT permet de gérer tout un restaurant. D\'une part un côté administrateur/cuisine permet : D\'automatiser certaines tâches comme la gestion des stocks. De gérer les commandes via l\'envoi automatique de notifications aux clients sur le statut de leur commande. De gérer les menus, produits, ingrédients... D\'autre part, le côté client du site permet de passer des commandes en ligne.', 'BeelEAT_Rapport_Projet_Tutore_S4_2019 ​MALDONADO Emilio, BURDET Lucien, DAHOUMANE Etienne, CASTILLO Berson.pdf'],
-            ['festival.webp', 'Festival', 'Projet - IUT', '2018', null, 'https://github.com/lucianoBrd/Festival', 'Application de gestion de festival (Festival de films : Cannes). PHP/Twig, Framework Symfony 4, MySQL (PhpMyAdmin/Doctrine), HTML/CSS, JavaScript.', 'Spec-festival.pdf'],
-            ['diminuo.webp', 'Diminuo', 'Projet', '2018', null, 'https://github.com/lucianoBrd/Diminuo', 'Une URL longue ? Raccourcissez-la!. PHP, MySQL, HTML/CSS, JavaScript.', null],
-            ['derailleur.webp', 'Dérailleur Automatique', 'Projet - Lycée', '2016 - 2017', 'https://cotiere.ent.auvergnerhonealpes.fr/en-direct-du-lycee-de-la-cotiere/actualites/actualites-des-eleves/nos-lyceens-en-finale-des-olympiades-de-si-a-paris-2226.htm', null, 'Le dispositif d’assistance au passage de vitesse sur un Vélo est piloté par une application Android. Il dispose d’un mode manuel et automatique. De plus, le dispositif permet d\'automatisé le changement de rapport de transmission sur deux types de dérail-leurs afin d’être adaptable sur tous les vélos. Ainsi, le dispositif permet d\'automatisé un dérailleur tradi-tionnel; mais aussi un dérailleur électrique. En mode manuel, le changement de rapport de transmission se fait en appuyant sur les boutons de l’application. En mode automatique le système change de ma-nière autonome le rapport de transmission pour permettre de pédaler à cadence de pédalage constante. Il faut simplement indiquer au système à l’aide du téléphone, quelle est la cadence de pédalage.', 'Derailleur Automatique.pdf'],
-            ['cral.webp', 'ELT/HARMONI.', 'Stage - Centre de Recherche Astrophysique de Lyon (CRAL)', '2019', 'http://harmoni-web.physics.ox.ac.uk/', null, 'L’objectif principal était de coder la structure du logiciel en C notamment les entrées/sorties. Ce logiciel sera livré avec l’instrument HARMONI à l’ESO, il avait donc des contraintes de développement fortes. En termes de contraintes de temps, il fallait finir de développer l’architecture du logiciel avant la fin du stage. Le travail était basé sur des diagrammes d’architecture. J’avait dû apprendre les librairies et logiciels de l’ESO : CPL, HDRL, EsoRex et EsoReflex. De plus, afin de générer de la documentation, j’avait dû me former à la librairie Doxygen.', 'Rapport_Stage_BURDET.pdf'],
-        ];
-
-        foreach ($projects as $p) {
-            $project = new Project();
-
-            $project->setImage($p[0])
-                ->setTitle($p[1])
-                ->setType($p[2])
-                ->setDate($p[3])
-                ->setUrl($p[4])
-                ->setGit($p[5])
-                ->setContent($p[6])
-                ->setDocument($p[7]);
-
-            $this->manager->persist($project);
-        }
-
-        $this->manager->flush();
+        /* Generate project */
+        $projectGenerator = new ProjectGenerator($this->manager, $this->locals);
+        $projectGenerator->generateProject();
 
     }
 
@@ -93,30 +73,12 @@ class DatabaseGenerator
     {
         $repository = $this->manager->getRepository(Education::class);
 
-        /* Reset project database */
+        /* Reset education database */
         $this->reset($repository);
 
-        $educations = [
-            ['tma.webp', 'Baccalauréat Professionnel - Technicien Menuisier Agenceur - Arrêt de la formation en milieu d\'année', 'Institut Européen de Formation - Compagnons du Tour de France - Mouchard', '2015'],
-            ['ssi.webp', 'Baccalauréat Scientifique - Sciences de l\'Ingénieur - Mention Bien', 'Lycée de la Cotière', '2015 - 2017'],
-            ['b.webp', 'Permis B', 'Miribel', '2017'],
-            ['dut.webp', 'DUT Informatique', 'IUT Lyon 1 - Villeurbanne', '2017 - 2019'],
-            ['a2.webp', 'Permis A2', 'Saint-Alban', '2019'],
-            ['irc.webp', 'Ingénieur en Informatique et Réseaux de Communication - Apprentissage EDF CNPE de Saint-Alban', 'CPE Lyon - Villeurbanne', '2019 - 2022'],
-        ];
-
-        foreach ($educations as $e) {
-            $education = new Education();
-
-            $education->setImage($e[0])
-                ->setTitle($e[1])
-                ->setPlace($e[2])
-                ->setDate($e[3]);
-
-            $this->manager->persist($education);
-        }
-
-        $this->manager->flush();
+        /* Generate education */
+        $educationGenerator = new EducationGenerator($this->manager, $this->locals);
+        $educationGenerator->generateEducation();
 
     }
 
@@ -124,29 +86,12 @@ class DatabaseGenerator
     {
         $repository = $this->manager->getRepository(Service::class);
 
-        /* Reset project database */
+        /* Reset service database */
         $this->reset($repository);
 
-        $services = [
-            ['web.webp', 'Web', 'Je peux développer tous types de site : E-commerce, site vitrine, blog...'],
-            ['communication.webp', 'Communication', 'Vous ne savez pas comment bien utiliser les réseaux sociaux ? Je peux gérer vos comptes afin d’accroître votre notoriété.'],
-            ['publicite.webp', 'Publicité', 'Afin de d’augmenter votre présence sur internet il vous faut les meilleures publicités : image, bannière, vidéo...'],
-            ['web-design.webp', 'Web design', 'Je respecte les derniers standards et normes de design afin de vous proposer un produit numérique beau et fonctionnel.'],
-            ['logo.webp', 'Logo', 'Création de logo sur mesure avec une identité forte et de qualité.'],
-            ['referencement.webp', 'Référencement', 'Je peux positionner les pages web de votre site internet dans les premiers résultats naturels des moteurs de recherche.'],
-        ];
-
-        foreach ($services as $s) {
-            $service = new Service();
-
-            $service->setImage($s[0])
-                ->setTitle($s[1])
-                ->setDescription($s[2]);
-
-            $this->manager->persist($service);
-        }
-
-        $this->manager->flush();
+        /* Generate service */
+        $serviceGenerator = new ServiceGenerator($this->manager, $this->locals);
+        $serviceGenerator->generateService();
 
     }
 
@@ -179,16 +124,12 @@ class DatabaseGenerator
     {
         $repository = $this->manager->getRepository(Cv::class);
 
-        /* Reset project database */
+        /* Reset cv database */
         $this->reset($repository);
 
-        $cv = new Cv();
-
-        $cv->setDocument('CV_BURDET_LUCIEN.webp');
-
-        $this->manager->persist($cv);
-
-        $this->manager->flush();
+        /* Generate cv */
+        $cvGenerator = new CvGenerator($this->manager, $this->locals);
+        $cvGenerator->generateCv();
 
     }
 
@@ -196,17 +137,12 @@ class DatabaseGenerator
     {
         $repository = $this->manager->getRepository(Politic::class);
 
-        /* Reset project database */
+        /* Reset politic database */
         $this->reset($repository);
 
-        $politic = new Politic();
-
-        $politic->setTitle('Politique de confidentialité')
-            ->setDocument('politique-de-confidentialite.md');
-
-        $this->manager->persist($politic);
-
-        $this->manager->flush();
+        /* Generate politic */
+        $politicGenerator = new PoliticGenerator($this->manager, $this->locals);
+        $politicGenerator->generatePolitic();
 
     }
 
@@ -214,98 +150,27 @@ class DatabaseGenerator
     {
         $repository = $this->manager->getRepository(Tag::class);
 
-        /* Reset project database */
+        /* Reset tag database */
         $this->reset($repository);
 
-        foreach ($this->tags as $t) {
-            $tag = new Tag();
+        /* Generate tag */
+        $tagGenerator = new TagGenerator($this->manager, $this->locals);
+        $tagGenerator->generateTag();
 
-            $tag->setTitle($t[0])
-                ->setSlug($t[1]);
-
-            $this->manager->persist($tag);
-        }
-
-        $this->manager->flush();
+        $this->tags = $tagGenerator->getTags();
 
     }
 
     public function manageBlog()
     {
         $repository = $this->manager->getRepository(Blog::class);
-        $repoTag = $this->manager->getRepository(Tag::class);
 
-        /* Reset project database */
+        /* Reset blog database */
         $this->reset($repository);
 
-        $blogs = [
-            [
-                'evil-twin.webp',
-                'L\'attaque Evil Twin - Récupérer clé WPA - WifiPhisher',
-                'attack-evil-twin-recover-wpa-key-wifiphisher',
-                [
-                    $this->tags['security'][1], 
-                    $this->tags['wifi'][1]
-                ],
-                new \DateTime('16-11-2020'),
-                'L\'attaque Evil Twin est une technique permettant de capturer la clé WPA d\'un point d\'accès Wifi. Dans un premier temps, en rendant insdiponible celui-ci. Puis, en redirigeant les clients connectés vers un faux point d\'accès contrôlé par le pirate et ressemblant de toute pièce au vrai point d\'accès, pour que les clients saississent la clé WPA du point d\'accès légitime sans se méfier.',
-                'evil-twin.md'
-            ],
-            [
-                'kali-nethunter.webp',
-                'Installer Kali Linux NetHunter sur un appareil Android (Samsung Galaxy S5 - SM-G900F)',
-                'install-kali-linux-nethunter-android-sm-g900f-device',
-                [
-                    $this->tags['security'][1], 
-                    $this->tags['android'][1]
-                ],
-                new \DateTime('03-11-2020'),
-                'Ce tutoriel vous permettra d\'installer Kali Linux NetHunter sur un appareil Android compatible (Samsung Galaxy S5 - SM-G900F dans le tutoriel). Kali NetHunter est une plate-forme de test de pénétration mobile gratuite et open-source pour les appareils Android, basée sur Kali Linux.',
-                'kali-nethunter.md'
-            ],
-            [
-                'root-twrp-sm-g900f.webp',
-                'Rooter et installer un Recovery Custom TWRP pour Samsung Galaxy S5 - SM-G900F',
-                'root-install-recovery-custom-twrp-sm-g900f',
-                [
-                    $this->tags['android'][1]
-                ],
-                new \DateTime('01-11-2020'),
-                'Équivalent du jailbreak sur iPhone, l\'idée de rooter son téléphone c\'est d\'accéder à un contrôle complet de l\'appareil. Les principaux usages qui peuvent venir en tête sont la suppression d\'applications installées par le fabricant / l\'opérateur, l\'accélération de la machine, installer une ROM spécifique ou encore pirater des jeux.',
-                'root-twrp-sm-g900f.md'
-            ],
-            [
-                'sd-card.webp',
-                'Augmenter le stockage d\'un appareil Android - Fusionner les mémoires',
-                'increase-storage-android-device-merge-memory',
-                [
-                    $this->tags['android'][1]
-                ],
-                new \DateTime('02-11-2020'),
-                'Votre téléphone possède un slot pour mettre une carte micro SD qui va permettre d’augmenter cette mémoire. En revanche son utilisation est vite restrictive au niveau déplacement du contenu. Si votre téléphone propose nativement dans les paramètres une option qui permet de fusionner les deux mémoires, il vous suffit de l\'activer. Sinon, voici comment procéder pour un appareil sous Android 6 minimum.',
-                'sd-card.md'
-            ],
-        ];
-
-        foreach ($blogs as $b) {
-            $blog = new Blog();
-
-            $blog->setImage($b[0])
-                ->setTitle($b[1])
-                ->setSlug($b[2])
-                ->setDate($b[4])
-                ->setContent($b[5])
-                ->setDocument($b[6]);
-            
-            foreach ($b[3] as $t) {
-                $tag = $repoTag->findOneBy(['slug' => $t]);
-                $blog->addTag($tag);
-            }
-
-            $this->manager->persist($blog);
-        }
-
-        $this->manager->flush();
+        /* Generate blog */
+        $blogGenerator = new BlogGenerator($this->manager, $this->locals, $this->tags);
+        $blogGenerator->generateBlog();
 
     }
 }

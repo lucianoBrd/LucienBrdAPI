@@ -32,6 +32,11 @@ class Service
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $local;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Service
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getLocal(): ?string
+    {
+        return $this->local;
+    }
+
+    public function setLocal(string $local): self
+    {
+        $this->local = $local;
 
         return $this;
     }

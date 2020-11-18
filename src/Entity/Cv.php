@@ -22,6 +22,11 @@ class Cv
      */
     private $document;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $local;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Cv
     public function setDocument(?string $document): self
     {
         $this->document = $document;
+
+        return $this;
+    }
+
+    public function getLocal(): ?string
+    {
+        return $this->local;
+    }
+
+    public function setLocal(string $local): self
+    {
+        $this->local = $local;
 
         return $this;
     }

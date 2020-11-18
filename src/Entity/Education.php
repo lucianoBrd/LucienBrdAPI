@@ -37,6 +37,11 @@ class Education
      */
     private $date;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $local;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Education
     public function setDate(string $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getLocal(): ?string
+    {
+        return $this->local;
+    }
+
+    public function setLocal(string $local): self
+    {
+        $this->local = $local;
 
         return $this;
     }

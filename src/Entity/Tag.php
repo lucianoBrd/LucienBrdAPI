@@ -23,9 +23,14 @@ class Tag
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=160, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $local;
 
     public function getId(): ?int
     {
@@ -52,6 +57,18 @@ class Tag
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getLocal(): ?string
+    {
+        return $this->local;
+    }
+
+    public function setLocal(string $local): self
+    {
+        $this->local = $local;
 
         return $this;
     }
