@@ -2,21 +2,25 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
+use App\Entity\User;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(MailerInterface $mailer, Request $request)
+    public function index(ObjectManager $manager, MailerInterface $mailer, Request $request)
     {
+        $repository = $this->manager->getRepository(User::class);
+
         $error = true;
 
         if ($request->getMethod() == 'POST') {
@@ -39,6 +43,17 @@ class ContactController extends AbstractController
                     $mail && !empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL) &&
                     $message && !empty($message)
                 ) {
+                    /* Save in User */
+                    $user = new User();
+
+                    $user->setName($name)
+                            ->setMail($mail)
+                            ->setMessage($message);
+
+                    $this->manager->persist($user);
+                    $this->manager->flush();
+
+                    /* Create message */
                     $html = '<h2>' . $name . '</h2>';
                     $html .= '<a href="mailto:' . $mail . '">' . $mail . '</a>';
                     $html .= '<p>' . $message . '</p>';
