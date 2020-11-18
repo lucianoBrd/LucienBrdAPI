@@ -30,8 +30,8 @@ Kali NetHunter est une plate-forme de test de pénétration mobile gratuite et o
 Avant toute manipulation, je vous invite à vérifier que votre appareil est compatible (voir 2. L'image NetHunter).
 
 * Assurez vous d'avoir une batterie chargée (75% minimum).
-* Avoir au moins 9 go de stockage de disponible (voir [Augmenter le stockage d'un appareil Android - Fusionner les mémoires](https://www.lucien-brd.com/blog/augmenter-stockage-appareil-android-fusionner-mémoires)).  
-* Avoir un téléphone *rooté* avec un *Recovery Custom* (voir [Rooter et installer un Recovery Custom TWRP pour Samsung Galaxy S5 - SM-G900F](https://www.lucien-brd.com/blog/rooter-installer-recovery-custom-twrp-sm-g900f)).
+* Avoir au moins 9 go de stockage de disponible (voir [Augmenter le stockage d'un appareil Android - Fusionner les mémoires](https://www.lucien-brd.com/blog/increase-storage-android-device-merge-memory)).  
+* Avoir un téléphone *rooté* avec un *Recovery Custom* (voir [Rooter et installer un Recovery Custom TWRP pour Samsung Galaxy S5 - SM-G900F](https://www.lucien-brd.com/blog/root-install-recovery-custom-twrp-sm-g900f)).
 * Avoir l'image NetHunter compatible avec son téléphone (voir 2. L'image NetHunter).
 
 # 2. L'image NetHunter

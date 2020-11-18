@@ -50,7 +50,7 @@ class Blog
     private $document;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=160, unique=true)
      */
     private $slug;
 
