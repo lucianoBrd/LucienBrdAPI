@@ -1,6 +1,6 @@
 [adb-list-disks]: https://api.lucien-brd.com/assets/images/blogs/sd-card/adb-list-disks.webp "adb list-disks"
 
-Votre téléphone possède un slot pour mettre une carte micro SD qui va permettre d’augmenter cette mémoire. En revanche son utilisation est vite restrictive niveau déplacement du contenu.
+Votre téléphone possède un slot pour mettre une carte micro SD qui va permettre d’augmenter cette mémoire. En revanche son utilisation est vite restrictive au niveau déplacement du contenu.
 Si votre téléphone propose nativement dans les paramètres une option qui permet de fusionner les deux mémoires, il vous suffit de l'activer.
 
 Sinon, voici comment procéder pour un appareil sous **Android 6 minimum** (Android ne le prend pas en charge dans les versions précedente).
@@ -20,15 +20,15 @@ Sinon, voici comment procéder pour un appareil sous **Android 6 minimum** (Andr
 
 # 2. Fusionner la mémoire interne avec la mémoire de la carte SD
 
-1. Ouvrir une invite de commande et allez dans le répertoire d'installation :
+1. Ouvrir une invite de commande et aller dans le répertoire d'installation :
    ```sh
     $ cd \adb
     ```
-2. Connecter votre téléphone à l'ordinateur et tapez la commande suivante qui permet de lancer adb :
+2. Connecter votre téléphone à l'ordinateur et taper la commande suivante qui permet de lancer adb :
     ```sh
     $ adb shell
     ```
-3. Afin de connaitre le nom de votre carte SD, tapez la commande suivante :
+3. Afin de connaître le nom de votre carte SD, taper la commande suivante :
     ```sh
     $ sm list-disks
     ```
@@ -36,7 +36,7 @@ Sinon, voici comment procéder pour un appareil sous **Android 6 minimum** (Andr
     ![adb list-disks][adb-list-disks]
 
     Dans mon cas, le nom est ```disk:179,64```.
-4. Enfin, afin de fusionner les mémoires, tapez la commande suivante en mettant le nom de votre carte SD :
+4. Enfin, afin de fusionner les mémoires, taper la commande suivante en mettant le nom de votre carte SD :
     ```sh
     $ sm partition disk:179,64 private
     ```

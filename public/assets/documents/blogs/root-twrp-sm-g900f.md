@@ -6,7 +6,7 @@ Les bénéfices potentiels que vous pouvez tirer d'un root de votre smartphone v
 
 Par exemple, les fabricants ou les opérateurs installent souvent leurs propres applications qu'il est impossible de retirer sans avoir les droits administrateurs. Cela vous permet ainsi de **nettoyer vraiment votre téléphone et de gagner de l'espace de stockage**.
 
-Vous pouvez aussi faire un *overclock*. Cela consiste à augmenter la fréquence de l'horloge du processeur pour que votre téléphone aille plus vite. On peut aussi signaler la possibilité d'installer une ROM spécifique et ainsi ne pas rester bloqué sur le modèle installé de base. Vous aurez ainsi accès à des systèmes plus personnalisés et poussés.
+Vous pouvez aussi faire un *overclock*. Cela consiste à augmenter la fréquence de l'horloge du processeur pour que votre téléphone aille plus vite. On peut aussi signaler la possibilité d'installer une ROM spécifique et ainsi ne pas resté bloquer sur le modèle installé de base. Vous aurez ainsi accès à des systèmes plus personnalisés et poussés.
 
 Le *Recovery* est la barrière qui permet d’activer le *root*, d’installer un *kernel* modifié, une ROM modifiée, un thème, un mod (overclock ou autres modifications profondes liées au système), d’effacer la mémoire interne ou celle de la carte SD, et plus encore… Il existe bien certains recovery originaux qui permettent d’entreprendre certaines de ses possibilités, mais ils demeurent tout de même très rares. Pour étendre les possibilités de son terminal, la meilleure façon est d’employer un recovery modifié !
 
@@ -28,13 +28,13 @@ Voici comment procéder pour un SM-G900F.
 3. Activer :
    * Le mode développeur : Paramètres > A propos de l'appareil > Taper plusieurs fois sur le numéro de *build*
    * Le débogage USB : Paramètres > Options de développement > Débogage USB.
-4. Sauvegardez vos données.
+4. Sauvegarder vos données.
 5. Eteindre votre téléphone.
 6. Assurez vous d'avoir une batterie chargée (75% minimum).
 
 # 2. *Rooter* le téléphone
 1. Démarrer en mode *download*.
- Appuyez simultanément sur **volume bas + home + power**
+ Appuyer simultanément sur **volume bas + home + power**
 2. Ouvrir ```Odin3-v3.10.6.exe``` (fichier extrait lors de l'étape 2) et connecter votre téléphone à l'ordinateur.
 3. Clicker sur **AP** et sélectionner le fichier ```CF-Auto-Root.tar``` (fichier extrait lors de l'étape 2).
 4. Clicker sur *Start*.
@@ -44,13 +44,13 @@ Si l'installation s'est bien déroulée, l'application SuperSU devrait être ins
 
 # 3. Installer un *Recovery Custom* TWRP
 1. Démarrer en mode *download*.
- Appuyez simultanément sur **volume bas + home + power**
+ Appuyer simultanément sur **volume bas + home + power**
 2. Ouvrir ```Odin3-v3.10.6.exe``` (fichier extrait lors de l'étape 2) et connecter votre téléphone à l'ordinateur.
 3. Clicker sur **AP** et sélectionner le fichier ```twrp-3.3.1-0-klte.img.tar``` (fichier extrait lors de l'étape 2). Assurez-vous d'avoir uniquement *Auto Reboot* et *F.Reset Time* de coché.
 4. Clicker sur *Start*.
 5. Une fois que le message *Pass* s'affiche, vous pouvez déconnecter votre téléphone de votre ordinateur : TWRP est installé.
 
-Si l'installation s'est bien déroulée, si vous démarer votre téléphone en mode *recovery*, appuyez simultanément sur **volume haut + home + power**, l'écran suivant devrait s'afficher :
+Si l'installation s'est bien déroulée, si vous démarrez votre téléphone en mode *recovery*, appuyer simultanément sur **volume haut + home + power**, l'écran suivant devrait s'afficher :
 
 * ![twrp][twrp]
 

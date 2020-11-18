@@ -27,10 +27,10 @@ Kali NetHunter est une plate-forme de test de pénétration mobile gratuite et o
 
 # 1. Prérequis
 
-Avant toute manipulation je vous invite à vérifier que votre appareil est compatible (voir 2. L'image NetHunter).
+Avant toute manipulation, je vous invite à vérifier que votre appareil est compatible (voir 2. L'image NetHunter).
 
 * Assurez vous d'avoir une batterie chargée (75% minimum).
-* Avoir au moins 9go de stockage de disponible (voir [Augmenter le stockage d'un appareil Android - Fusionner les mémoires](https://www.lucien-brd.com/blog/augmenter-stockage-appareil-android-fusionner-mémoires)).  
+* Avoir au moins 9 go de stockage de disponible (voir [Augmenter le stockage d'un appareil Android - Fusionner les mémoires](https://www.lucien-brd.com/blog/augmenter-stockage-appareil-android-fusionner-mémoires)).  
 * Avoir un téléphone *rooté* avec un *Recovery Custom* (voir [Rooter et installer un Recovery Custom TWRP pour Samsung Galaxy S5 - SM-G900F](https://www.lucien-brd.com/blog/rooter-installer-recovery-custom-twrp-sm-g900f)).
 * Avoir l'image NetHunter compatible avec son téléphone (voir 2. L'image NetHunter).
 
@@ -41,30 +41,30 @@ Si vous trouvez une image NetHunter compatible avec votre appareil (attention à
 
 L'image pour un Samsung Galaxy S5 - SM-G900F, Android 6 - *Marshmallow*, ROM officielle *Touchwiz* est disponible [ici](https://api.lucien-brd.com/assets/documents/blogs/kali-nethunter/update-nethunter-20201020_215800-klte-touchwiz-marshmallow.zip) (pas besoin de siuvre les étapes suivante de cette partie).
 
-Si vous n'avez pas trouvé d'image compatible avec votre appareil tout n'est pas perdu.
+Si vous n'avez pas trouvé d'image compatible avec votre appareil, tout n'est pas perdu.
 
 ## 2.2. Générer sa propre image
-1. Premièrement il faudra que vous récupériez le projet :
+1. Premièrement, il faudra que vous récupériez le projet :
     ```sh
     $ git clone https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-project
     ```
 
-2. Puis allez dans le dossier ```nethunter-installer``` du projet afin de le *build* :
+2. Puis, aller dans le dossier ```nethunter-installer``` du projet afin de le *build* :
     ```sh
     $ cd kali-nethunter/nethunter-installer
     $ ./bootstrap.sh
     ```
 
-3. Si tout c'est bien déroulé, vous devrié pouvoir executer la commande suivante (dans le dossier ```nethunter-installer```) :
+3. Si tout c'est bien déroulé, vous devriez pouvoir exécuter la commande suivante (dans le dossier ```nethunter-installer```) :
     ```sh
     $ python3 build.py -h
     ```
 
     ![build.py -h résultat][build.py-h]
 
-    Comme vous le constatez, la liste des appareils et des versions d'Android compatible sont affichées.
+    Comme vous le constatez, la liste des appareils et des versions d'Android compatible est affichée.
 
-4. Enfin vous devez générer l'image NetHunter. Si vous avez installé une ROM        *custom*, vérifiez dans la liste des *device* qu'il n'existe pas une version spécifique à celle-ci.
+4. Enfin vous devez générer l'image NetHunter. Si vous avez installé une ROM        *custom*, vérifier dans la liste des *device* qu'il n'existe pas une version spécifique à celle-ci.
     Dans le cas d'un Samsung Galaxy S5 - SM-G900F, Android 6 - *Marshmallow*, ROM   officielle *Touchwiz*, la commande est la suivante ( dans le dossier              ```nethunter-installer```) :
     ```sh
     $ python3 build.py -d klte-touchwiz -m
@@ -78,11 +78,11 @@ Afin d'installer l'image NetHunter, il faudra flasher celle-ci sur votre télép
 
 1. Copier l'image NetHunter (fichier zip) sur votre téléphone.
 2. Eteindre votre téléphone.
-3. Démarer votre téléphone en mode *recovery*.
-Pour le s5 appuyez simultanément sur **volume haut + home + power**.
+3. Démarrer votre téléphone en mode *recovery*.
+Pour le S5, appuyer simultanément sur **volume haut + home + power**.
 ![twrp][twrp]
 3. Faites un *backup* de votre configuration actuelle (optionnel).
-4. Installez le fichier. ![install-zip][install-zip]
+4. Installer le fichier. ![install-zip][install-zip]
 
 Si l'installation s'est bien déroulée, si vous ouvrez NetHunter App, le *Kernel Version* devrait être celui de Kali Linux NetHunter :
 
@@ -90,8 +90,8 @@ Si l'installation s'est bien déroulée, si vous ouvrez NetHunter App, le *Kerne
 
 # 4. Configuration après installation
 
-1. Ouvrez NetHunter App et allez dans *Kali Chroot Manager*. Téléchargez et installez *Kali Chroot* (faites attention de choisir la version compatible avec l'architecture de votre processeur).
-2. Ouvrez NetHunter Store (F-Droid) et installez *Hacker Keyboard*.
+1. Ouvrer NetHunter App et aller dans *Kali Chroot Manager*. Télécharger et installer *Kali Chroot* (faites attention de choisir la version compatible avec l'architecture de votre processeur).
+2. Ouvrer NetHunter Store (F-Droid) et installer *Hacker Keyboard*.
 
 # 5. En savoir plus
 
