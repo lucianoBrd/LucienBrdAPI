@@ -3,37 +3,31 @@
 namespace App\Controller;
 
 use App\Entity\Blog;
+use App\Service\LocalGenerator;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogController extends AbstractController
 {
-    /**
-     * @Route("/blog", name="blog")
-     */
-    public function index()
-    {
-        $blogs = $this->getDoctrine()
-            ->getRepository(Blog::class)
-            ->findAllArray();
+    private $localGenerator;
 
-        foreach ($blogs as $b) {
-            
+    public function __construct(LocalGenerator $localGenerator)
+    {
+        $this->localGenerator = $localGenerator;
+    }
+
+    /**
+     * @Route("/blog/latest/{local}", name="blog_latest")
+     */
+    public function getLatest($local)
+    {
+        if ($this->localGenerator->checkLocal($local)) {
+            return $this->json([]);
         }
-        return $this->json([
-            'blogs' => $blogs,
-            'imagePath' => $this->getParameter('app.assets.images.blogs'),
-        ]);
-    }
 
-    /**
-     * @Route("/blog/latest", name="blog_latest")
-     */
-    public function getLatest()
-    {
         $blogs = $this->getDoctrine()
             ->getRepository(Blog::class)
-            ->findLatestArray();
+            ->findLatestArray($local);
 
         return $this->json([
             'blogs' => $blogs,
@@ -42,13 +36,17 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/blog/tag/{slug}", name="blog_tag")
+     * @Route("/blog/{local}", name="blog")
      */
-    public function getByTag($slug)
+    public function index($local)
     {
+        if ($this->localGenerator->checkLocal($local)) {
+            return $this->json([]);
+        }
+
         $blogs = $this->getDoctrine()
             ->getRepository(Blog::class)
-            ->findByTagArray($slug);
+            ->findAllArray($local);
 
         return $this->json([
             'blogs' => $blogs,
@@ -57,13 +55,36 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/blog/{slug}", name="blog_slug")
+     * @Route("/blog/tag/{local}/{slug}", name="blog_tag")
      */
-    public function getOneBySlug($slug)
+    public function getByTag($local, $slug)
     {
+        if ($this->localGenerator->checkLocal($local)) {
+            return $this->json([]);
+        }
+
+        $blogs = $this->getDoctrine()
+            ->getRepository(Blog::class)
+            ->findByTagArray($local, $slug);
+
+        return $this->json([
+            'blogs' => $blogs,
+            'imagePath' => $this->getParameter('app.assets.images.blogs'),
+        ]);
+    }
+
+    /**
+     * @Route("/blog/{local}/{slug}", name="blog_slug")
+     */
+    public function getOneBySlug($local, $slug)
+    {
+        if ($this->localGenerator->checkLocal($local)) {
+            return $this->json([]);
+        }
+        
         $blog = $this->getDoctrine()
             ->getRepository(Blog::class)
-            ->findOneBySlugArray($slug);
+            ->findOneBySlugArray($local, $slug);
 
         return $this->json([
             'blog' => $blog,

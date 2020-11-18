@@ -18,4 +18,14 @@ class LocalGenerator
         return $this->locals;
     }
 
+    public function checkLocal($local): bool {
+        $error = true;
+        foreach ($this->locals as $l) {
+            if ($l == $local) {
+                $error = false;
+            }
+        }
+        return $error;
+    }
+
 }

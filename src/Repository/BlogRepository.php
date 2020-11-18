@@ -23,9 +23,11 @@ class BlogRepository extends ServiceEntityRepository
     /**
      * @return Blog[] Returns an array of Blog objects
      */
-    public function findAllArray()
+    public function findAllArray($local)
     {
         return $this->createQueryBuilder('b')
+            ->andWhere('b.local = :local')
+            ->setParameter('local', $local)
             ->leftJoin('b.tags', 'tag')
             ->addSelect('tag')
             ->orderBy('b.date', 'DESC')
@@ -37,9 +39,11 @@ class BlogRepository extends ServiceEntityRepository
     /**
      * @return Blog[] Returns an array of Blog objects
      */
-    public function findLatestArray()
+    public function findLatestArray($local)
     {
         $blogs = $this->createQueryBuilder('b')
+            ->andWhere('b.local = :local')
+            ->setParameter('local', $local)
             ->leftJoin('b.tags', 'tag')
             ->addSelect('tag')
             ->orderBy('b.date', 'DESC')
@@ -56,12 +60,14 @@ class BlogRepository extends ServiceEntityRepository
     /**
      * @return Blog[] Returns an array of Blog objects
      */
-    public function findByTagArray($tag)
+    public function findByTagArray($local, $tag)
     {
         return $this->createQueryBuilder('b')
+            ->andWhere('b.local = :local')
             ->leftJoin('b.tags', 'tag')
             ->addSelect('tag')
             ->andWhere('tag.slug = :slug')
+            ->setParameter('local', $local)
             ->setParameter('slug', $tag)
             ->orderBy('b.date', 'DESC')
             ->getQuery()
@@ -72,11 +78,13 @@ class BlogRepository extends ServiceEntityRepository
     /**
      * @return Blog Returns a Blog object
      */
-    public function findOneBySlugArray($slug)
+    public function findOneBySlugArray($local, $slug)
     {
         return $this->createQueryBuilder('b')
-            ->andWhere('b.slug = :val')
-            ->setParameter('val', $slug)
+            ->andWhere('b.local = :local')
+            ->andWhere('b.slug = :slug')
+            ->setParameter('local', $local)
+            ->setParameter('slug', $slug)
             ->leftJoin('b.tags', 'tag')
             ->addSelect('tag')
             ->getQuery()
