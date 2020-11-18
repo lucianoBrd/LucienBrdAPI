@@ -19,7 +19,7 @@ class ContactController extends AbstractController
      */
     public function index(EntityManagerInterface $manager, MailerInterface $mailer, Request $request)
     {
-        $repository = $this->manager->getRepository(User::class);
+        $repository = $manager->getRepository(User::class);
 
         $error = true;
 
@@ -50,8 +50,8 @@ class ContactController extends AbstractController
                             ->setMail($mail)
                             ->setMessage($message);
 
-                    $this->manager->persist($user);
-                    $this->manager->flush();
+                    $manager->persist($user);
+                    $manager->flush();
 
                     /* Create message */
                     $html = '<h2>' . $name . '</h2>';
