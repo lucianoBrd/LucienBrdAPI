@@ -90,7 +90,7 @@ class DownloadController extends AbstractController
                         ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
                         ->to(new Address($mail))
                         ->subject($this->localGenerator->getSubjectFile($local, $file))
-                        ->html($confirm . $html)
+                        ->html($html)
                         ->attachFromPath($pathFile);
                     try {
                         $mailer->send($email);

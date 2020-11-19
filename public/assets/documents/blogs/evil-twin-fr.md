@@ -172,7 +172,7 @@ Les entreprises qui offrent la connexion Wifi à leurs employés ou à leurs cli
 ## 6.1. Liens de téléchargement
 
 * [wifiphisher](https://github.com/wifiphisher/wifiphisher.git)
-* [Pages-main.zi](https://lucien-brd.com/download/Pages-main.zip)
+* [Pages-main.zip](https://lucien-brd.com/download/Pages-main.zip)
 
 ## 6.2. Documentation
 
