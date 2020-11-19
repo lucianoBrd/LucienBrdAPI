@@ -16,7 +16,7 @@ class CommentController extends AbstractController
     private $images;
     private $length;
 
-    public function __construct(LocalGenerator $localGenerator)
+    public function __construct()
     {
         $this->images = [
             'user.webp',
