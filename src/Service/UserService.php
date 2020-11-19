@@ -32,6 +32,10 @@ class UserService
             $user = $u;
 
         } else {
+            $messages = $user->getMessages();
+            foreach ($messages as $message) {
+                $this->manager->persist($message);
+            }
             $this->manager->persist($user);
         }
 
