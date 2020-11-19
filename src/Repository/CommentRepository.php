@@ -27,9 +27,13 @@ class CommentRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.post = :post')
+            ->andWhere('c.reply = :reply')
             ->setParameter('post', $post)
+            ->setParameter('reply', false)
             ->leftJoin('c.user', 'user')
+            ->leftJoin('c.comments', 'comments')
             ->addSelect('user')
+            ->addSelect('comments')
             ->orderBy('c.date', 'DESC')
             ->getQuery()
             ->getResult(Query::HYDRATE_ARRAY)
