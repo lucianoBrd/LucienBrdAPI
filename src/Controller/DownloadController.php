@@ -24,7 +24,7 @@ class DownloadController extends AbstractController
     }
     
     /**
-     * @Route("/download/{local}", name="contact")
+     * @Route("/download/{local}", name="download")
      */
     public function index($local, EntityManagerInterface $manager, MailerInterface $mailer, Request $request)
     {
