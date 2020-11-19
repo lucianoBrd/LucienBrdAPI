@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Entity\File;
+
 class LocalGenerator
 {
     private $locals;
@@ -44,17 +46,19 @@ class LocalGenerator
         return $confirm;
     }
 
-    public function getMessageFile($local, $name, $file) {
+    public function getMessageFile($local, $name, $path, File $f) {
+        $fullPath = $path . $f->getFile();
+
         if ($local == 'fr') {
             $html = '<h1>Bonjour ' . $name . '</h1>';
-            $html .= '<p>Vous trouverez ci-joint le fichier ' . $file . '.</p>';
-            $html .= '<p>Le mot de passe de l\'archive est : awesome?oh8.</p>';
+            $html .= '<p>Vous trouverez le fichier ici : <a href="' . $fullPath . '">' . $fullPath . '</a></p>';
+            $html .= '<p>Le mot de passe de l\'archive est : ' . $f->getPassword() . '.</p>';
             $html .= '<p>Pour rappel : "Les systèmes, programmes et méthodologies sont utilisés à but éducatif et préventif uniquement. Vous restez les responsables de vos actions et aucune responsabilité ne sera engagée quant à la mauvaise utilisation du contenu enseigné."</p>';
             $html .= '<br>';
         } else {
             $html = '<h1>Hello ' . $name . '</h1>';
-            $html .= '<p>Please find attached the file ' . $file . '.</p>';
-            $html .= '<p>The archive password is : awesome?oh8.</p>';
+            $html .= '<p>You can find the file here : <a href="' . $fullPath . '">' . $fullPath . '</a></p>';
+            $html .= '<p>The archive password is : ' . $f->getPassword() . '.</p>';
             $html .= '<p>As a reminder: "Systems, programmes and methodologies are used for educational and preventive purposes only. You remain responsible for your actions and there will be no liability for the misuse of the content taught."</p>';
             $html .= '<br>';
         }

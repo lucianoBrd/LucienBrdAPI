@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Cv;
 use App\Entity\Tag;
 use App\Entity\Blog;
+use App\Entity\File;
 use App\Entity\Social;
 use App\Entity\Politic;
 use App\Entity\Project;
@@ -52,6 +53,7 @@ class DatabaseGenerator
         $this->manageSocial();
         $this->manageCv();
         $this->managePolitic();
+        $this->manageFile();
         $this->manageTag();
         $this->manageBlog();
     }
@@ -114,6 +116,30 @@ class DatabaseGenerator
                 ->setFa($s[1]);
 
             $this->manager->persist($social);
+        }
+
+        $this->manager->flush();
+
+    }
+
+    public function manageFile()
+    {
+        $repository = $this->manager->getRepository(File::class);
+
+        /* Reset project database */
+        $this->reset($repository);
+
+        $files = [
+            ['Pages-main.zip', 'phishingPages?oh8'],
+        ];
+
+        foreach ($files as $f) {
+            $file = new File();
+
+            $file->setFile($f[0])
+                ->setPassword($f[1]);
+
+            $this->manager->persist($file);
         }
 
         $this->manager->flush();

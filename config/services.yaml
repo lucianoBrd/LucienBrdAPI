@@ -8,6 +8,7 @@ parameters:
     app.assets.images.blogs: '%app.url%/assets/images/blogs/'
     app.assets.documents.blogs: '%app.url%/assets/documents/blogs/'
     app.assets.documents.cv: '%app.url%/assets/documents/cv/'
+    app.assets.documents.download: '%app.url%/assets/documents/download/'
     app.assets.images.educations: '%app.url%/assets/images/educations/'
     app.assets.documents.politic: '%app.url%/assets/documents/politic/'
     app.assets.images.projects: '%app.url%/assets/images/projects/'

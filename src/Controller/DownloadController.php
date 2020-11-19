@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\File;
 use App\Entity\User;
 use App\Service\UserService;
 use App\Service\LocalGenerator;
@@ -47,11 +48,10 @@ class DownloadController extends AbstractController
                 $mail = filter_var($mail, FILTER_SANITIZE_EMAIL);
 
                 /* Check file + file exist */
-                $pathFile = '../src/Download/';
-                $fileError = true;
-                if ($file && !empty($file) && file_exists($pathFile . $file)) {
-                    $pathFile = $pathFile . $file;
-                    $fileError = false;
+                $f = null;
+                if ($file && !empty($file)) {
+                    $repository = $this->manager->getRepository(File::class);
+                    $f = $repository->findOneBy(['file' => $file]);
                 }
 
                 /* Check captcha */
@@ -61,7 +61,7 @@ class DownloadController extends AbstractController
                 if ($resp != null && $resp->success &&
                     $name && !empty($name) &&
                     $mail && !empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL) &&
-                    !$fileError
+                    $f
                 ) {
                     /* Save User + Message */
                     $user = new User();
@@ -72,7 +72,12 @@ class DownloadController extends AbstractController
                     $userService->addUser($user);
 
                     /* Create message */
-                    $html = $this->localGenerator->getMessageFile($local, $name, $file);
+                    $html = $this->localGenerator->getMessageFile(
+                        $local, 
+                        $name, 
+                        $this->getParameter('app.assets.documents.download'),
+                        $f
+                    );
 
                     /* Get signature */
                     $signature = '';
@@ -90,8 +95,7 @@ class DownloadController extends AbstractController
                         ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
                         ->to(new Address($mail))
                         ->subject($this->localGenerator->getSubjectFile($local, $file))
-                        ->html($html)
-                        ->attachFromPath($pathFile);
+                        ->html($html);
                     try {
                         $mailer->send($email);
                         $error = false;
