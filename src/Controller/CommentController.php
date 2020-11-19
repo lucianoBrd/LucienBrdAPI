@@ -35,22 +35,8 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @Route("/comment/{post}", name="comment_post")
-     */
-    public function getByPost($post)
-    {
-        $comments = $this->getDoctrine()
-            ->getRepository(Comment::class)
-            ->findByPostArray($post);
-        
-        return $this->json([
-            'comments' => $comments,
-            'imagePath' => $this->getParameter('app.assets.images.comments'),
-        ]);
-    }
-    
-    /**
      * @Route("/comment", name="comment_new")
+     * @Route("/comment/reply", name="comment_reply_new")
      */
     public function addComment(EntityManagerInterface $manager, Request $request)
     {
@@ -61,6 +47,19 @@ class CommentController extends AbstractController
         if ($request->getMethod() == 'POST') {
 
             $postData = json_decode($request->getContent(), true);
+
+            /* Check isset reply */
+            $reply = null;
+            if (isset($postData['reply'])) {
+                $reply = htmlspecialchars($postData['reply']);
+                if ($reply && !empty($reply)) {
+                    /* Check reply exist */
+                } else {
+                    $reply = null;
+                    $repository = $manager->getRepository(Comment::class);
+                    $reply = $repository->findOneBy(['id' => $reply]);
+                }
+            }
 
             if (isset($postData['captcha']) && isset($postData['name']) && isset($postData['mail']) && isset($postData['message']) && isset($postData['post'])) {
 
@@ -103,9 +102,20 @@ class CommentController extends AbstractController
                     $comment->setMessage($message)
                         ->setImage($this->getRandomImage())
                         ->setPost($post)
-                        ->setUser($user);
+                        ->setUser($user)
+                        ->setReply(false);
 
                     $manager->persist($comment);
+
+                    /* If isset reply add comment to it */
+                    if ($reply) {
+                        $comment->setReply(true);
+                        $reply->addComment($comment);
+
+                        $manager->persist($comment);
+                        $manager->persist($reply);
+                    }
+
                     $manager->flush();
 
                     $error = false;
@@ -115,6 +125,21 @@ class CommentController extends AbstractController
 
         return $this->json([
             'error' => $error,
+        ]);
+    }
+
+    /**
+     * @Route("/comment/{post}", name="comment_post")
+     */
+    public function getByPost($post)
+    {
+        $comments = $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findByPostArray($post);
+        
+        return $this->json([
+            'comments' => $comments,
+            'imagePath' => $this->getParameter('app.assets.images.comments'),
         ]);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,9 +45,20 @@ class Comment
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $reply;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Comment::class)
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +122,42 @@ class Comment
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getReply(): ?bool
+    {
+        return $this->reply;
+    }
+
+    public function setReply(bool $reply): self
+    {
+        $this->reply = $reply;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(self $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+        }
+
+        return $this;
+    }
+
+    public function removeComment(self $comment): self
+    {
+        $this->comments->removeElement($comment);
 
         return $this;
     }
