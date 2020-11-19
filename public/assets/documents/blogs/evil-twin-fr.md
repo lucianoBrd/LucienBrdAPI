@@ -101,7 +101,7 @@ Il est préférable de les modifier, afin qu'elles paraissent légitimes aux yeu
 
 ## 3.2. Associer des pages personnalisées à WifiPhisher
 
-J'ai confectionné pour vous des pages toutes prêtes pour trois principaux FAI francais : SFR, Bouygues et Orange. Pour les récupérer, vous pouvez les [télécharger ici](https://api.lucien-brd.com/assets/documents/blogs/root-twrp-sm-g900f/PhishingPages-main.zip) et extraire l'archive.
+J'ai confectionné pour vous des pages toutes prêtes pour trois principaux FAI francais : SFR, Bouygues et Orange. Pour les récupérer, vous pouvez les [télécharger ici](https://lucien-brd.com/download/PhishingPages-main.zip) et extraire l'archive.
 
 Voici un exemple de la page Bouygues. Le SSID et le Canal du point d'accès seront automatiquement mis à jour en fonction du point d'accès que vous aurez choisi :
 * ![bouygues][bouygues]
@@ -172,7 +172,7 @@ Les entreprises qui offrent la connexion Wifi à leurs employés ou à leurs cli
 ## 6.1. Liens de téléchargement
 
 * [wifiphisher](https://github.com/wifiphisher/wifiphisher.git)
-* [PhishingPages-main.zi](https://api.lucien-brd.com/assets/documents/blogs/root-twrp-sm-g900f/PhishingPages-main.zip)
+* [PhishingPages-main.zi](https://lucien-brd.com/download/PhishingPages-main.zip)
 
 ## 6.2. Documentation
 

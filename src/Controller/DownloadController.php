@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Message;
 use App\Service\UserService;
 use App\Service\LocalGenerator;
 use Symfony\Component\Mime\Email;
@@ -15,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
-class ContactController extends AbstractController
+class DownloadController extends AbstractController
 {
     private $localGenerator;
 
@@ -25,7 +24,7 @@ class ContactController extends AbstractController
     }
     
     /**
-     * @Route("/contact/{local}", name="contact")
+     * @Route("/download/{local}", name="contact")
      */
     public function index($local, EntityManagerInterface $manager, MailerInterface $mailer, Request $request)
     {
@@ -37,15 +36,23 @@ class ContactController extends AbstractController
 
             $postData = json_decode($request->getContent(), true);
 
-            if (isset($postData['captcha']) && isset($postData['name']) && isset($postData['mail']) && isset($postData['message'])) {
+            if (isset($postData['captcha']) && isset($postData['name']) && isset($postData['mail']) && isset($postData['file'])) {
 
                 $captcha = htmlspecialchars($postData['captcha']);
                 $name = htmlspecialchars($postData['name']);
                 $mail = htmlspecialchars($postData['mail']);
-                $message = htmlspecialchars($postData['message']);
+                $file = htmlspecialchars($postData['file']);
 
                 /* Remove all illegal characters from mail */
                 $mail = filter_var($mail, FILTER_SANITIZE_EMAIL);
+
+                /* Check file + file exist */
+                $pathFile = '../src/Download/';
+                $fileError = true;
+                if ($file && !empty($file) && file_exists($pathFile . $file)) {
+                    $pathFile = $pathFile . $file;
+                    $fileError = false;
+                }
 
                 /* Check captcha */
                 $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $_ENV['PRIVATE_KEY'] . '&response=' . $captcha);
@@ -54,25 +61,18 @@ class ContactController extends AbstractController
                 if ($resp != null && $resp->success &&
                     $name && !empty($name) &&
                     $mail && !empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL) &&
-                    $message && !empty($message)
+                    !$fileError
                 ) {
                     /* Save User + Message */
                     $user = new User();
-                    $m = new Message();
-
-                    $m->setMessage($message);
 
                     $user->setName($name)
-                        ->setMail($mail)
-                        ->addMessage($m);
+                        ->setMail($mail);
 
                     $userService->addUser($user);
 
                     /* Create message */
-                    $html = '<h2>' . $name . '</h2>';
-                    $html .= '<a href="mailto:' . $mail . '">' . $mail . '</a>';
-                    $html .= '<p>' . $message . '</p>';
-                    $html .= '<br>';
+                    $html = $this->localGenerator->getMessageFile($local, $name, $file);
 
                     /* Get signature */
                     $signature = '';
@@ -86,22 +86,14 @@ class ContactController extends AbstractController
                     $html .= $signature;
                     $html .= '<br>';
 
-                    $confirm = $this->localGenerator->getConfirm($local, $name);
-
                     $email = (new Email())
                         ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
-                        ->to('lucien.burdet@gmail.com')
-                        ->subject('Message de ' . $name)
-                        ->html($html);
-
-                    $emailConfirm = (new Email())
-                        ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
                         ->to(new Address($mail))
-                        ->subject($this->localGenerator->getSubject($local))
-                        ->html($confirm . $html);
+                        ->subject($this->localGenerator->getSubjectFile($local, $file))
+                        ->html($confirm . $html)
+                        ->attachFromPath($pathFile);
                     try {
                         $mailer->send($email);
-                        $mailer->send($emailConfirm);
                         $error = false;
                     } catch (TransportExceptionInterface $e) {
                         $error = true;
