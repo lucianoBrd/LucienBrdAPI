@@ -105,6 +105,9 @@ class CommentController extends AbstractController
                         ->setPost($post)
                         ->setUser($user);
 
+                    $this->manager->persist($comment);
+                    $this->manager->flush();
+
                     $error = false;
                 }
             }
