@@ -50,7 +50,7 @@ class DownloadController extends AbstractController
                 /* Check file + file exist */
                 $f = null;
                 if ($file && !empty($file)) {
-                    $repository = $this->manager->getRepository(File::class);
+                    $repository = $manager->getRepository(File::class);
                     $f = $repository->findOneBy(['file' => $file]);
                 }
 
