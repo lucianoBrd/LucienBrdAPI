@@ -13,9 +13,8 @@ Lucien Burdet - lucien-brd.com
 #### 1.2 Éditeur (ci-après « l'éditeur ») : 
  
 L'entreprise indivuduelle Lucien Burdet
-située : Impasse des hirondelles, 01700 Miribel
+située : 01700 Miribel
 immatriculée au RCS de Dijon 847828183
-n° de téléphone : 0634422757
 adresse mail : contact@lucien-brd.com
  
 #### 1.3 Hébergeur (ci-après « l'hébergeur ») : 
@@ -77,7 +76,7 @@ En application de la réglementation applicable aux données à caractère perso
 * le droit à la portabilité : ils peuvent réclamer que la Plateforme leur remette les données personnelles qu'ils ont fournies pour les transmettre à une nouvelle Plateforme.
 
 Vous pouvez exercer ce droit en nous contactant, à l’adresse suivante :
-  Impasse des hirondelles 01700 Miribel.
+  01700 Miribel.
  
 Ou par email, à l’adresse :
 contact@lucien-brd.com 

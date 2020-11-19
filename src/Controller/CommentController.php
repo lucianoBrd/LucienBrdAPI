@@ -100,7 +100,7 @@ class CommentController extends AbstractController
 
                     $comment = new Comment();
 
-                    $commen->setMessage($message)
+                    $comment->setMessage($message)
                         ->setImage($this->getRandomImage())
                         ->setPost($post)
                         ->setUser($user);
