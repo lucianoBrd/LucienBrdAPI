@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Message;
+use App\Service\UserService;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +21,7 @@ class ContactController extends AbstractController
      */
     public function index(EntityManagerInterface $manager, MailerInterface $mailer, Request $request)
     {
-        $repository = $manager->getRepository(User::class);
+        $userService = new UserService($manager);
 
         $error = true;
 
@@ -43,15 +45,17 @@ class ContactController extends AbstractController
                     $mail && !empty($mail) && filter_var($mail, FILTER_VALIDATE_EMAIL) &&
                     $message && !empty($message)
                 ) {
-                    /* Save in User */
+                    /* Save User + Message */
                     $user = new User();
+                    $m = new Message();
+
+                    $m->setMessage($message);
 
                     $user->setName($name)
                             ->setMail($mail)
-                            ->setMessage($message);
+                            ->addMessage($m);
 
-                    $manager->persist($user);
-                    $manager->flush();
+                    $userService->addUser($user);
 
                     /* Create message */
                     $html = '<h2>' . $name . '</h2>';
