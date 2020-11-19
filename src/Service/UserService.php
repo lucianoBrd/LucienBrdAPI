@@ -8,10 +8,26 @@ use Doctrine\Persistence\ObjectManager;
 class UserService
 {
     private $manager;
+    private $images;
+    private $length;
 
     public function __construct(ObjectManager $manager)
     {
         $this->manager = $manager;
+        $this->images = [
+            'user.webp',
+            'businessman.webp',
+            'customer.webp',
+            'employee.webp',
+            'manager.webp',
+            'scientist.webp',
+        ];
+
+        $this->length = sizeof($this->images);
+    }
+
+    private function getRandomImage() {
+        return $this->images[rand(0, ($this->length - 1))];
     }
 
     public function addUser($user): User
@@ -36,6 +52,7 @@ class UserService
             foreach ($messages as $message) {
                 $this->manager->persist($message);
             }
+            $user->setImage($this->getRandomImage());
             $this->manager->persist($user);
         }
 

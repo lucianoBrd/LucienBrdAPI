@@ -13,27 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommentController extends AbstractController
 {
-    private $images;
-    private $length;
-
-    public function __construct()
-    {
-        $this->images = [
-            'user.webp',
-            'businessman.webp',
-            'customer.webp',
-            'employee.webp',
-            'manager.webp',
-            'scientist.webp',
-        ];
-
-        $this->length = sizeof($this->images);
-    }
-
-    private function getRandomImage() {
-        return $this->images[rand(0, ($this->length - 1))];
-    }
-
     /**
      * @Route("/comment", name="comment_new")
      * @Route("/comment/reply", name="comment_reply_new")
@@ -56,7 +35,7 @@ class CommentController extends AbstractController
                     /* Check reply exist */
                     $repository = $manager->getRepository(Comment::class);
                     $reply = $repository->findOneBy(['id' => $reply]);
-                    
+
                 } else {
                     $reply = null;
                     
@@ -102,7 +81,6 @@ class CommentController extends AbstractController
                     $comment = new Comment();
 
                     $comment->setMessage($message)
-                        ->setImage($this->getRandomImage())
                         ->setPost($post)
                         ->setUser($user)
                         ->setReply(false);
