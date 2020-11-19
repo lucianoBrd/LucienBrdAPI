@@ -54,10 +54,12 @@ class CommentController extends AbstractController
                 $reply = htmlspecialchars($postData['reply']);
                 if ($reply && !empty($reply)) {
                     /* Check reply exist */
-                } else {
-                    $reply = null;
                     $repository = $manager->getRepository(Comment::class);
                     $reply = $repository->findOneBy(['id' => $reply]);
+                    
+                } else {
+                    $reply = null;
+                    
                 }
             }
 
