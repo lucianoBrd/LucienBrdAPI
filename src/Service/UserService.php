@@ -24,6 +24,7 @@ class UserService
         if ($u) {
             $messages = $user->getMessages();
             foreach ($messages as $message) {
+                $this->manager->persist($message);
                 $u->addMessage($message);
             }
 
