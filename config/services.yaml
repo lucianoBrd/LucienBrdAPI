@@ -5,9 +5,11 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.url: 'https://api.lucien-brd.com'
+    app.client.url: 'https://lucien-brd.com'
     app.assets.images.blogs: '%app.url%/assets/images/blogs/'
     app.assets.documents.blogs: '%app.url%/assets/documents/blogs/'
     app.assets.documents.cv: '%app.url%/assets/documents/cv/'
+    app.assets.email: '%app.url%/assets/email/'
     app.assets.images.comments: '%app.url%/assets/images/comments/'
     app.assets.documents.download: '%app.url%/assets/documents/download/'
     app.assets.images.educations: '%app.url%/assets/images/educations/'

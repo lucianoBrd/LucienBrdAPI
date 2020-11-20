@@ -19,6 +19,8 @@
         "symfony/framework-bundle": "5.2.*",
         "symfony/mailer": "5.2.*",
         "symfony/maker-bundle": "^1.22",
+        "symfony/swiftmailer-bundle": "3.5.x-dev",
+        "symfony/twig-bundle": "5.2.*",
         "symfony/yaml": "5.2.*"
     },
     "require-dev": {

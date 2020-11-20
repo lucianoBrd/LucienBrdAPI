@@ -10,10 +10,8 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class DownloadController extends AbstractController
 {
@@ -27,7 +25,7 @@ class DownloadController extends AbstractController
     /**
      * @Route("/download/{local}", name="download")
      */
-    public function index($local, EntityManagerInterface $manager, MailerInterface $mailer, Request $request)
+    public function index($local, EntityManagerInterface $manager, \Swift_Mailer $mailer, Request $request)
     {
         $userService = new UserService($manager);
 
@@ -71,35 +69,41 @@ class DownloadController extends AbstractController
 
                     $userService->addUser($user);
 
-                    /* Create message */
-                    $html = $this->localGenerator->getMessageFile(
-                        $local, 
-                        $name, 
-                        $this->getParameter('app.assets.documents.download'),
-                        $f
+                    /* Create messages */
+                    $title = $this->localGenerator->getDownload($local) . $file;
+                    $message = (new \Swift_Message($title))
+                        ->setFrom('no-reply@lucien-brd.com')
+                        ->setTo($mail)
+                        ->setBody(
+                            $this->renderView(
+                                'emails/base.html.twig',
+                                [
+                                    'local' => $local,
+                                    'title' => $title,
+                                    'clientPath' => $this->getParameter('app.client.url'),
+                                    'emailPath' => $this->getParameter('app.assets.email'),
+                                    'banner' => 'download',
+                                    'h1' => [
+                                        'hello' => $this->localGenerator->getHello($local),
+                                        'name' => $name,
+                                    ],
+                                    'h3' => $title,
+                                    'paragraphs' => $this->localGenerator->getFile($local, $f),
+                                    'button' => [
+                                        'url' => $this->getParameter('app.assets.documents.download') . $f->getFile(), 
+                                        'title' => $this->localGenerator->getDownload($local),
+                                    ],
+                                    'question' => $this->localGenerator->getQuestion($local),
+                                    'contact' => $this->localGenerator->getContact($local),
+                                ]
+                            ),
+                            'text/html'
                     );
 
-                    /* Get signature */
-                    $signature = '';
-                    $f = fopen('../public/assets/email/mail.html', 'r');
-                    while (!feof($f)) {
-                        $result = fgets($f);
-                        $signature .= $result;
-                    }
-                    fclose($f);
-
-                    $html .= $signature;
-                    $html .= '<br>';
-
-                    $email = (new Email())
-                        ->from(Address::fromString('Lucien Burdet <no-reply@lucien-brd.com>'))
-                        ->to(new Address($mail))
-                        ->subject($this->localGenerator->getSubjectFile($local, $file))
-                        ->html($html);
                     try {
-                        $mailer->send($email);
+                        $mailer->send($message);
                         $error = false;
-                    } catch (TransportExceptionInterface $e) {
+                    } catch (\Swift_TransportException $Ste) {
                         $error = true;
                     }
                 }
