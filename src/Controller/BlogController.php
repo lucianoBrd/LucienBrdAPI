@@ -16,6 +16,16 @@ class BlogController extends AbstractController
         $this->localGenerator = $localGenerator;
     }
 
+    private function formatBlog($blogs) {
+        $key = 'date';
+        $newBlogs = [];
+        foreach ($blogs as $blog) {
+            $blog[$key] = $blog[$key]->format('Y-m-d H:i:s');
+            $newBlogs[] = $blog;
+        }
+        return $newBlogs;
+    }
+
     /**
      * @Route("/blog/latest/{local}", name="blog_latest")
      */
@@ -30,7 +40,7 @@ class BlogController extends AbstractController
             ->findLatestArray($local);
 
         return $this->json([
-            'blogs' => $blogs,
+            'blogs' => $this->formatBlog($blogs),
             'imagePath' => $this->getParameter('app.assets.images.blogs'),
         ]);
     }
@@ -49,7 +59,7 @@ class BlogController extends AbstractController
             ->findAllArray($local);
 
         return $this->json([
-            'blogs' => $blogs,
+            'blogs' => $this->formatBlog($blogs),
             'imagePath' => $this->getParameter('app.assets.images.blogs'),
         ]);
     }
@@ -68,7 +78,7 @@ class BlogController extends AbstractController
             ->findByTagArray($local, $slug);
 
         return $this->json([
-            'blogs' => $blogs,
+            'blogs' => $this->formatBlog($blogs),
             'imagePath' => $this->getParameter('app.assets.images.blogs'),
         ]);
     }
@@ -87,7 +97,7 @@ class BlogController extends AbstractController
             ->findOneBySlugArray($local, $slug);
 
         return $this->json([
-            'blog' => $blog,
+            'blog' => $this->formatBlog($blogs),
             'imagePath' => $this->getParameter('app.assets.images.blogs'),
             'documentPath' => $this->getParameter('app.assets.documents.blogs'),
         ]);

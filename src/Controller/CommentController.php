@@ -20,6 +20,16 @@ class CommentController extends AbstractController
     {
         $this->localGenerator = $localGenerator;
     }
+
+    private function formatComment($comments) {
+        $key = 'date';
+        $newComments = [];
+        foreach ($comments as $comment) {
+            $comment[$key] = $comment[$key]->format('Y-m-d H:i:s');
+            $newComments[] = $comment;
+        }
+        return $newComments;
+    }
     
     /**
      * @Route("/comment/reply/{local}", name="comment_reply_new")
@@ -226,7 +236,7 @@ class CommentController extends AbstractController
             ->findByPostArray($post);
         
         return $this->json([
-            'comments' => $comments,
+            'comments' => $this->formatComment($comments),
             'imagePath' => $this->getParameter('app.assets.images.comments'),
         ]);
     }
