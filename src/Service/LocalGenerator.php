@@ -75,7 +75,7 @@ class LocalGenerator
             $message[] = $comment->getUser()->getName() . ' answered you :';
         }
 
-        $confirm[] = $comment->getMessage();
+        $message[] = $comment->getMessage();
 
         return $message;
     }
@@ -92,7 +92,7 @@ class LocalGenerator
             $message[] = $comment->getUser()->getName() . ' has commented :';
         }
 
-        $confirm[] = $comment->getMessage();
+        $message[] = $comment->getMessage();
 
         return $message;
     }
