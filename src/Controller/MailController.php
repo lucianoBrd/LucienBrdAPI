@@ -23,7 +23,7 @@ class MailController extends AbstractController
     {
         $local = 'en';
         $title = 'Test';
-        $message = $this->render('emails/base.html.twig', [
+        $m = $this->render('emails/base.html.twig', [
             'local' => $local,
             'title' => $title,
             'clientPath' => $this->getParameter('app.client.url'),
@@ -49,7 +49,7 @@ class MailController extends AbstractController
         $message = (new \Swift_Message($title))
             ->setFrom('no-reply@lucien-brd.com')
             ->setTo('contact@lucien-brd.com')
-            ->setBody($message);
+            ->setBody($m);
 
         try {
             $mailer->send($message);
@@ -57,6 +57,6 @@ class MailController extends AbstractController
             dump($Ste);
         }
 
-        return $message;
+        return $m;
     }
 }
