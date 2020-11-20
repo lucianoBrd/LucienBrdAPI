@@ -48,7 +48,7 @@ class MailController extends AbstractController
 
         $message = (new \Swift_Message($title))
             ->setFrom('lucien.burdet@gmail.com')
-            ->setTo('contact@lucien-brd.com')
+            ->setTo('lucien.burdet@gmail.com')
             ->setBody($m, 'text/html');
 
         try {
