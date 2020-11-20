@@ -36,11 +36,11 @@ class LocalGenerator
         $confirm = [];
         if ($local == 'fr') {
             $confirm[] = 'Merci pour votre message, je vous répondrais dans les meilleurs délais.';
-            $message[] = '';
+            $confirm[] = '';
             $confirm[] = 'Votre message :';
         } else {
             $confirm[] = 'Thank you for your message, I will answer you as soon as possible.';
-            $message[] = '';
+            $confirm[] = '';
             $confirm[] = 'Your message :';
         }
         $confirm[] = $message;

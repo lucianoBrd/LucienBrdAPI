@@ -199,7 +199,7 @@ class CommentController extends AbstractController
 
                     try {
                         $mailer->send($message);
-                        if ($reply) {
+                        if ($reply && $reply->getUser()->getId() != $comment->getUser()->getId()) {
                             $mailer->send($messageReply);
                         }
                         $mailer->send($messageConfirm);
