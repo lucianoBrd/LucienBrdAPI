@@ -69,8 +69,8 @@ class DownloadController extends AbstractController
 
                     $userService->addUser($user);
 
-                    /* Create messages */
-                    $title = $this->localGenerator->getDownload($local) . $file;
+                    /* Create message */
+                    $title = $this->localGenerator->getDownload($local) . ' ' . $file;
                     $message = (new \Swift_Message($title))
                         ->setFrom('lucien.burdet@gmail.com')
                         ->setTo($mail)

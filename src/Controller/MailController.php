@@ -45,7 +45,7 @@ class MailController extends AbstractController
             'question' => $this->localGenerator->getQuestion($local),
             'contact' => $this->localGenerator->getContact($local),
         ]);
-
+        /*
         $message = (new \Swift_Message($title))
             ->setFrom('lucien.burdet@gmail.com')
             ->setTo('lucien.burdet@gmail.com')
@@ -56,7 +56,7 @@ class MailController extends AbstractController
         } catch (\Swift_TransportException $Ste) {
             dump($Ste);
         }
-
+        */
         return $m;
     }
 }

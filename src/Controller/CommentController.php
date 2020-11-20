@@ -6,6 +6,7 @@ use App\Entity\Blog;
 use App\Entity\User;
 use App\Entity\Comment;
 use App\Service\UserService;
+use App\Service\LocalGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,17 +14,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommentController extends AbstractController
 {
+    private $localGenerator;
+
+    public function __construct(LocalGenerator $localGenerator)
+    {
+        $this->localGenerator = $localGenerator;
+    }
+    
     /**
-     * @Route("/comment", name="comment_new")
-     * @Route("/comment/reply", name="comment_reply_new")
+     * @Route("/comment/reply/{local}", name="comment_reply_new")
+     * @Route("/comment/new/{local}", name="comment_new")
      */
-    public function addComment(EntityManagerInterface $manager, Request $request)
+    public function addComment($local, EntityManagerInterface $manager, \Swift_Mailer $mailer, Request $request)
     {
         $userService = new UserService($manager);
 
         $error = true;
 
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() == 'POST' && !$this->localGenerator->checkLocal($local)) {
 
             $postData = json_decode($request->getContent(), true);
 
@@ -57,7 +65,7 @@ class CommentController extends AbstractController
                 $blog = null;
                 if ($post && !empty($post)) {
                     $repository = $manager->getRepository(Blog::class);
-                    $blog = $repository->findOneBy(['slug' => $post, 'local' => 'fr']);
+                    $blog = $repository->findOneBy(['slug' => $post, 'local' => $local]);
                 }
 
                 /* Check captcha */
@@ -98,7 +106,107 @@ class CommentController extends AbstractController
 
                     $manager->flush();
 
-                    $error = false;
+                    /* Create messages */
+                    $title = $this->localGenerator->getThankComment($local);
+                    $message = (new \Swift_Message($title))
+                        ->setFrom('lucien.burdet@gmail.com')
+                        ->setTo($mail)
+                        ->setBody(
+                            $this->renderView(
+                                'emails/base.html.twig',
+                                [
+                                    'local' => $local,
+                                    'title' => $title,
+                                    'clientPath' => $this->getParameter('app.client.url'),
+                                    'emailPath' => $this->getParameter('app.assets.email'),
+                                    'banner' => 'comment',
+                                    'h1' => [
+                                        'hello' => $this->localGenerator->getHello($local),
+                                        'name' => $name,
+                                    ],
+                                    'h3' => $title,
+                                    'paragraphs' => [$this->localGenerator->getAnswer($local)],
+                                    'button' => [
+                                        'url' => $this->getParameter('app.client.url') . '/blog/' . $blog->getSlug(), 
+                                        'title' => $this->localGenerator->getSeePost($local),
+                                    ],
+                                    'question' => $this->localGenerator->getQuestion($local),
+                                    'contact' => $this->localGenerator->getContact($local),
+                                ]
+                            ),
+                            'text/html'
+                    );
+                    if ($reply) {
+                        $titleReply = $this->localGenerator->getTitleReplyComment($local, $name);
+                        $messageReply = (new \Swift_Message($titleReply))
+                            ->setFrom('lucien.burdet@gmail.com')
+                            ->setTo($reply->getUser()->getMail())
+                            ->setBody(
+                                $this->renderView(
+                                    'emails/base.html.twig',
+                                    [
+                                        'local' => $local,
+                                        'title' => $titleReply,
+                                        'clientPath' => $this->getParameter('app.client.url'),
+                                        'emailPath' => $this->getParameter('app.assets.email'),
+                                        'banner' => 'comment-reply',
+                                        'h1' => [
+                                            'hello' => $this->localGenerator->getHello($local),
+                                            'name' => $reply->getUser()->getName(),
+                                        ],
+                                        'h3' => $titleReply,
+                                        'paragraphs' => $this->localGenerator->getReplyComment($local, $blog, $comment),
+                                        'button' => [
+                                            'url' => $this->getParameter('app.client.url') . '/blog/' . $blog->getSlug(), 
+                                            'title' => $this->localGenerator->getSeePost($local),
+                                        ],
+                                        'question' => $this->localGenerator->getQuestion($local),
+                                        'contact' => $this->localGenerator->getContact($local),
+                                    ]
+                                ),
+                                'text/html'
+                        );
+                    }
+                    $titleConfirm = 'Nouveau commentaire';
+                    $messageConfirm = (new \Swift_Message($titleConfirm))
+                        ->setFrom('lucien.burdet@gmail.com')
+                        ->setTo('lucien.burdet@gmail.com')
+                        ->setBody(
+                            $this->renderView(
+                                'emails/base.html.twig',
+                                [
+                                    'local' => $local,
+                                    'title' => $titleConfirm,
+                                    'clientPath' => $this->getParameter('app.client.url'),
+                                    'emailPath' => $this->getParameter('app.assets.email'),
+                                    'banner' => 'comment-reply',
+                                    'h1' => [
+                                        'hello' => $this->localGenerator->getHello($local),
+                                        'name' => 'Lucien Burdet',
+                                    ],
+                                    'h3' => $titleConfirm,
+                                    'paragraphs' => $this->localGenerator->getConfirmComment($local, $blog, $comment),
+                                    'button' => [
+                                        'url' => $this->getParameter('app.client.url') . '/blog/' . $blog->getSlug(), 
+                                        'title' => $this->localGenerator->getSeePost($local),
+                                    ],
+                                    'question' => $this->localGenerator->getQuestion($local),
+                                    'contact' => $this->localGenerator->getContact($local),
+                                ]
+                            ),
+                            'text/html'
+                    );
+
+                    try {
+                        $mailer->send($message);
+                        if ($reply) {
+                            $mailer->send($messageReply);
+                        }
+                        $mailer->send($messageConfirm);
+                        $error = false;
+                    } catch (\Swift_TransportException $Ste) {
+                        $error = true;
+                    }
                 }
             }
         }
