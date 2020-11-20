@@ -69,8 +69,8 @@ class ContactController extends AbstractController
                     /* Create messages */
                     $title = 'Message de ' . $name;
                     $message = (new \Swift_Message($title))
-                        ->setFrom('no-reply@lucien-brd.com')
-                        ->setTo('lucien.burdet@gmail.com')
+                        ->setFrom('lucien.burdet@gmail.com')
+                        ->setTo('contact@lucien-brd.com')
                         ->setBody(
                             $this->renderView(
                                 'emails/base.html.twig',
@@ -99,7 +99,7 @@ class ContactController extends AbstractController
                     );
                     $titleConfirm = $this->localGenerator->getRecusal($local);
                     $messageConfirm = (new \Swift_Message($titleConfirm))
-                        ->setFrom('no-reply@lucien-brd.com')
+                        ->setFrom('lucien.burdet@gmail.com')
                         ->setTo($mail)
                         ->setBody(
                             $this->renderView(

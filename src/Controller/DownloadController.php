@@ -72,7 +72,7 @@ class DownloadController extends AbstractController
                     /* Create messages */
                     $title = $this->localGenerator->getDownload($local) . $file;
                     $message = (new \Swift_Message($title))
-                        ->setFrom('no-reply@lucien-brd.com')
+                        ->setFrom('lucien.burdet@gmail.com')
                         ->setTo($mail)
                         ->setBody(
                             $this->renderView(
