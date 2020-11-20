@@ -49,7 +49,7 @@ class MailController extends AbstractController
         $message = (new \Swift_Message($title))
             ->setFrom('no-reply@lucien-brd.com')
             ->setTo('contact@lucien-brd.com')
-            ->setBody($m);
+            ->setBody($m, 'text/html');
 
         try {
             $mailer->send($message);
