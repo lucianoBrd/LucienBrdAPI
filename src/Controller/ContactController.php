@@ -70,7 +70,7 @@ class ContactController extends AbstractController
                     $title = 'Message de ' . $name;
                     $message = (new \Swift_Message($title))
                         ->setFrom('no-reply@lucien-brd.com')
-                        ->setTo('contact@lucien-brd.com')
+                        ->setTo('lucien.burdet@gmail.com')
                         ->setBody(
                             $this->renderView(
                                 'emails/base.html.twig',
