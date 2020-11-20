@@ -88,7 +88,7 @@ class ContactController extends AbstractController
                                     'paragraphs' => [
                                         $name,
                                         $mail,
-                                        $message,
+                                        $m->getMessage(),
                                     ],
                                     'button' => null,
                                     'question' => $this->localGenerator->getQuestion($local),
@@ -115,7 +115,7 @@ class ContactController extends AbstractController
                                         'name' => $name,
                                     ],
                                     'h3' => $titleConfirm,
-                                    'paragraphs' => $this->localGenerator->getConfirm($local, $message),
+                                    'paragraphs' => $this->localGenerator->getConfirm($local, $m->getMessage()),
                                     'button' => null,
                                     'question' => $this->localGenerator->getQuestion($local),
                                     'contact' => $this->localGenerator->getContact($local),
