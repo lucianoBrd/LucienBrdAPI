@@ -19,7 +19,7 @@ class MailController extends AbstractController
     /**
      * @Route("/mail", name="mail")
      */
-    public function testMail()
+    public function testMail(\Swift_Mailer $mailer)
     {
         $local = 'en';
         $title = 'Test';
