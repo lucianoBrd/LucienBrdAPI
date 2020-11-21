@@ -19,17 +19,20 @@ class BlogController extends AbstractController
     private function formatBlog($blogs, $array = true)
     {
         $key = 'date';
-        if ($array) {
-            $newBlogs = [];
-            foreach ($blogs as $blog) {
-                $blog[$key] = $blog[$key]->format('Y-m-d H:i:s');
-                $newBlogs[] = $blog;
+        if ($blogs) {
+            if ($array) {
+                $newBlogs = [];
+                foreach ($blogs as $blog) {
+                    $blog[$key] = $blog[$key]->format('Y-m-d H:i:s');
+                    $newBlogs[] = $blog;
+                }
+                return $newBlogs;
+            } else {
+                $blogs[$key] = $blogs[$key]->format('Y-m-d H:i:s');
+                return $blogs;
             }
-            return $newBlogs;
-        } else {
-            $blogs[$key] = $blog[$key]->format('Y-m-d H:i:s');
-            return $blogs;
         }
+        return $blogs;
     }
 
     /**
@@ -103,7 +106,7 @@ class BlogController extends AbstractController
             ->findOneBySlugArray($local, $slug);
 
         return $this->json([
-            'blog' => $this->formatBlog($blogs, false),
+            'blog' => $this->formatBlog($blog, false),
             'imagePath' => $this->getParameter('app.assets.images.blogs'),
             'documentPath' => $this->getParameter('app.assets.documents.blogs'),
         ]);
