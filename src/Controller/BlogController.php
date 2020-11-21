@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Blog;
 use App\Service\LocalGenerator;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
 class BlogController extends AbstractController
 {
@@ -16,14 +16,20 @@ class BlogController extends AbstractController
         $this->localGenerator = $localGenerator;
     }
 
-    private function formatBlog($blogs) {
+    private function formatBlog($blogs, $array = true)
+    {
         $key = 'date';
-        $newBlogs = [];
-        foreach ($blogs as $blog) {
-            $blog[$key] = $blog[$key]->format('Y-m-d H:i:s');
-            $newBlogs[] = $blog;
+        if ($array) {
+            $newBlogs = [];
+            foreach ($blogs as $blog) {
+                $blog[$key] = $blog[$key]->format('Y-m-d H:i:s');
+                $newBlogs[] = $blog;
+            }
+            return $newBlogs;
+        } else {
+            $blogs[$key] = $blog[$key]->format('Y-m-d H:i:s');
+            return $blogs;
         }
-        return $newBlogs;
     }
 
     /**
@@ -91,13 +97,13 @@ class BlogController extends AbstractController
         if ($this->localGenerator->checkLocal($local)) {
             return $this->json([]);
         }
-        
+
         $blog = $this->getDoctrine()
             ->getRepository(Blog::class)
             ->findOneBySlugArray($local, $slug);
 
         return $this->json([
-            'blog' => $this->formatBlog($blogs),
+            'blog' => $this->formatBlog($blogs, false),
             'imagePath' => $this->getParameter('app.assets.images.blogs'),
             'documentPath' => $this->getParameter('app.assets.documents.blogs'),
         ]);
