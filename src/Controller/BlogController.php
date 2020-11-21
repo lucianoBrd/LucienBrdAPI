@@ -23,12 +23,12 @@ class BlogController extends AbstractController
             if ($array) {
                 $newBlogs = [];
                 foreach ($blogs as $blog) {
-                    $blog[$key] = $blog[$key]->format('Y-m-d H:i:s');
+                    $blog[$key] = $blog[$key]->format('Y/m/d H:i:s');
                     $newBlogs[] = $blog;
                 }
                 return $newBlogs;
             } else {
-                $blogs[$key] = $blogs[$key]->format('Y-m-d H:i:s');
+                $blogs[$key] = $blogs[$key]->format('Y/m/d H:i:s');
                 return $blogs;
             }
         }
