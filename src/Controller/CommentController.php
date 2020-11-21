@@ -26,6 +26,12 @@ class CommentController extends AbstractController
         $newComments = [];
         foreach ($comments as $comment) {
             $comment[$key] = $comment[$key]->format('Y-m-d H:i:s');
+            $newCommentsReply = [];
+            foreach ($comment['comments'] as $c) {
+                $c[$key] = $c[$key]->format('Y-m-d H:i:s');
+                $newCommentsReply[] = $c;
+            }
+            $comment['comments'] = $newCommentsReply;
             $newComments[] = $comment;
         }
         return $newComments;
