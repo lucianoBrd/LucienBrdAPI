@@ -99,6 +99,9 @@ class SubscribeController extends AbstractController
         $user = $repository->findOneBy(['secret' => $secret]);
 
         if (!$this->localGenerator->checkLocal($local) && $user) {
+            $user->setSubscribe(false);
+            $manager->persist($user);
+            $manager->flush();
 
             $title = $this->localGenerator->getUnsubscribeSuccess($local);
 
