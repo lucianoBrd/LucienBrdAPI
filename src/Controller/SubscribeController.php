@@ -39,7 +39,7 @@ class SubscribeController extends AbstractController
 
                 $user->setMail($mail);
 
-                $userService->addUser($user, true);
+                $user = $userService->addUser($user, true);
 
                 /* Create message */
                 $title = $this->localGenerator->getThankSubscribe($local);

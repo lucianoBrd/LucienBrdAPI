@@ -64,7 +64,7 @@ class ContactController extends AbstractController
                         ->setMail($mail)
                         ->addMessage($m);
 
-                    $userService->addUser($user);
+                    $user = $userService->addUser($user);
 
                     /* Create messages */
                     $title = 'Message de ' . $name;

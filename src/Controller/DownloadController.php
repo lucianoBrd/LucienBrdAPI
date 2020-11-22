@@ -67,7 +67,7 @@ class DownloadController extends AbstractController
                     $user->setName($name)
                         ->setMail($mail);
 
-                    $userService->addUser($user);
+                    $user = $userService->addUser($user);
 
                     /* Create message */
                     $title = $this->localGenerator->getDownload($local) . ' ' . $file;
