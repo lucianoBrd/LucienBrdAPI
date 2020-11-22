@@ -21,7 +21,7 @@ class MailController extends AbstractController
      */
     public function testMail(\Swift_Mailer $mailer)
     {
-        $local = 'en';
+        $local = 'fr';
         $title = 'Test';
         $m = $this->render('emails/base.html.twig', [
             'local' => $local,
@@ -44,6 +44,8 @@ class MailController extends AbstractController
             ],
             'question' => $this->localGenerator->getQuestion($local),
             'contact' => $this->localGenerator->getContact($local),
+            'unsubscribe' => $this->localGenerator->getUnsubscribe($local),
+            'unsubscribePath' => $this->getParameter('app.url') . '/unsubscribe/' . $local . '/' . 'secret',
         ]);
         /*
         $message = (new \Swift_Message($title))

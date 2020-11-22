@@ -148,6 +148,8 @@ class CommentController extends AbstractController
                                     ],
                                     'question' => $this->localGenerator->getQuestion($local),
                                     'contact' => $this->localGenerator->getContact($local),
+                                    'unsubscribe' => $this->localGenerator->getUnsubscribe($local),
+                                    'unsubscribePath' => $this->getParameter('app.url') . '/unsubscribe/' . $local . '/' . $user->getSecret(),
                                 ]
                             ),
                             'text/html'
@@ -178,6 +180,8 @@ class CommentController extends AbstractController
                                         ],
                                         'question' => $this->localGenerator->getQuestion($local),
                                         'contact' => $this->localGenerator->getContact($local),
+                                        'unsubscribe' => $this->localGenerator->getUnsubscribe($local),
+                                        'unsubscribePath' => $this->getParameter('app.url') . '/unsubscribe/' . $local . '/' . $reply->getUser()->getSecret(),
                                     ]
                                 ),
                                 'text/html'
@@ -208,6 +212,8 @@ class CommentController extends AbstractController
                                     ],
                                     'question' => $this->localGenerator->getQuestion($local),
                                     'contact' => $this->localGenerator->getContact($local),
+                                    'unsubscribe' => $this->localGenerator->getUnsubscribe($local),
+                                    'unsubscribePath' => null,
                                 ]
                             ),
                             'text/html'

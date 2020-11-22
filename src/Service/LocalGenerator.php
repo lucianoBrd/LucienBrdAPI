@@ -97,6 +97,14 @@ class LocalGenerator
         return $message;
     }
 
+    public function getThankSubscribe($local) {
+        if ($local == 'fr') {
+            return 'Merci de vous être abonné';
+        } else {
+            return 'Thank you for subscribing';
+        }
+    }
+
     public function getThankComment($local) {
         if ($local == 'fr') {
             return 'Merci pour votre commentaire';
@@ -166,6 +174,38 @@ class LocalGenerator
             return 'Voir l\'article';
         } else {
             return 'See post';
+        }
+    }
+
+    public function getUnsubscribeSuccess($local) {
+        if ($local == 'fr') {
+            return 'Désabonnement effectué avec succès';
+        } else {
+            return 'Unsubscribe successfully';
+        }
+    }
+
+    public function getSubscribe($local) {
+        if ($local == 'fr') {
+            return 'S\'abonner';
+        } else {
+            return 'Subscribe';
+        }
+    }
+
+    public function getUnsubscribe($local) {
+        if ($local == 'fr') {
+            return 'Se désabonner';
+        } else {
+            return 'Unsubscribe';
+        }
+    }
+
+    public function getSeeBlog($local) {
+        if ($local == 'fr') {
+            return 'Voir le Blog';
+        } else {
+            return 'See Blog';
         }
     }
 

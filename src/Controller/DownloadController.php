@@ -95,6 +95,8 @@ class DownloadController extends AbstractController
                                     ],
                                     'question' => $this->localGenerator->getQuestion($local),
                                     'contact' => $this->localGenerator->getContact($local),
+                                    'unsubscribe' => $this->localGenerator->getUnsubscribe($local),
+                                    'unsubscribePath' => $this->getParameter('app.url') . '/unsubscribe/' . $local . '/' . $user->getSecret(),
                                 ]
                             ),
                             'text/html'

@@ -30,7 +30,7 @@ class UserService
         return $this->images[rand(0, ($this->length - 1))];
     }
 
-    public function addUser($user): User
+    public function addUser($user, $subscribe = false): User
     {
         $repository = $this->manager->getRepository(User::class);
 
@@ -38,6 +38,10 @@ class UserService
         $u = $repository->findOneBy(['mail' => $user->getMail()]);
 
         if ($u) {
+            $u->setName($user->getName());
+            if ($subscribe) {
+                $u->setSubscribe($subscribe);
+            }
             $messages = $user->getMessages();
             foreach ($messages as $message) {
                 $this->manager->persist($message);
@@ -53,6 +57,7 @@ class UserService
                 $this->manager->persist($message);
             }
             $user->setImage($this->getRandomImage());
+            $user->setSecret(md5(md5(time() . 'chachacha') . $user->getMail() . time()));
             $this->manager->persist($user);
         }
 

@@ -20,7 +20,7 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
@@ -44,10 +44,21 @@ class User
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $subscribe;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $secret;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->subscribe = true;
     }
 
     public function getId(): ?int
@@ -147,6 +158,30 @@ class User
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getSubscribe(): ?bool
+    {
+        return $this->subscribe;
+    }
+
+    public function setSubscribe(bool $subscribe): self
+    {
+        $this->subscribe = $subscribe;
+
+        return $this;
+    }
+
+    public function getSecret(): ?string
+    {
+        return $this->secret;
+    }
+
+    public function setSecret(string $secret): self
+    {
+        $this->secret = $secret;
 
         return $this;
     }
