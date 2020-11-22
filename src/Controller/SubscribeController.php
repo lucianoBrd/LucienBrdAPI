@@ -3,20 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Service\LocalGenerator;
+use App\Service\MailService;
 use App\Service\UserService;
+use App\Service\LocalGenerator;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SubscribeController extends AbstractController
 {
     private $localGenerator;
+    private $mailService;
 
-    public function __construct(LocalGenerator $localGenerator)
+    public function __construct(LocalGenerator $localGenerator, MailService $mailService)
     {
         $this->localGenerator = $localGenerator;
+        $this->mailService = $mailService;
     }
 
     /**
@@ -43,43 +46,27 @@ class SubscribeController extends AbstractController
 
                 /* Create message */
                 $title = $this->localGenerator->getThankSubscribe($local);
-                $message = (new \Swift_Message($title))
-                    ->setFrom('lucien.burdet@gmail.com')
-                    ->setTo($mail)
-                    ->setBody(
-                        $this->renderView(
-                            'emails/base.html.twig',
-                            [
-                                'local' => $local,
-                                'title' => $title,
-                                'clientPath' => $this->getParameter('app.client.url'),
-                                'emailPath' => $this->getParameter('app.assets.email'),
-                                'banner' => 'subscribe',
-                                'h1' => [
-                                    'hello' => $this->localGenerator->getHello($local),
-                                    'name' => ($user->getName() ? $user->getName() : $mail),
-                                ],
-                                'h3' => $title,
-                                'paragraphs' => [],
-                                'button' => [
-                                    'url' => $this->getParameter('app.client.url') . '/blog',
-                                    'title' => $this->localGenerator->getSeeBlog($local),
-                                ],
-                                'question' => $this->localGenerator->getQuestion($local),
-                                'contact' => $this->localGenerator->getContact($local),
-                                'unsubscribe' => $this->localGenerator->getUnsubscribe($local),
-                                'unsubscribePath' => $this->getParameter('app.url') . '/unsubscribe/' . $local . '/' . $user->getSecret(),
-                            ]
-                        ),
-                        'text/html'
-                    );
+                $message = $this->mailService->getMessageView(
+                    $title,
+                    $local,
+                    'subscribe',
+                    ($user->getName() ? $user->getName() : $mail),
+                    [],
+                    [
+                        'url' => $this->getParameter('app.client.url') . '/blog',
+                        'title' => $this->localGenerator->getSeeBlog($local),
+                    ],
+                    $user->getSecret()
+                );
 
-                try {
-                    $mailer->send($message);
-                    $error = false;
-                } catch (\Swift_TransportException $Ste) {
-                    $error = true;
-                }
+                /* Send message */
+                $error = $this->mailService->sendMessage(
+                    [
+                        'to' => $mail,
+                        'title' => $title,
+                        'm' => $message
+                    ]
+                );
             }
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\MailService;
 use App\Service\LocalGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,55 +11,58 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MailController extends AbstractController
 {
     private $localGenerator;
+    private $mailService;
 
-    public function __construct(LocalGenerator $localGenerator)
+    public function __construct(LocalGenerator $localGenerator, MailService $mailService)
     {
         $this->localGenerator = $localGenerator;
+        $this->mailService = $mailService;
     }
 
     /**
      * @Route("/mail", name="mail")
      */
-    public function testMail(\Swift_Mailer $mailer)
+    public function testMail()
     {
         $local = 'fr';
-        $title = 'Test';
-        $m = $this->render('emails/base.html.twig', [
-            'local' => $local,
-            'title' => $title,
-            'clientPath' => $this->getParameter('app.client.url'),
-            'emailPath' => $this->getParameter('app.assets.email'),
-            'banner' => 'contact',
-            'h1' => [
-                'hello' => $this->localGenerator->getHello($local),
-                'name' => 'Lucien Burdet',
-            ],
-            'h3' => $title,
-            'paragraphs' => [
+        $title = 'Titre';
+
+        $m = $this->mailService->getMessage(
+            $title,
+            $local,
+            'contact',
+            'Lucien Burdet',
+            [
                 'Ceci est un paragraphe',
                 'Deuxième paragraphe',
             ],
-            'button' => [
+            [
                 'url' => '#', 
                 'title' => $this->localGenerator->getDownload($local),
             ],
-            'question' => $this->localGenerator->getQuestion($local),
-            'contact' => $this->localGenerator->getContact($local),
-            'unsubscribe' => $this->localGenerator->getUnsubscribe($local),
-            'unsubscribePath' => $this->getParameter('app.url') . '/unsubscribe/' . $local . '/' . 'secret',
-        ]);
-        /*
-        $message = (new \Swift_Message($title))
-            ->setFrom('lucien.burdet@gmail.com')
-            ->setTo('lucien.burdet@gmail.com')
-            ->setBody($m, 'text/html');
+            'secret'
+        );
+        
+        /*$error = $this->mailService->sendMessage(
+            'contact@lucien-brd.com',
+            $title,
+            $this->mailService->getMessageView(
+                $title,
+                $local,
+                'contact',
+                'Lucien Burdet',
+                [
+                    'Ceci est un paragraphe',
+                    'Deuxième paragraphe',
+                ],
+                [
+                    'url' => '#', 
+                    'title' => $this->localGenerator->getDownload($local),
+                ],
+                'secret'
+            )
+        );*/
 
-        try {
-            $mailer->send($message);
-        } catch (\Swift_TransportException $Ste) {
-            dump($Ste);
-        }
-        */
         return $m;
     }
 }
