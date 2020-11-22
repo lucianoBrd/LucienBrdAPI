@@ -50,7 +50,7 @@ class SubscribeController extends AbstractController
                     $title,
                     $local,
                     'subscribe',
-                    ($user->getName() ? $user->getName() : $mail),
+                    ($user->getName() != null ? $user->getName() : $mail),
                     [],
                     [
                         'url' => $this->getParameter('app.client.url') . '/blog',

@@ -38,7 +38,10 @@ class UserService
         $u = $repository->findOneBy(['mail' => $user->getMail()]);
 
         if ($u) {
-            $u->setName($user->getName());
+            if ($user->getName() != null) {
+                $u->setName($user->getName());
+            }
+            
             if ($subscribe) {
                 $u->setSubscribe($subscribe);
             }
