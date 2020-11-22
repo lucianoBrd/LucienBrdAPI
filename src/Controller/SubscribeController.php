@@ -102,7 +102,7 @@ class SubscribeController extends AbstractController
 
             $title = $this->localGenerator->getUnsubscribeSuccess($local);
 
-            return $this->renderView(
+            return $this->render(
                 'emails/base.html.twig',
                 [
                     'local' => $local,
@@ -112,7 +112,7 @@ class SubscribeController extends AbstractController
                     'banner' => 'unsubscribe',
                     'h1' => [
                         'hello' => $this->localGenerator->getHello($local),
-                        'name' => ($user->getName() ? $user->getName() : $mail),
+                        'name' => ($user->getName() ? $user->getName() : $user->getMail()),
                     ],
                     'h3' => $title,
                     'paragraphs' => [],
