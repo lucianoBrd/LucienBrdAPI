@@ -85,11 +85,9 @@ class DownloadController extends AbstractController
 
                     /* Send message */
                     $error = $this->mailService->sendMessage(
-                        [
-                            'to' => $mail,
-                            'title' => $title,
-                            'm' => $message
-                        ]
+                        $mail,
+                        $title,
+                        $message
                     );
                 }
             }

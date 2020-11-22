@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 19 nov. 2020 à 21:59
+-- Généré le :  Dim 22 nov. 2020 à 18:12
 -- Version du serveur :  5.7.21
 -- Version de PHP :  7.3.23
 
@@ -162,16 +162,17 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20201022191630', '2020-11-19 21:58:43', 308),
-('DoctrineMigrations\\Version20201026135729', '2020-11-19 21:58:43', 76),
-('DoctrineMigrations\\Version20201031161618', '2020-11-19 21:58:43', 20),
-('DoctrineMigrations\\Version20201102135650', '2020-11-19 21:58:43', 159),
-('DoctrineMigrations\\Version20201118152629', '2020-11-19 21:58:44', 184),
-('DoctrineMigrations\\Version20201118194851', '2020-11-19 21:58:44', 23),
-('DoctrineMigrations\\Version20201119094734', '2020-11-19 21:58:44', 169),
-('DoctrineMigrations\\Version20201119134623', '2020-11-19 21:58:44', 18),
-('DoctrineMigrations\\Version20201119204316', '2020-11-19 21:58:44', 145),
-('DoctrineMigrations\\Version20201119215644', '2020-11-19 21:58:44', 58);
+('DoctrineMigrations\\Version20201022191630', '2020-11-22 18:10:43', 797),
+('DoctrineMigrations\\Version20201026135729', '2020-11-22 18:10:44', 108),
+('DoctrineMigrations\\Version20201031161618', '2020-11-22 18:10:44', 27),
+('DoctrineMigrations\\Version20201102135650', '2020-11-22 18:10:44', 213),
+('DoctrineMigrations\\Version20201118152629', '2020-11-22 18:10:45', 287),
+('DoctrineMigrations\\Version20201118194851', '2020-11-22 18:10:45', 24),
+('DoctrineMigrations\\Version20201119094734', '2020-11-22 18:10:45', 236),
+('DoctrineMigrations\\Version20201119134623', '2020-11-22 18:10:45', 30),
+('DoctrineMigrations\\Version20201119204316', '2020-11-22 18:10:45', 206),
+('DoctrineMigrations\\Version20201119215644', '2020-11-22 18:10:45', 82),
+('DoctrineMigrations\\Version20201122143422', '2020-11-22 18:10:45', 37);
 
 -- --------------------------------------------------------
 
@@ -408,9 +409,11 @@ INSERT INTO `tag` (`id`, `title`, `slug`, `local`) VALUES
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subscribe` tinyint(1) NOT NULL,
+  `secret` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
