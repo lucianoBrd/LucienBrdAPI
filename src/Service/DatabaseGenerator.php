@@ -6,6 +6,7 @@ use App\Entity\Cv;
 use App\Entity\Tag;
 use App\Entity\Blog;
 use App\Entity\File;
+use App\Entity\User;
 use App\Entity\Social;
 use App\Entity\Politic;
 use App\Entity\Project;
@@ -51,6 +52,7 @@ class DatabaseGenerator
         $this->manageEducation();
         $this->manageService();
         $this->manageSocial();
+        $this->manageUser();
         $this->manageCv();
         $this->managePolitic();
         $this->manageFile();
@@ -116,6 +118,32 @@ class DatabaseGenerator
                 ->setFa($s[1]);
 
             $this->manager->persist($social);
+        }
+
+        $this->manager->flush();
+
+    }
+
+    public function manageUser()
+    {
+        $repository = $this->manager->getRepository(User::class);
+
+        /* Reset project database */
+        $this->reset($repository);
+
+        $users = [
+            ['Lucien Burdet', 'lucien.burdet@gmail.com', 'lucien.webp'],
+        ];
+
+        foreach ($users as $u) {
+            $user = new User();
+
+            $user->setName($u[0])
+                ->setMail($u[1])
+                ->setImage($u[2])
+                ->setSecret(md5(md5(time() . 'chachacha') . $u[1] . time()));
+
+            $this->manager->persist($user);
         }
 
         $this->manager->flush();
