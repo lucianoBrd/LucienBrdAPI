@@ -179,7 +179,7 @@ class CommentController extends AbstractController
                         null
                     );
                     $messages[] = [
-                        'to' => 'lucien.burdet@gmail.com',
+                        'to' => 'contact@lucien-brd.com',
                         'title' => $titleConfirm,
                         'm' => $messageConfirm
                     ];

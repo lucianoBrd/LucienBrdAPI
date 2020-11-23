@@ -132,7 +132,7 @@ class DatabaseGenerator
         $this->reset($repository);
 
         $users = [
-            ['Lucien Burdet', 'lucien.burdet@gmail.com', 'lucien.webp'],
+            ['Lucien Burdet', 'contact@lucien-brd.com', 'lucien.webp'],
         ];
 
         foreach ($users as $u) {
