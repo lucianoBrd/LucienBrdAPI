@@ -45,7 +45,7 @@ class MailService extends AbstractController
         $error = true;
 
         $message = (new \Swift_Message($title))
-            ->setFrom('lucien.burdet@gmail.com')
+            ->setFrom('contact@lucien-brd.com')
             ->setTo($to)
             ->setBody(
                 $m,
