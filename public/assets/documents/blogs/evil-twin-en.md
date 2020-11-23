@@ -12,164 +12,164 @@
 [wifiphisher-resume]: https://api.lucien-brd.com/assets/images/blogs/evil-twin/wifiphisher-resume.gif "wifiphisher-resume"
 [victim]: https://api.lucien-brd.com/assets/images/blogs/evil-twin/victim.gif "victim"
 
-> Les systèmes, programmes et méthodologies de ce tutoriel sont utilisés à but éducatif et préventif uniquement. 
-> Vous restez les responsables de vos actions et aucune responsabilité ne sera engagée quant à la mauvaise utilisation du contenu enseigné.
+> The systems, programs and methodologies in this tutorial are for educational and preventive purposes only. 
+> You remain responsible for your actions and no responsibility will be taken for the misuse of the content taught.
 
-L'attaque Evil Twin est une technique permettant de capturer la clé WPA d'un point d'accès Wifi.
-Dans un premier temps, en rendant indisponible celui-ci.
-Puis, en redirigeant les clients connectés vers un faux point d'accès contrôlé par le pirate et ressemblant de toute pièce au vrai point d'accès, pour que les clients saisissent la clé WPA du point d'accès légitime sans se méfier.
+The Evil Twin attack is a technique to capture the WPA key of a WiFi access point. 
+First, by making this one unavailable. 
+Then, by redirecting the connected clients to a fake access point controlled by the hacker and resembling the real access point, so that the clients enter the WPA key of the legitimate access point without being suspicious.
 
-Pour réaliser l'attaque, nous aurons besoin de deux cartes réseaux wifi, dont une supportant l'injection de paquet.
-Plus précisément, une première interface wifi sera définie comme point d'accès et la seconde comme interface d'attaque pour rendre indisponible le point d'accès et copier son identité.
-Ensuite, les clients seront déconnectés de force du point d'accès et comme un faux point d'accès identique ne disposant pas d'authentification aura été créé, ils se reconnecteront automatiquement sans se rendre compte de rien.
-Ensuite, le DHCP les redirigera vers une fausse page, leur demandant de saisir la clé WPA.
+To carry out the attack, we will need two wifi network cards, one of which supports packet injection.
+More precisely, a first wifi interface will be defined as an access point and the second as an attack interface to make the access point unavailable and copy its identity.
+Then, the clients will be forcibly disconnected from the access point and as a false identical access point with no authentication will have been created, they will automatically reconnect without realizing anything.
+Then DHCP will redirect them to a fake page, asking them to enter the WPA key.
 
-Pour automatiser l'attaque, nous allons utiliser WifiPhisher. 
+To automate the attack, we will use WifiPhisher.
 
-# Table des matières
+# Table of contents
 
-1. Prérequis
-2. Présentation générale
-    1. Présentation de l'attaque Evil Twin
-    2. L'utilitaire WifiPhisher
-3. Préparation des outils
-    1. Télécharger WifiPhisher
-    2. Associer des pages personnalisées à WifiPhisher
-    3. Installer WifiPhisher
-4. L'attaque Evil Twin
-    1. L'attaquant
-    2. La victime
-5. Comment éviter les attaques Evil Twin
-6. En savoir plus
-    1. Liens de téléchargement
+1. Prerequisites
+2. General Presentation
+    1. Evil Twin Attack Presentation
+    2. The WifiPhisher utility
+3. Preparation of tools
+    1. Download WifiPhisher
+    2. Link custom pages to WifiPhisher
+    3. Install WifiPhisher
+4. The Evil Twin Attack
+    1. The Attacker
+    2. The victim
+5. How to Avoid Evil Twin Attacks
+6. Learn more
+    1. Download Links
     2. Documentation
 
-# 1. Prérequis
+# 1. Prerequisites
 
-* Disposer de **Kali Linux**, vous pouvez utiliser une machine virtuelle sous **VirtualBox** par exemple.
-* Disposer de **deux cartes réseaux wifi**, dont une supportant **l'injection de paquet**. Dans ce tutoriel, j'utilise deux cartes [Alfa Network AWUS036NH](https://www.amazon.fr/ALFA-Network-AWUS036NH-150Mbit-adaptateur/dp/B00358XUC4).
+* Having **Kali Linux**, you can use a virtual machine under **VirtualBox** for example.
+* Have **two wifi network cards**, one of which supports **packet injection**. In this tutorial, I use two cards [Alfa Network AWUS036NH](https://www.amazon.fr/ALFA-Network-AWUS036NH-150Mbit-adaptateur/dp/B00358XUC4).
 
     ![AWUS036NH][AWUS036NH]
 
-    Sinon voir la liste des [cartes Wifi compatibles Kali Linux](https://www.kali-linux.fr/cartes-wifi-compatibles).
+    Otherwise see the list of [Kali Linux compatible WiFi cards](https://www.kali-linux.fr/cartes-wifi-compatibles).
 
-# 2. Présentation générale
+# 2. General Presentation
 
-## 2.1. Présentation de l'attaque Evil Twin
+## 2.1. Evil Twin Attack Presentation
 
-Scénario d'attaque EvilTwin :
+EvilTwin Attack Scenario :
 
 * ![eviltwin][eviltwin]
 
-1. Le pirate créé d'abord un faux point d'accès sans fil, autrement dit un AP et se fait passer pour un point d'accès wifi légitime.
-2. Il déclenche ensuite une attaque par déni de service DDOS vers le point d'accès wifi légitime ou il crée des interférences autour de ce dernier, qui déconnectent alors les utilisateurs sans fil.
-3. Ces derniers sont ensuite invités à inspecter les réseaux disponibles : c'est la que le piège se referme, car une fois déconnecté du point d'accès wifi légitime, le pirate va forcer les ordinateurs et périphériques hors ligne à se reconnecter automatiquement au jumeau maléfique, permettant au pirate d'intercepter tout le trafic via ce dispositif.
+1. The hacker first creates a fake wireless access point, in other words an AP and passes himself off as a legitimate Wi-Fi access point.
+2. It then initiates a DDOS denial-of-service attack to or interferes with the legitimate Wi-Fi hotspot, which then disconnects wireless users.
+3. The latter are then invited to inspect the available networks: this is when the trap closes, because once disconnected from the legitimate Wi-Fi access point, the hacker will force computers and offline devices to automatically reconnect to the evil twin, allowing the hacker to intercept all traffic via this device.
 
-La technique est également connu comme :
+The technique is also known as:
 * AP Phishing
 * Wi-Fi Phishing
 * Hotspotter
 * Rogue AP
 * Honeypot AP
 
-Ces genres d'attaques font usage de faux points d'accès avec des pages de connection truquées pour capturer : les informations d'identification wifi des utilisateurs, les numéros de cartes de crédit ou encore lancer des attaques *Man in the Middle* connu sous le nom de MITM et infecter les hôtes du réseau sans fil.
+These kinds of attacks make use of fake access points with fake connection pages to capture: users wifi credentials, credit card numbers or launch *Man in the Middle* attacks known as MITM and infect wireless network hosts.
 
-## 2.2. L'utilitaire WifiPhisher
+## 2.2. The WifiPhisher utility
 
-Un chercheur en sécurité Grec nommé George Chatzisofroniou a développé un outils d'ingiéneurie social wifi, qui est conçu pour voler les informations d'identification des utilisateurs via des réseaux wifi sécurisés.
+A Greek security researcher named George Chatzisofroniou has developed a wifi social engineering tool, which is designed to steal user identification information via secure wifi networks.
 
-L'outil est baptisé WifiPhisher et a été publié sur [Github](https://github.com/wifiphisher/wifiphisher). Cependant, il existe de nombreux autres outils de hacking sur Internet dédiés au piratage d'un réseau sécurisé wifi. Mais WifiPhisher automatise de multiples techniques de piratage wifi, se démarquant ainsi des autres.
+The tool is called WifiPhisher and has been published on [Github](https://github.com/wifiphisher/wifiphisher). However, there are many other hacking tools on Internet dedicated to hacking a secure wifi network. But WifiPhisher automates multiple Wi-Fi hacking techniques, differentiating itself from the others.
 
-WifiPhisher implémente l'attaque EvilTwin de manière automatique, en fournissant un serveur WEB, un DHCP et des pages de phishing toutes prêtes pour le hacker.
+WifiPhisher implements the EvilTwin attack automatically, providing a web server, a DHCP and phishing pages ready to hack.
 
-# 3. Préparation des outils
+# 3. Preparation of tools
 
-## 3.1. Télécharger WifiPhisher
+## 3.1. Download WifiPhisher
 
-Pour télécharger WifiPhisher, taper la commande suivante :
+To download WifiPhisher, type the following command :
 ```sh
 $ git clone https://github.com/wifiphisher/wifiphisher.git
 ```
 
-Vous trouverez dans ```wifiphisher/wifiphisher/data/phishing-pages```, les différentes pages *truquées* selon le scénario (mise à jour, pages de connection...). 
+You will find in ```wifiphisher/wifiphisher/data/phishing-pages```, the different pages *rigged* depending on the scenario (update, connection pages...).
 
-En revanche, ces pages sont en anglais, donc pas forcément compréhensibles par un utilisateur francais et le design de ces pages laisse à désirer.
+However, these pages are in English, so not necessarily understandable by a French user and the design of these pages leaves something to be desired.
 
-Il faut considérer ces pages comme des exemples. Il vaut mieux éviter de les utiliser telles quelles, car elles ne sont pas adaptées à la plupart des situations rencontrées. 
+These pages should be considered as examples. It is best to avoid using them as they are, as they are not adapted to most situations encountered.
 
-Il est préférable de les modifier, afin qu'elles paraissent légitimes aux yeux de la victime. Pour cela, il faut prendre en considération le FAI et le modèle de la box dont nous essayons d'usurper l'identité, ainsi que la langue utilisée par défaut dans le pays ou vous vous trouvez. 
+It is preferable to amend them so that they appear legitimate in the eyes of the victim. To do this, you have to take into account the ISP and the box model whose identity we are trying to usurp, as well as the language used by default in the country where you are.
 
-## 3.2. Associer des pages personnalisées à WifiPhisher
+## 3.2. Link custom pages to WifiPhisher
 
-J'ai confectionné pour vous des pages toutes prêtes pour trois principaux FAI francais : SFR, Bouygues et Orange. Pour les récupérer, vous pouvez les [télécharger ici](https://lucien-brd.com/download/Pages-main.zip) et extraire l'archive.
+I have prepared pages for you ready to use pages for three main French ISPs: SFR, Bouygues and Orange. To retrieve them, you can [download them here](https://lucien-brd.com/download/Pages-main.zip) and extract the archive.
 
-Voici un exemple de la page Bouygues. Le SSID et le Canal du point d'accès seront automatiquement mis à jour en fonction du point d'accès que vous aurez choisi :
+Here is an example of the Bouygues page. The SSID and Access Point Channel will be automatically updated based on the access point you choose:
 * ![bouygues][bouygues]
 
-Vous pouvez modifier les informations présentes dans les pages, afin qu'elles concordent avec celles de la victime (adresse IP, adresse MAC...).
+You can modify the information present in the pages, so that it matches those of the victim (IP address, MAC address...).
 
-Copier les dossiers présents dans ```Pages-main``` dans ```wifiphisher/wifiphisher/data/phishing-pages``` :
+Copy the folders present in```Pages-main``` in ```wifiphisher/wifiphisher/data/phishing-pages``` :
 * ```Pages-main/bouygues```
 * ```Pages-main/orange```
 * ```Pages-main/sfr```
 
-Votre dossier ```wifiphisher/wifiphisher/data/phishing-pages``` devrait ressembler à cela :
+Your folder ```wifiphisher/wifiphisher/data/phishing-pages``` should look like this :
 
 * ![phishing-pages][phishing-pages]
 
-Il faudra réinstaller WifiPhisher à chaque fois que vous modifiez les pages de *phising* (voir 3.3. Installer WifiPhisher).
+You will need to reinstall WifiPhisher each time you change the *phising* pages (see 3.3. Install WifiPhisher).
 
-## 3.3. Installer WifiPhisher
+## 3.3. Install WifiPhisher
 
-Pour installer WifiPhisher, rendez-vous dans le dossier téléchargé précedemment (étape 3.1. Télécharger WifiPhisher) et taper la commande suivante :
+To install WifiPhisher, go to the previously downloaded folder (step 3.1. Download WifiPhisher) and type the following command :
 ```sh
 $ sudo python3 setup.py install
 ```
 
-# 4. L'attaque Evil Twin
+# 4. The Evil Twin Attack
 
-## 4.1. L'attaquant
+## 4.1. The Attacker
 
-1. Brancher les deux cartes réseaux wifi à votre ordianateur. Connecter celle-ci à votre machine virtuelle si vous en utilisez une.
-2. Lancer WifiPhisher avec la commande suivante, en étant dans le dossier téléchargé précedemment (étape 3.1. Télécharger WifiPhisher) :
+1. Connect the two wifi network cards to your computer. Connect it to your virtual machine if you use one.
+2. Run WifiPhisher with the following command, in the folder downloaded above (step 3.1. Download WifiPhisher) :
     ```sh
     $ python3 bin/wifiphisher
     ```
     ![wifiphisher-start][wifiphisher-start]
-3. Une fois que l'outil s'est lancé, séléctionner le point d'accès Wifi de la victime :
+3. Once the tool has launched, select the victim’s Wifi access point :
     ![wifiphisher-wifi][wifiphisher-wifi]
-4. Séléctionner la page de *phising* en fonction de la victime :
+4. Select the *phising* page according to the victim :
     ![wifiphisher-phising][wifiphisher-phising]
-5. Puis, WifiPhisher va lancer le faux point d'accès et le serveur WEB :
+5. Then, WifiPhisher will launch the fake access point and the WEB server :
     ![wifiphisher-starting][wifiphisher-starting]
-6. Ensuite, l'outil va déconnecter tous les utilisateurs connecté au point d'accès légitime et rendre indisponible celui-ci :
+6. Then, the tool will disconnect all users connected to the legitimate access point and make it unavailable :
     ![wifiphisher-ddos][wifiphisher-ddos]
-7. Les utilisateurs précédemment connectés vont se reconnecter automatiquement / manuellement au jumeau maléfique :
+7. Previously logged in users will automatically/manually reconnect to the evil twin :
     ![wifiphisher-connect][wifiphisher-connect]
-8. Le DHCP de WifiPhisher va alors rediriger les requêtes vers la page de *phising* précédemment choisie. Une fois que la victime aura envoyé la clé WPA, vous la recevrez directement sur la console  :
+8. The WifiPhisher DHCP will then redirect requests to the previously selected *phising* page. Once the victim has sent the WPA key, you will receive it directly on the console :
     ![wifiphisher-wpa][wifiphisher-wpa]
-9. Voici un résumé de l'attaque :
+9. Here is a summary of the attack :
     ![wifiphisher-resume][wifiphisher-resume]
 
-## 4.2. La victime
+## 4.2. The victim
 
-Voici ce qui se passe du côté de la vitime lors de l'attaque : 
+Here is what happens to the victim during the attack : 
 * ![victim][victim]
 
-# 5. Comment éviter les attaques Evil Twin
+# 5. How to Avoid Evil Twin Attacks
 
-Les entreprises qui offrent la connexion Wifi à leurs employés ou à leurs clients, peuvent utiliser des systèmes de prévention des intrusions sans fil (WIPS) afin de détecter la présence d’une attaque Evil Twin et empêcher les employés et les clients des entreprises de s’y connecter.
+Companies that offer Wi-Fi to their employees or customers can use Wireless Intrusion Prevention (WIPS) systems to detect the presence of an Evil Twin attack and prevent employees and business customers from connecting to it.
 
-* Demander toujours à l’établissement quel est le nom du hotspot officiel. Cela vous évitera de faire des suppositions incorrectes et de choisir un hotspot malveillant.
-* Éviter de vous connecter à des points d’accès Wifi qui portent la mention « Unsecure » (ou « non sécurisé »), même s’ils leur SSID vous semble familier.
-* Ne visiter que les sites web HTTPS, surtout lorsqu’ils se trouvent sur des réseaux ouverts. Les sites web HTTPS offrent un chiffrement de bout en bout. Ceci rend difficile – voire impossible – pour les pirates de voir ce que vous faites lorsque vous naviguez.
-* Si le hotspot officiel auquel vous voulez vous connecter a une clé, essayez de taper intentionnellement la mauvaise clé. Si la connexion accepte la clé manifestement erronée, il s’agit très probablement d’un jumeau maléfique.
-* Désactiver les fonctions « auto connect » ou « auto join » pour les hotspots enregistrés pour tous vos appareils sans fil.
-* Utilisez un VPN chaque fois que vous vous connectez à un Wifi public. Ceci vous permet de vous assurer que les pirates ne puissent pas voir vos habitudes de navigation.
+* Always ask the facility for the name of the official hotspot. This will prevent you from making incorrect assumptions and choosing a malicious hotspot.
+* Avoid connecting to Wi-Fi hotspots marked « Unsecure » (or « unsecured »), even if their SSID looks familiar.
+* Only visit HTTPS websites, especially when they are on open networks. HTTPS websites offer end-to-end encryption. This makes it difficult – if not impossible – for hackers to see what you’re doing when you’re sailing.
+* If the official hotspot you want to connect to has a key, try to intentionally type the wrong key. If the connection accepts the obviously wrong key, it is most likely an evil twin.
+* Turn off « auto connect » or « auto join » for registered hotspots for all your wireless devices.
+* Use a VPN whenever you connect to a public Wifi. This allows you to make sure that hackers can’t see your browsing habits.
 
-# 6. En savoir plus
+# 6. Learn more
 
-## 6.1. Liens de téléchargement
+## 6.1. Download Links
 
 * [wifiphisher](https://github.com/wifiphisher/wifiphisher.git)
 * [Pages-main.zip](https://lucien-brd.com/download/Pages-main.zip)
