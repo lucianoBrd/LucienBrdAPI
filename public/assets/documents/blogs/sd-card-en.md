@@ -5,13 +5,13 @@ Si votre téléphone propose nativement dans les paramètres une option qui perm
 
 Sinon, voici comment procéder pour un appareil sous **Android 6 minimum** (Android ne le prend pas en charge dans les versions précedente).
 
-# Table des matières
+# Table of contents
 
-1. Prérequis
+1. Prerequisites
 2. Fusionner la mémoire interne avec la mémoire de la carte SD
-3. Liens de téléchargement
+3. Download Links
 
-# 1. Prérequis
+# 1. Prerequisites
 
 1. [Télécharger](https://api.lucien-brd.com/assets/documents/blogs/sd-card/adb-setup-1.4.3.exe) et installer l’application ADB pour votre ordinateur.
 2. Activer :
@@ -41,6 +41,6 @@ Sinon, voici comment procéder pour un appareil sous **Android 6 minimum** (Andr
     $ sm partition disk:179,64 private
     ```
 
-# 3. Liens de téléchargement
+# 3. Download Links
 
 * [adb-setup-1.4.3.exe](https://api.lucien-brd.com/assets/documents/blogs/sd-card/adb-setup-1.4.3.exe)

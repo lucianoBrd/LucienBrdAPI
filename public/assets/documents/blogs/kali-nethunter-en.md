@@ -1,5 +1,5 @@
 [build.py-h]: https://api.lucien-brd.com/assets/images/blogs/kali-nethunter/build.py-h.webp "build.py -h result"
-[install-zip]: https://api.lucien-brd.com/assets/images/blogs/kali-nethunter/install-zip.webp "installer zip"
+[install-zip]: https://api.lucien-brd.com/assets/images/blogs/kali-nethunter/install-zip.webp "install zip"
 [twrp]: https://api.lucien-brd.com/assets/images/blogs/kali-nethunter/twrp.webp "twrp"
 [kernel]: https://api.lucien-brd.com/assets/images/blogs/kali-nethunter/kernel.webp "kernel"
 

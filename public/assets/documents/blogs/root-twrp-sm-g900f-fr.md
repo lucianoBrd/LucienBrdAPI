@@ -26,7 +26,7 @@ Voici comment procéder pour un SM-G900F.
 1. [Télécharger](https://api.lucien-brd.com/assets/documents/blogs/root-twrp-sm-g900f/Samsung_USB_Driver_v1.7.31.0.zip) et installer les *driver* USB samsung.
 2. [Télécharger](https://api.lucien-brd.com/assets/documents/blogs/root-twrp-sm-g900f/SM-G900F-6.0.1.zip) et extraire les fichiers pour le *root* et le *Recovery Custom*.
 3. Activer :
-   * Le mode développeur : Paramètres > A propos de l'appareil > Taper plusieurs fois sur le numéro de *build*
+   * Le mode développeur : Paramètres > A propos de l'appareil > Taper plusieurs fois sur le numéro de *build*.
    * Le débogage USB : Paramètres > Options de développement > Débogage USB.
 4. Sauvegarder vos données.
 5. Eteindre votre téléphone.
@@ -34,7 +34,7 @@ Voici comment procéder pour un SM-G900F.
 
 # 2. *Rooter* le téléphone
 1. Démarrer en mode *download*.
- Appuyer simultanément sur **volume bas + home + power**
+   Appuyer simultanément sur **volume bas + home + power**
 2. Ouvrir ```Odin3-v3.10.6.exe``` (fichier extrait lors de l'étape 2) et connecter votre téléphone à l'ordinateur.
 3. Clicker sur **AP** et sélectionner le fichier ```CF-Auto-Root.tar``` (fichier extrait lors de l'étape 2).
 4. Clicker sur *Start*.
@@ -44,7 +44,7 @@ Si l'installation s'est bien déroulée, l'application SuperSU devrait être ins
 
 # 3. Installer un *Recovery Custom* TWRP
 1. Démarrer en mode *download*.
- Appuyer simultanément sur **volume bas + home + power**
+   Appuyer simultanément sur **volume bas + home + power**
 2. Ouvrir ```Odin3-v3.10.6.exe``` (fichier extrait lors de l'étape 2) et connecter votre téléphone à l'ordinateur.
 3. Clicker sur **AP** et sélectionner le fichier ```twrp-3.3.1-0-klte.img.tar``` (fichier extrait lors de l'étape 2). Assurez-vous d'avoir uniquement *Auto Reboot* et *F.Reset Time* de coché.
 4. Clicker sur *Start*.
