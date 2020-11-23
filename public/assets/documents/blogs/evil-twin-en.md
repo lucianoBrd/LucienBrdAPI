@@ -101,7 +101,7 @@ It is preferable to amend them so that they appear legitimate in the eyes of the
 
 ## 3.2. Link custom pages to WifiPhisher
 
-I have prepared pages for you ready to use pages for three main French ISPs: SFR, Bouygues and Orange. To retrieve them, you can [download them here](https://lucien-brd.com/download/Pages-main.zip) and extract the archive.
+I have prepared pages for you ready to use pages for three main French ISPs: SFR, Bouygues and Orange. To retrieve them, you can [download them here](https://www.lucien-brd.com/download/Pages-main.zip) and extract the archive.
 
 Here is an example of the Bouygues page. The SSID and Access Point Channel will be automatically updated based on the access point you choose:
 * ![bouygues][bouygues]
@@ -172,7 +172,7 @@ Companies that offer Wi-Fi to their employees or customers can use Wireless Intr
 ## 6.1. Download Links
 
 * [wifiphisher](https://github.com/wifiphisher/wifiphisher.git)
-* [Pages-main.zip](https://lucien-brd.com/download/Pages-main.zip)
+* [Pages-main.zip](https://www.lucien-brd.com/download/Pages-main.zip)
 
 ## 6.2. Documentation
 
