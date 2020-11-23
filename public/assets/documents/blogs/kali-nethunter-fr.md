@@ -31,7 +31,7 @@ Avant toute manipulation, je vous invite à vérifier que votre appareil est com
 
 * Assurez vous d'avoir une batterie chargée (75% minimum).
 * Avoir au moins 9 go de stockage de disponible (voir [Augmenter le stockage d'un appareil Android - Fusionner les mémoires](https://www.lucien-brd.com/blog/increase-storage-android-device-merge-memory)).  
-* Avoir un téléphone *rooté* avec un *Recovery Custom* (voir [Rooter et installer un Recovery Custom TWRP pour Samsung Galaxy S5 - SM-G900F](https://www.lucien-brd.com/blog/root-install-recovery-custom-twrp-sm-g900f)).
+* Avoir un téléphone *rooté* avec un *Recovery Custom* (voir [Rooter et installer un Recovery Custom TWRP pour Samsung Galaxy S5 - SM-G900F](https://www.lucien-brd.com/blog/root-install-custom-recovery-twrp-sm-g900f)).
 * Avoir l'image NetHunter compatible avec son téléphone (voir 2. L'image NetHunter).
 
 # 2. L'image NetHunter
@@ -46,7 +46,7 @@ Si vous n'avez pas trouvé d'image compatible avec votre appareil, tout n'est pa
 ## 2.2. Générer sa propre image
 1. Premièrement, il faudra que vous récupériez le projet :
     ```sh
-    $ git clone https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-project
+    $ git clone https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-project.git
     ```
 
 2. Puis, aller dans le dossier ```nethunter-installer``` du projet afin de le *build* :
@@ -64,8 +64,8 @@ Si vous n'avez pas trouvé d'image compatible avec votre appareil, tout n'est pa
 
     Comme vous le constatez, la liste des appareils et des versions d'Android compatible est affichée.
 
-4. Enfin vous devez générer l'image NetHunter. Si vous avez installé une ROM        *custom*, vérifier dans la liste des *device* qu'il n'existe pas une version spécifique à celle-ci.
-    Dans le cas d'un Samsung Galaxy S5 - SM-G900F, Android 6 - *Marshmallow*, ROM   officielle *Touchwiz*, la commande est la suivante ( dans le dossier              ```nethunter-installer```) :
+4. Enfin vous devez générer l'image NetHunter. Si vous avez installé une ROM *custom*, vérifier dans la liste des *device* qu'il n'existe pas une version spécifique à celle-ci.
+    Dans le cas d'un Samsung Galaxy S5 - SM-G900F, Android 6 - *Marshmallow*, ROM officielle *Touchwiz*, la commande est la suivante ( dans le dossier ```nethunter-installer```) :
     ```sh
     $ python3 build.py -d klte-touchwiz -m
     ```
@@ -79,8 +79,8 @@ Afin d'installer l'image NetHunter, il faudra flasher celle-ci sur votre télép
 1. Copier l'image NetHunter (fichier zip) sur votre téléphone.
 2. Eteindre votre téléphone.
 3. Démarrer votre téléphone en mode *recovery*.
-Pour le S5, appuyer simultanément sur **volume haut + home + power**.
-![twrp][twrp]
+    Pour le S5, appuyer simultanément sur **volume haut + home + power**.
+    ![twrp][twrp]
 3. Faites un *backup* de votre configuration actuelle (optionnel).
 4. Installer le fichier. ![install-zip][install-zip]
 
