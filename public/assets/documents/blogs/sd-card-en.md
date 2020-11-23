@@ -1,42 +1,42 @@
 [adb-list-disks]: https://api.lucien-brd.com/assets/images/blogs/sd-card/adb-list-disks.webp "adb list-disks"
 
-Votre téléphone possède un slot pour mettre une carte micro SD qui va permettre d’augmenter cette mémoire. En revanche son utilisation est vite restrictive au niveau déplacement du contenu.
-Si votre téléphone propose nativement dans les paramètres une option qui permet de fusionner les deux mémoires, il vous suffit de l'activer.
+Your phone has a slot to put a micro SD card that will increase this memory. On the other hand, its use is quickly restrictive at the level of content displacement. 
+If your phone natively offers in the settings an option that allows to merge the two memories, you just have to activate it. 
 
-Sinon, voici comment procéder pour un appareil sous **Android 6 minimum** (Android ne le prend pas en charge dans les versions précedente).
+Otherwise, here is how to proceed for a device running on **Android 6 minimum** (Android does not support it in previous versions).
 
 # Table of contents
 
 1. Prerequisites
-2. Fusionner la mémoire interne avec la mémoire de la carte SD
+2. Merge internal memory with SD card memory
 3. Download Links
 
 # 1. Prerequisites
 
-1. [Télécharger](https://api.lucien-brd.com/assets/documents/blogs/sd-card/adb-setup-1.4.3.exe) et installer l’application ADB pour votre ordinateur.
-2. Activer :
-   * Le mode développeur : Paramètres > A propos de l'appareil > Taper plusieurs fois sur le numéro de *build*
-   * Le débogage USB : Paramètres > Options de développement > Débogage USB.
+1. [Download](https://api.lucien-brd.com/assets/documents/blogs/sd-card/adb-setup-1.4.3.exe) and install the ADB application for your computer.
+2. Activate:
+   * Developer Mode: Settings > About the device > Type several times on the *build* number.
+   * USB debugging: Settings > Development Options > USB debugging.
 
-# 2. Fusionner la mémoire interne avec la mémoire de la carte SD
+# 2. Merge internal memory with SD card memory
 
-1. Ouvrir une invite de commande et aller dans le répertoire d'installation :
+1. Open a command prompt and go to the installation directory :
    ```sh
     $ cd \adb
     ```
-2. Connecter votre téléphone à l'ordinateur et taper la commande suivante qui permet de lancer adb :
+2. Connect your phone to the computer and type the following command to launch adb :
     ```sh
     $ adb shell
     ```
-3. Afin de connaître le nom de votre carte SD, taper la commande suivante :
+3. To know the name of your SD card, type the following command :
     ```sh
     $ sm list-disks
     ```
 
     ![adb list-disks][adb-list-disks]
 
-    Dans mon cas, le nom est ```disk:179,64```.
-4. Enfin, afin de fusionner les mémoires, taper la commande suivante en mettant le nom de votre carte SD :
+    In my case, the name is ```disk:179,64```.
+4. Finally, in order to merge the memories, type the following command by putting the name of your SD card :
     ```sh
     $ sm partition disk:179,64 private
     ```
