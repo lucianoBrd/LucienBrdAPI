@@ -48,6 +48,16 @@ class ProjectGenerator
                     null
                 ],
                 [
+                    'CPE-Projet-Transversal-2021.webp', 
+                    'CPE Projet Transversal 2021', 
+                    'Projet - CPE', 
+                    '2021', 
+                    'https://youtu.be/eT1Ov4cR_HA', 
+                    'https://github.com/lucianoBrd/TransversalCPE', 
+                    'L’objectif de ce projet était de réaliser d’une part un simulateur d’incendies permettant la création, le suivi et la propagation de feux de différents types (localisés sur une carte), et d’autre part de créer un dispositif de gestion de services d’urgences permettant, à partir d’informations collectées par des capteurs, de déployer et gérer les dispositifs adaptés pour éteindre les incendies.', 
+                    'CPE-Projet-Transversal-2021.pdf'
+                ],
+                [
                     'graphjs.webp', 
                     'GraphJS', 
                     'Projet - CPE', 
@@ -158,6 +168,16 @@ class ProjectGenerator
                     'https://github.com/lucianoBrd/SmartEV', 
                     'This application allows you to locate charging stations compatible with your electric vehicle and obtain "smart" itineraries. JavaScript, Leaflet, OpenChargeMap.', 
                     null
+                ],
+                [
+                    'CPE-Projet-Transversal-2021.webp', 
+                    'CPE Transversal Project 2021', 
+                    'Project - CPE', 
+                    '2021', 
+                    'https://youtu.be/eT1Ov4cR_HA', 
+                    'https://github.com/lucianoBrd/TransversalCPE', 
+                    'The aim of the project was to create a fire simulator allowing the creation, monitoring and propagation of fires of different types (located on a map), and to create an emergency services management system allowing, from information collected by sensors, deploy and manage suitable devices for extinguishing fires.', 
+                    'CPE-Projet-Transversal-2021.pdf'
                 ],
                 [
                     'graphjs.webp', 
