@@ -149,5 +149,5 @@ Les présentes conditions d'utilisation du site sont régies par la loi françai
 
 ### Article 16 - Contactez-nous
 
-Pour toute question, information sur les produits présentés sur le site, ou concernant le site lui-même, vous pouvez laisser un message à l'adresse suivante : lucien.burdet@gmail.com.com.     
+Pour toute question, information sur les produits présentés sur le site, ou concernant le site lui-même, vous pouvez laisser un message à l'adresse suivante : lucien.burdet@gmail.com.     
  
