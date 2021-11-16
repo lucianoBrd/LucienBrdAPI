@@ -15,7 +15,7 @@ Lucien Burdet - lucien-brd.com
 L'entreprise indivuduelle Lucien Burdet
 située : 01700 Miribel
 immatriculée au RCS de Dijon 847828183
-adresse mail : contact@lucien-brd.com
+adresse mail : lucien.burdet@gmail.com
  
 #### 1.3 Hébergeur (ci-après « l'hébergeur ») : 
  
@@ -79,7 +79,7 @@ Vous pouvez exercer ce droit en nous contactant, à l’adresse suivante :
   01700 Miribel.
  
 Ou par email, à l’adresse :
-contact@lucien-brd.com 
+lucien.burdet@gmail.com 
  
 Toute demande doit être accompagnée de la photocopie d’un titre d’identité en cours de validité signé et faire mention de l’adresse à laquelle l'éditeur pourra contacter le demandeur. La réponse sera adressée dans le mois suivant la réception de la demande. Ce délai d'un mois peut être prolongé de deux mois si la complexité de la demande et/ou le nombre de demandes l'exigent.
  
@@ -117,8 +117,8 @@ Les données personnelles peuvent être partagées avec des sociétés tierces e
  
 ### Article 12 - Offres commerciales
  
-Vous êtes susceptible de recevoir des offres commerciales de l'éditeur. Si vous ne le souhaitez pas, veuillez cliquer sur le lien suivant : contact@lucien-brd.com.
-Vos données sont susceptibles d’être utilisées par les partenaires de l'éditeur à des fins de prospection commerciale, si vous ne le souhaitez pas, veuillez cliquer sur le lien suivant : contact@lucien-brd.com.
+Vous êtes susceptible de recevoir des offres commerciales de l'éditeur. Si vous ne le souhaitez pas, veuillez cliquer sur le lien suivant : lucien.burdet@gmail.com.
+Vos données sont susceptibles d’être utilisées par les partenaires de l'éditeur à des fins de prospection commerciale, si vous ne le souhaitez pas, veuillez cliquer sur le lien suivant : lucien.burdet@gmail.com.
 Si, lors de la consultation du site, vous accédez à des données à caractère personnel, vous devez vous abstenir de toute collecte, de toute utilisation non autorisée et de tout acte pouvant constituer une atteinte à la vie privée ou à la réputation des personnes. L'éditeur décline toute responsabilité à cet égard.
 Les données sont conservées et utilisées pour une durée conforme à la législation en vigueur.
 
@@ -149,5 +149,5 @@ Les présentes conditions d'utilisation du site sont régies par la loi françai
 
 ### Article 16 - Contactez-nous
 
-Pour toute question, information sur les produits présentés sur le site, ou concernant le site lui-même, vous pouvez laisser un message à l'adresse suivante : contact@lucien-brd.com.     
+Pour toute question, information sur les produits présentés sur le site, ou concernant le site lui-même, vous pouvez laisser un message à l'adresse suivante : lucien.burdet@gmail.com.com.     
  
