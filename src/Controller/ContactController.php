@@ -95,7 +95,7 @@ class ContactController extends AbstractController
                     $error = $this->mailService->sendMessages(
                         [
                             [
-                                'to' => 'contact@lucien-brd.com',
+                                'to' => 'lucien.burdet@gmail.com',
                                 'title' => $title,
                                 'm' => $message
                             ],
