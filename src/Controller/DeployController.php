@@ -39,8 +39,8 @@ class DeployController extends AbstractController
         $output[$i]['result'] = $this->do_command($kernel, 'cache:clear');
 
         /* Update database */
-        $dbGenerator = new DatabaseGenerator($this->getDoctrine()->getManager());
-        $dbGenerator->updateDatabase();
+        // $dbGenerator = new DatabaseGenerator($this->getDoctrine()->getManager());
+        // $dbGenerator->updateDatabase();
 
         return $this->json([
             $output
